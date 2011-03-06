@@ -1,0 +1,18 @@
+﻿'Remove old versions and old files of Tailored HTML
+Install\Module\DataSprings_TailoredHTML_Version23_FullSourceCode_ReviewLicenseAgreementBeforeUse
+Install\Module\DataSprings_TailoredHTML_ModulePAInstallationFilev23
+Bin\Datasprings.Modules.TailoredHTML.SqlDataProvider.dll
+'Tidy up debug files
+Bin\DataSprings.Modules.TailoredHTML.pdb
+Bin\DataSprings.Modules.TailoredHTML.xml
+'Tidy up redundant or moved files
+DesktopModules\Tailored HTML\icon2.gif
+DesktopModules\Tailored HTML\CheckBoxIcon.gif
+DesktopModules\Tailored HTML\DS_Icon1d.gif
+DesktopModules\Tailored HTML\DS_Icon1l.gif
+DesktopModules\Tailored HTML\DS_Icon1j.gif
+DesktopModules\Tailored HTML\01.00.00.SqlDataProvider
+DesktopModules\Tailored HTML\01.01.01.SqlDataProvider
+DesktopModules\Tailored HTML\02.20.00.SqlDataProvider
+DesktopModules\Tailored HTML\02.50.00.SqlDataProvider
+DesktopModules\Tailored HTML\Uninstall.SqlDataProvider

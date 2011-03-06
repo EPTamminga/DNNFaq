@@ -1,0 +1,68 @@
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/** Drop FAQs Table **/
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs] DROP CONSTRAINT [FK_{objectQualifier}FAQs_{objectQualifier}Modules]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs] DROP CONSTRAINT [PK_{objectQualifier}FAQs]
+GO
+
+DROP INDEX {databaseOwner}[{objectQualifier}FAQs].[IX_{objectQualifier}FAQs]
+GO
+
+DROP TABLE {databaseOwner}[{objectQualifier}FAQs]
+GO
+
+DROP TABLE {databaseOwner}[{objectQualifier}FAQsCategory]
+GO
+
+/** Drop Stored Procedures **/
+
+drop procedure {databaseOwner}{objectQualifier}FAQGet
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQList
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQAdd
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQUpdate
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQDelete
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQCategoryGet
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQCategoryList
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQCategoryAdd
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQCategoryUpdate
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQCategoryDelete
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQIncrementViewCount
+GO
+
+drop procedure {databaseOwner}{objectQualifier}FAQSearch
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

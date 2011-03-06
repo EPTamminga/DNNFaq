@@ -1,0 +1,9 @@
+﻿<h2>Release notes Tailored HTML 02.71.00</h2>
+<p>Tailored HTML 02.71.00 will work for any DNN version 5.5.1 and up.</p>
+<h3>Release notes</h3>
+<ul>
+	<li>This is an issue that is solved</li>
+</ul>
+<p>The 2.7 release reflects new enhancements within Tailored Text to allow you to specify all tokens (SQL, Querystring, Session, etc...) 
+within the meta tags for page title, page description, and page keywords.
+<p/>
