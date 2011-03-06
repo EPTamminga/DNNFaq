@@ -19,7 +19,6 @@
 '
 
 Imports System
-Imports System.Web.UI.DataBinder
 Imports System.Web.UI.WebControls
 Imports System.Web.UI.HtmlControls
 Imports DotNetNuke.UI.Utilities
@@ -185,7 +184,7 @@ Namespace DotNetNuke.Modules.FAQs
                     ClientAPI.RegisterClientReference(Me.Page, ClientAPI.ClientNamespaceReferences.dnn_xmlhttp)
 
                     If Me.Page.IsClientScriptBlockRegistered("AjaxFaq.js") = False Then
-                        Me.Page.RegisterClientScriptBlock("AjaxFaq.js", "<script language=javascript src=""" & Me.ModulePath & "AjaxFaq.js""></script>")
+                        Me.Page.RegisterClientScriptBlock("AjaxFaq.js", "<script language=javascript src=""" & Me.ModulePath & "scripts\AjaxFaq.js""></script>")
                     End If
                 End If
 

@@ -1,18 +1,17 @@
-﻿'Remove old versions and old files of Tailored HTML
-Install\Module\DataSprings_TailoredHTML_Version23_FullSourceCode_ReviewLicenseAgreementBeforeUse
-Install\Module\DataSprings_TailoredHTML_ModulePAInstallationFilev23
-Bin\Datasprings.Modules.TailoredHTML.SqlDataProvider.dll
-'Tidy up debug files
-Bin\DataSprings.Modules.TailoredHTML.pdb
-Bin\DataSprings.Modules.TailoredHTML.xml
+﻿'Remove old versions and old files of DNN FAQs
+Install\Module\FAQs_04.04.00_Install.zip
+Install\Module\FAQs_04.04.00_Source.zip
+Install\Module\FAQs_04.04.00_Source.resources
+Bin\DotNetNuke.Modules.FAQs.SqlDataProvider.dll
+'
+'Tidy up debug and old files
+Bin\DotNetNuke.Modules.FAQs.pdb
+Bin\DotNetNuke.Modules.FAQs.xml
+Bin\DotNetNuke.Modules.FAQs.SqlDataProvider.pdb
+Bin\DotNetNuke.Modules.FAQs.SqlDataProvider.xml
+'
 'Tidy up redundant or moved files
-DesktopModules\Tailored HTML\icon2.gif
-DesktopModules\Tailored HTML\CheckBoxIcon.gif
-DesktopModules\Tailored HTML\DS_Icon1d.gif
-DesktopModules\Tailored HTML\DS_Icon1l.gif
-DesktopModules\Tailored HTML\DS_Icon1j.gif
-DesktopModules\Tailored HTML\01.00.00.SqlDataProvider
-DesktopModules\Tailored HTML\01.01.01.SqlDataProvider
-DesktopModules\Tailored HTML\02.20.00.SqlDataProvider
-DesktopModules\Tailored HTML\02.50.00.SqlDataProvider
-DesktopModules\Tailored HTML\Uninstall.SqlDataProvider
+DesktopModules\FAQs\AjaxFaq.js
+DesktopModules\FAQs\03.01.00.SqlDataProvider
+DesktopModules\FAQs\03.03.03.SqlDataProvider
+DesktopModules\FAQs\Uninstall.SqlDataProvider

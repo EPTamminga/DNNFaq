@@ -1,7 +1,7 @@
-'
-' DotNetNuke� - http://www.dotnetnuke.com
-' Copyright (c) 2002-2006
-' by Perpetual Motion Interactive Systems Inc. ( http://www.perpetualmotion.ca )
+﻿'
+' DotNetNuke - http://www.dotnetnuke.com
+' Copyright (c) 2002-2011
+' by DotNetNuke Corporation
 '
 ' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
 ' documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
@@ -17,7 +17,6 @@
 ' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 ' DEALINGS IN THE SOFTWARE.
 '
-
 Imports System
 Imports System.Reflection
 Imports System.Runtime.InteropServices
@@ -29,15 +28,16 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DotNetNuke.Modules.FAQs")> 
-<Assembly: AssemblyDescription("ASP.NET Open Source Portal Application, FAQs Module")> 
-<Assembly: AssemblyCompany("Perpetual Motion Interactive Systems Inc.")> 
+<Assembly: AssemblyDescription("Open Source Web Application Framework")> 
+<Assembly: AssemblyCompany("DotNetNuke Corporation")> 
 <Assembly: AssemblyProduct("http://www.dotnetnuke.com")> 
-<Assembly: AssemblyCopyright("Portal engine source code is copyright &copy; 2002-YYYY by DotNetNuke. All Rights Reserved")> 
+<Assembly: AssemblyCopyright("DotNetNuke® is copyright 2002-2011 by DotNetNuke Corporation. All Rights Reserved.")> 
 <Assembly: AssemblyTrademark("DotNetNuke")> 
-<Assembly: CLSCompliant(True)> 
+
+<Assembly: ComVisibleAttribute(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("DC4F3327-479D-49F3-8323-E3A252C4AA78")> 
+<Assembly: Guid("1f803b5e-5536-4164-a60c-44cd582a4dde")> 
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -48,4 +48,6 @@ Imports System.Runtime.InteropServices
 '
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
-<Assembly: AssemblyVersion("1.0.*")> 
+
+<Assembly: AssemblyVersion("4.5.0.*")> 
+<Assembly: AssemblyFileVersion("4.5.0.0")> 

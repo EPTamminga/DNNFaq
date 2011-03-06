@@ -56,7 +56,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DocumentationFile>DotNetNuke.Modules.FAQs.xml</DocumentationFile>
     <BaseAddress>285212672</BaseAddress>
     <ConfigurationOverrideFile>
@@ -66,7 +66,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <DebugSymbols>true</DebugSymbols>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
@@ -96,17 +96,20 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke">
-      <Name>DotNetNuke</Name>
+    <Reference Include="DotNetNuke, Version=5.6.1.238, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.WebControls">
-      <Name>DotNetNuke.WebControls</Name>
-      <HintPath>..\SolutionReferences\DotNetNuke.WebControls.dll</HintPath>
+    <Reference Include="DotNetNuke.WebUtility, Version=4.2.0.185, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\DotNetNuke.WebUtility.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetNuke.WebUtility">
-      <Name>DotNetNuke.WebUtility</Name>
-      <HintPath>..\SolutionReferences\DotNetNuke.WebUtility.dll</HintPath>
+    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -129,7 +132,9 @@
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\04.50.00.txt" />
     <Content Include="Scripts\AjaxFaq.js" />
-    <Content Include="EditFAQs.ascx" />
+    <Content Include="EditFAQs.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="FAQs.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -139,9 +144,6 @@
     <Content Include="Settings.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Compile Include="Components\AssemblyInfo.vb">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Components\CategoryInfo.vb">
       <SubType>Code</SubType>
     </Compile>
@@ -168,6 +170,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Installation\Attributes.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="Settings.ascx.vb">
       <DependentUpon>Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,7 +195,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
-    <Folder Include="My Project\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
