@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
@@ -39,6 +40,23 @@
     <MyType>Windows</MyType>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -56,8 +74,9 @@
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
     <DebugType>full</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
@@ -75,8 +94,9 @@
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,42017,42018,42019,42032</NoWarn>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
     <DebugType>none</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetNuke">
@@ -108,22 +128,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AjaxFaq.js" />
+    <Content Include="Installation\CleanUp\04.50.00.txt" />
+    <Content Include="Installation\License.txt" />
+    <Content Include="Installation\ReleaseNotes\04.50.00.txt" />
+    <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="EditFAQs.ascx" />
     <Content Include="FAQs.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="FAQsCategories.ascx" />
-    <Content Include="Settings.ascx" />
-    <Compile Include="AssemblyInfo.vb">
+    <Content Include="FAQsCategories.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Settings.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Compile Include="Components\AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CategoryInfo.vb">
+    <Compile Include="Components\CategoryInfo.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataProvider.vb">
+    <Compile Include="Components\DataProvider.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\SqlDataProvider.vb" />
     <Compile Include="EditFAQs.ascx.vb">
       <DependentUpon>EditFAQs.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -136,17 +164,20 @@
       <DependentUpon>FAQsCategories.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FAQsController.vb">
+    <Compile Include="Components\FAQsController.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FAQsInfo.vb">
+    <Compile Include="Components\FAQsInfo.vb">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Installation\Attributes.vb" />
     <Compile Include="Settings.ascx.vb">
       <DependentUpon>Settings.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <None Include="DotNetNuke.Modules.FAQs.dnn" />
+    <None Include="Installation\03.01.00.SqlDataProvider" />
+    <None Include="Installation\03.03.03.SqlDataProvider" />
+    <None Include="Installation\DotNetNuke.Modules.FAQs.dnn" />
     <EmbeddedResource Include="App_LocalResources\EditFAQs.ascx.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -159,9 +190,29 @@
     <EmbeddedResource Include="App_LocalResources\Settings.ascx.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Installation\Project.targets" />
+    <None Include="Installation\Uninstall.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\" />
     <Folder Include="My Project\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
