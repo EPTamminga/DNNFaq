@@ -47,13 +47,15 @@ Namespace DotNetNuke.Modules.FAQs
         Public Sub New()
 
             ' Read the configuration specific information for this provider
-            Dim objProvider As Provider = CType(_providerConfiguration.Providers(_providerConfiguration.DefaultProvider), Provider)
+            Dim objProvider As Framework.Providers.Provider = CType(_providerConfiguration.Providers(_providerConfiguration.DefaultProvider), Framework.Providers.Provider)
 
-            ' Read the attributes for this provider
-            If objProvider.Attributes("connectionStringName") <> "" AndAlso _
-            ConfigurationSettings.AppSettings(objProvider.Attributes("connectionStringName")) <> "" Then
-                _connectionString = ConfigurationSettings.AppSettings(objProvider.Attributes("connectionStringName"))
-            Else
+            ' This code handles getting the connection string from either the connectionString / appsetting section and uses the connectionstring section by default if it exists.  
+            ' Get Connection string from web.config
+            _connectionString = DotNetNuke.Common.Utilities.Config.GetConnectionString()
+
+            ' If above funtion does not return anything then connectionString must be set in the dataprovider section.
+            If _connectionString = "" Then
+                ' Use connection string specified in provider
                 _connectionString = objProvider.Attributes("connectionString")
             End If
 

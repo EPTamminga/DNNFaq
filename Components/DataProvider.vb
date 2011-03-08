@@ -37,7 +37,7 @@ Namespace DotNetNuke.Modules.FAQs
 
         ' dynamically create provider
         Private Shared Sub CreateProvider()
-            objProvider = CType(Framework.Reflection.CreateObject("data", "DotNetNuke.Modules.FAQs", "DotNetNuke.Modules.FAQs"), DataProvider)
+            objProvider = CType(Framework.Reflection.CreateObject("data", "DotNetNuke.Modules.FAQs", ""), DataProvider)
         End Sub
 
         ' return the provider
