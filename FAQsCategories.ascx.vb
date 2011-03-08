@@ -29,7 +29,7 @@ Imports DotNetNuke.Services.Localization
 
 Namespace DotNetNuke.Modules.FAQs
 
-    Public Class FAQsCategories
+    Partial Class FAQsCategories
         Inherits PortalModuleBase
 
 #Region " Web Form Designer Generated Code "
@@ -53,18 +53,6 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Members"
 
-        Protected WithEvents txtCategoryName As TextBox
-        Protected WithEvents txtCategoryDescription As TextBox
-        Protected WithEvents cmdUpdate As LinkButton
-        Protected WithEvents cmdCancel As LinkButton
-        Protected WithEvents lstCategory As DataList
-        Protected WithEvents lblId As Label
-        Protected WithEvents rowFaqCategoryId As HtmlTableRow
-        Protected WithEvents panelAddEdit As Panel
-        Protected WithEvents cmdAddNew As LinkButton
-        Protected WithEvents cmdGoBack As LinkButton
-        Protected WithEvents rqdCategoryName As RequiredFieldValidator
-        Protected WithEvents rqdCategoryDescription As RequiredFieldValidator
 
 #End Region
 

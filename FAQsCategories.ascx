@@ -5,20 +5,20 @@
         <HeaderTemplate>
             <table border="0" cellpadding="2" cellspacing="2" class="Normal">
                 <tr>
-                    <td>
-                        <dnn:label id="plEdit" suffix=":" controlname="CategoryEdit" runat="server">
+                    <td align="center">
+                        <dnn:label id="plEdit" controlname="CategoryEdit" runat="server">
                         </dnn:label>
                     </td>
                     <td>
-                        <dnn:label id="plName" suffix=":" controlname="CategoryName" runat="server">
+                        <dnn:label id="plName" controlname="CategoryName" runat="server">
                         </dnn:label>
                     </td>
                     <td>
-                        <dnn:label id="plDescription" suffix=":" controlname="CategoryDescription" runat="server">
+                        <dnn:label id="plDescription" controlname="CategoryDescription" runat="server">
                         </dnn:label>
                     </td>
-                    <td>
-                        <dnn:label id="plDelete" suffix=":" controlname="CategoryDelete" runat="server">
+                    <td align="center"">
+                        <dnn:label id="plDelete" controlname="CategoryDelete" runat="server">
                         </dnn:label>
                     </td>
                 </tr>
@@ -28,7 +28,7 @@
         </FooterTemplate>
         <ItemTemplate>
             <tr>
-                <td>
+                <td align="center">
                     <asp:ImageButton ID="btnEditCategory" runat="server" CommandName="Edit" ImageUrl="~/images/edit.gif"></asp:ImageButton>
                 </td>
                 <td>
@@ -41,7 +41,7 @@
 						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryDescription") %>
                     </asp:Label>
                 </td>
-                <td>
+                <td align="center">
                     <asp:ImageButton ID="btnDeleteCategory" CommandName="Delete" runat="server" ImageUrl="~/images/delete.gif"></asp:ImageButton>
                 </td>
             </tr>
@@ -54,8 +54,8 @@
     <asp:Panel ID="panelAddEdit" runat="server" Height="136px" Visible="False">
         <table class="Normal" id="tblManageCategories" cellspacing="3" cellpadding="3" border="0">
             <tr id="rowFaqCategoryId" runat="server">
-                <td valign="top">
-                    <dnn:label id="plCategoryId" runat="server" controlname="CategoryEdit" suffix=":">
+                <td valign="top" class="SubHead">
+                    <dnn:label id="plCategoryId" runat="server" controlname="CategoryEdit">
                     </dnn:label>
                 </td>
                 <td>
@@ -65,8 +65,8 @@
                 </td>
             </tr>
             <tr>
-                <td valign="top">
-                    <dnn:label id="plCategoryName" runat="server" controlname="CategoryEdit" suffix=":">
+                <td valign="top"  class="SubHead">
+                    <dnn:label id="plCategoryName" runat="server" controlname="CategoryEdit">
                     </dnn:label>
                 </td>
                 <td>
@@ -77,29 +77,23 @@
                 </td>
             </tr>
             <tr>
-                <td valign="top" height="53">
-                    <dnn:label id="plCategoryDescription" runat="server" controlname="CategoryEdit" suffix=":">
+                <td valign="top"  class="SubHead" >
+                    <dnn:label id="plCategoryDescription" runat="server" controlname="CategoryEdit">
                     </dnn:label>
                 </td>
-                <td height="53">
+                <td>
                     <asp:TextBox ID="txtCategoryDescription" runat="server" Width="304px" CssClass="NormalTextBox" TextMode="MultiLine" Height="93px" MaxLength="250"></asp:TextBox>
                 </td>
-                <td valign="top" height="53">
+                <td valign="top" >
                     <asp:RequiredFieldValidator ID="rqdCategoryDescription" runat="server" CssClass="NormalRed" ErrorMessage="<b> Description is Required </b>" ControlToValidate="txtCategoryDescription" resourcekey="rqdCategoryDescription"></asp:RequiredFieldValidator>
                 </td>
             </tr>
             <tr>
-                <td>
-                </td>
-                <td>
+                <td colspan="3">
                     <asp:LinkButton ID="cmdUpdate" runat="server" CssClass="CommandButton" resourcekey="cmdUpdate">Update</asp:LinkButton>&nbsp;&nbsp;
                     <asp:LinkButton ID="cmdCancel" runat="server" CssClass="CommandButton" resourcekey="cmdCancel">Cancel</asp:LinkButton>
-                </td>
-                <td>
                 </td>
             </tr>
         </table>
     </asp:Panel>
 </p>
-<p>
-    &nbsp;</p>

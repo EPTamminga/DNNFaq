@@ -4,7 +4,7 @@
 <table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblDefaultSorting" ControlName="lblDefaultSorting" Suffix=":" runat="server">
+            <dnn:label id="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server">
             </dnn:label>
         </td>
         <td valign="top" >
@@ -18,7 +18,7 @@
     </tr>
     <tr valign="top" >
         <td class="SubHead" >
-            <dnn:label id="lblUseAjax" ControlName="chkUseAjax" Suffix=":" runat="server">
+            <dnn:label id="lblUseAjax" ControlName="chkUseAjax" runat="server">
             </dnn:label>
         </td>
         <td>
@@ -27,7 +27,7 @@
     </tr>
     <tr valign="top">
         <td class="SubHead">
-                <dnn:label id="lblQuestionTemplate" ControlName="lblQuestionTemplate" Suffix=":" runat="server">
+                <dnn:label id="lblQuestionTemplate" ControlName="lblQuestionTemplate" runat="server">
                 </dnn:label>
         </td>
         <td>
@@ -36,7 +36,7 @@
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblAnswerTemplate" ControlName="lblAnswerTemplate" Suffix=":" runat="server">
+            <dnn:label id="lblAnswerTemplate" ControlName="lblAnswerTemplate" runat="server">
             </dnn:label>
         </td>
         <td>
@@ -45,7 +45,7 @@
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblLoadingTemplate" ControlName="lblLoadingTemplate" Suffix=":" runat="server">
+            <dnn:label id="lblLoadingTemplate" ControlName="lblLoadingTemplate" runat="server">
             </dnn:label>
         </td>
         <td>
@@ -54,7 +54,7 @@
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblAvailableTokens" ControlName="lblAvailableTokens" Suffix=":" runat="server">
+            <dnn:label id="lblAvailableTokens" ControlName="lblAvailableTokens" runat="server">
             </dnn:label>
         </td>
         <td>

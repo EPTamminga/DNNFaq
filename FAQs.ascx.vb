@@ -30,7 +30,7 @@ Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
 
-    Public Class FAQs
+    Partial Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler
 
@@ -56,7 +56,6 @@ Namespace DotNetNuke.Modules.FAQs
 #Region "Members"
 
         Private SupportsClientAPI As Boolean = False
-        Protected WithEvents lstFAQs As DataList
 
 #End Region
 
@@ -183,8 +182,8 @@ Namespace DotNetNuke.Modules.FAQs
                     ClientAPI.RegisterClientReference(Me.Page, ClientAPI.ClientNamespaceReferences.dnn_xml)
                     ClientAPI.RegisterClientReference(Me.Page, ClientAPI.ClientNamespaceReferences.dnn_xmlhttp)
 
-                    If Me.Page.IsClientScriptBlockRegistered("AjaxFaq.js") = False Then
-                        Me.Page.RegisterClientScriptBlock("AjaxFaq.js", "<script language=javascript src=""" & Me.ModulePath & "scripts\AjaxFaq.js""></script>")
+                    If Me.Page.ClientScript.IsClientScriptBlockRegistered("AjaxFaq.js") = False Then
+                        Me.Page.ClientScript.RegisterClientScriptBlock(Me.GetType(), "AjaxFaq.js", "<script language=javascript src=""" & Me.ControlPath & "scripts\AjaxFaq.js""></script>")
                     End If
                 End If
 

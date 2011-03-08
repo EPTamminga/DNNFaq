@@ -29,7 +29,7 @@ Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
 
-    Public Class Settings
+    Partial Class Settings
         Inherits ModuleSettingsBase
 
 #Region " Web Form Designer Generated Code "
@@ -53,13 +53,7 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Members"
 
-        Protected WithEvents txtQuestionTemplate As TextBox
-        Protected WithEvents txtAnswerTemplate As TextBox
-        Protected WithEvents txtLoadingTemplate As TextBox
-        Protected WithEvents drpDefaultSorting As DropDownList
-        Protected WithEvents lstAvailableTokens As ListBox
         Protected WithEvents tblHTMLTemplates As HtmlTable
-        Protected WithEvents chkUseAjax As CheckBox
 
 #End Region
 

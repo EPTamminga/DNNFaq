@@ -2,50 +2,40 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register TagPrefix="Portal" TagName="Audit" Src="~/controls/ModuleAuditControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="TextEditor" Src="~/controls/TextEditor.ascx" %>
-<table class="Normal" id="tblAddFaq" cellspacing="3" cellpadding="3" border="0">
+<%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
+<table class="Normal" id="tblAddFaq" cellspacing="3" cellpadding="3" border="0" width="100%">
     <tr>
-        <td valign="top">
-            <dnn:label id="plCategoryField" runat="server" controlname="Category" suffix=":">
-            </dnn:label>
+        <td valign="top"   class="SubHead" width="128">
+            <dnn:Label ID="plCategoryField" runat="server" ControlName="Category" ></dnn:Label>
         </td>
         <td>
-            <asp:DropDownList ID="drpCategory" runat="server" Width="200px" CssClass="Normal">
+            <asp:DropDownList ID="drpCategory" runat="server" CssClass="Normal">
                 <asp:ListItem Value="-1" resourcekey="SelectCategory">Select Category</asp:ListItem>
             </asp:DropDownList>
         </td>
     </tr>
     <tr>
-        <td valign="top">
-            <dnn:label id="plQuestionField" runat="server" controlname="QuestionField" suffix=":">
-            </dnn:label>
+        <td valign="top"  class="SubHead">
+            <dnn:Label ID="plQuestionField" runat="server" ControlName="QuestionField" ></dnn:Label>
         </td>
         <td>
-            <dnn:texteditor id="teQuestionField" runat="server" ControlID="teQuestionField" height="200" width="500">
-            </dnn:texteditor>
+            <dnn:TextEditor ID="teQuestionField" runat="server" ControlID="teQuestionField" Height="200" Width="600" HtmlEncode="True"></dnn:TextEditor>
         </td>
     </tr>
     <tr>
-        <td valign="top">
-            <dnn:label id="plAnswerField" runat="server" controlname="AnswerField" suffix=":">
-            </dnn:label>
+        <td valign="top"  class="SubHead">
+            <dnn:Label ID="plAnswerField" runat="server" ControlName="AnswerField"></dnn:Label>
         </td>
         <td>
-            <dnn:texteditor id="teAnswerField" runat="server" ControlID="teAnswerField" height="200" width="500">
-            </dnn:texteditor>
-        </td>
-    </tr>
-    <tr>
-        <td>
-        </td>
-        <td>
+            <dnn:TextEditor ID="teAnswerField" runat="server" ControlID="teAnswerField" Height="300" Width="600" HtmlEncode="True"></dnn:TextEditor>
         </td>
     </tr>
 </table>
 <p>
-    <asp:LinkButton ID="cmdUpdate" runat="server" BorderStyle="none" Text="Update" CssClass="CommandButton" resourcekey="cmdUpdate"></asp:LinkButton>&nbsp;
-    <asp:LinkButton ID="cmdCancel" runat="server" BorderStyle="none" Text="Cancel" CssClass="CommandButton" resourcekey="cmdCancel" CausesValidation="False"></asp:LinkButton>&nbsp;
-    <asp:LinkButton ID="cmdDelete" runat="server" BorderStyle="none" Text="Delete" CssClass="CommandButton" resourcekey="cmdDelete" CausesValidation="False"></asp:LinkButton></p>
-<Portal:audit id="ctlAudit" runat="server">
-</Portal:audit>
-<p>
-</p>
+    <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update" />
+    &nbsp;
+    <dnn:CommandButton ID="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+    &nbsp;
+    <dnn:CommandButton ID="cmdDelete" runat="server" ImageUrl="~/images/delete.gif" CssClass="CommandButton" CausesValidation="False" Text="Delete" />
+  </p>
+<Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>

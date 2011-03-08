@@ -52,10 +52,6 @@ Namespace DotNetNuke.Modules.FAQs
 #End Region
 
 #Region "Members"
-        Protected WithEvents cmdUpdate As LinkButton
-        Protected WithEvents cmdCancel As LinkButton
-        Protected WithEvents cmdDelete As LinkButton
-        Protected WithEvents drpCategory As DropDownList
 
         Protected teQuestionField As TextEditor
         Protected teAnswerField As TextEditor
