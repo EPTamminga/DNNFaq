@@ -75,7 +75,6 @@ Namespace DotNetNuke.Modules.FAQs
                     txtQuestionTemplate.Text = Localization.GetString("DefaultQuestionTemplate", Me.LocalResourceFile)
                 End If
 
-
                 If Not Null.IsNull(Settings("FaqAnswerTemplate")) Then
                     txtAnswerTemplate.Text = Convert.ToString(Settings("FaqAnswerTemplate"))
                 Else
@@ -90,6 +89,8 @@ Namespace DotNetNuke.Modules.FAQs
 
                 If Not Null.IsNull(Settings("FaqEnableAjax")) Then
                     chkUseAjax.Checked = CType(Settings("FaqEnableAjax"), Boolean)
+                Else
+                    chkUseAjax.Checked = True
                 End If
 
                 If Not Null.IsNull(Settings("FaqDefaultSorting")) Then _

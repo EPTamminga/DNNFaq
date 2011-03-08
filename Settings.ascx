@@ -1,14 +1,14 @@
 <%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.Settings" AutoEventWireup="false" CodeBehind="Settings.ascx.vb" %>
 <%@ Register TagPrefix="dnn" TagName="SectionHead" Src="~/controls/SectionHeadControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
-<table class="Normal" id="Table2" cellspacing="3" cellpadding="3" border="0">
-    <tr>
-        <td>
+<table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
+    <tr valign="top">
+        <td class="SubHead">
             <dnn:label id="lblDefaultSorting" ControlName="lblDefaultSorting" Suffix=":" runat="server">
             </dnn:label>
         </td>
-        <td>
-            <asp:DropDownList ID="drpDefaultSorting" runat="server" Width="150px" CssClass="Normal">
+        <td valign="top" >
+            <asp:DropDownList ID="drpDefaultSorting" runat="server" CssClass="Normal">
                 <asp:ListItem Value="0" resourcekey="OrderByDateNew">Date New</asp:ListItem>
                 <asp:ListItem Value="1" resourcekey="OrderByDateOld">Date Old</asp:ListItem>
                 <asp:ListItem Value="2" resourcekey="OrderByPopularityHigh">Popularity High</asp:ListItem>
@@ -16,8 +16,8 @@
             </asp:DropDownList>
         </td>
     </tr>
-    <tr>
-        <td valign="top" width="107">
+    <tr valign="top" >
+        <td class="SubHead" >
             <dnn:label id="lblUseAjax" ControlName="chkUseAjax" Suffix=":" runat="server">
             </dnn:label>
         </td>
@@ -25,22 +25,17 @@
             <asp:CheckBox ID="chkUseAjax" runat="server" CssClass="Normal"></asp:CheckBox>
         </td>
     </tr>
-</table>
-<dnn:sectionhead id="dshHTMLTemplate" runat="server" resourcekey="lblSectionTemplate" cssclass="Head" includerule="True" section="tblHTMLTemplates" text="Item Template">
-</dnn:sectionhead>
-<table class="Normal" id="tblHTMLTemplates" cellspacing="3" cellpadding="3" border="0" runat="server">
-    <tr>
-        <td valign="top" width="107">
-            <p>
+    <tr valign="top">
+        <td class="SubHead">
                 <dnn:label id="lblQuestionTemplate" ControlName="lblQuestionTemplate" Suffix=":" runat="server">
-                </dnn:label></p>
+                </dnn:label>
         </td>
         <td>
             <asp:TextBox ID="txtQuestionTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
-    <tr>
-        <td valign="top" width="107">
+    <tr valign="top">
+        <td class="SubHead">
             <dnn:label id="lblAnswerTemplate" ControlName="lblAnswerTemplate" Suffix=":" runat="server">
             </dnn:label>
         </td>
@@ -48,8 +43,8 @@
             <asp:TextBox ID="txtAnswerTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
-    <tr>
-        <td valign="top" width="107">
+    <tr valign="top">
+        <td class="SubHead">
             <dnn:label id="lblLoadingTemplate" ControlName="lblLoadingTemplate" Suffix=":" runat="server">
             </dnn:label>
         </td>
@@ -57,8 +52,8 @@
             <asp:TextBox ID="txtLoadingTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
-    <tr>
-        <td valign="top" width="107">
+    <tr valign="top">
+        <td class="SubHead">
             <dnn:label id="lblAvailableTokens" ControlName="lblAvailableTokens" Suffix=":" runat="server">
             </dnn:label>
         </td>
