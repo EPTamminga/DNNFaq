@@ -16,15 +16,6 @@
             </asp:DropDownList>
         </td>
     </tr>
-    <tr valign="top" >
-        <td class="SubHead" >
-            <dnn:label id="lblUseAjax" ControlName="chkUseAjax" runat="server">
-            </dnn:label>
-        </td>
-        <td>
-            <asp:CheckBox ID="chkUseAjax" runat="server" CssClass="Normal"></asp:CheckBox>
-        </td>
-    </tr>
     <tr valign="top">
         <td class="SubHead">
                 <dnn:label id="lblQuestionTemplate" ControlName="lblQuestionTemplate" runat="server">

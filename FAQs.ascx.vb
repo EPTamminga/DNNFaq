@@ -29,8 +29,9 @@ Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
-    <DNNtc.ModuleControlProperties("View", "FAQs view", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
-    Partial Class FAQs
+    <DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "05.04.02")> _
+    <DNNtc.ModuleControlProperties("", "FAQs view", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
+        Partial Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler
 
@@ -176,8 +177,7 @@ Namespace DotNetNuke.Modules.FAQs
 
             Try
                 If ClientAPI.BrowserSupportsFunctionality(ClientAPI.ClientFunctionality.XMLHTTP) _
-                 AndAlso ClientAPI.BrowserSupportsFunctionality(ClientAPI.ClientFunctionality.XML) _
-                 AndAlso (CType(Settings("FaqEnableAjax"), Boolean)) Then
+                 AndAlso ClientAPI.BrowserSupportsFunctionality(ClientAPI.ClientFunctionality.XML) Then
                     SupportsClientAPI = True
                     ClientAPI.RegisterClientReference(Me.Page, ClientAPI.ClientNamespaceReferences.dnn_xml)
                     ClientAPI.RegisterClientReference(Me.Page, ClientAPI.ClientNamespaceReferences.dnn_xmlhttp)

@@ -86,9 +86,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Installation\CleanUp\04.50.00.txt" />
+    <Content Include="Installation\CleanUp\04.05.00.txt" />
     <Content Include="Installation\License.txt" />
-    <Content Include="Installation\ReleaseNotes\04.50.00.txt" />
+    <Content Include="Installation\ReleaseNotes\04.05.00.txt" />
     <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="EditFAQs.ascx">
       <SubType>ASPXCodeBehind</SubType>

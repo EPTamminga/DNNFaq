@@ -5,8 +5,8 @@
 <%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
 <table class="Normal" id="tblAddFaq" cellspacing="3" cellpadding="3" border="0" width="100%">
     <tr>
-        <td valign="top"   class="SubHead" width="128">
-            <dnn:Label ID="plCategoryField" runat="server" ControlName="Category" ></dnn:Label>
+        <td valign="top" class="SubHead" width="128">
+            <dnn:Label ID="plCategoryField" runat="server" ControlName="Category"></dnn:Label>
         </td>
         <td>
             <asp:DropDownList ID="drpCategory" runat="server" CssClass="Normal">
@@ -15,19 +15,20 @@
         </td>
     </tr>
     <tr>
-        <td valign="top"  class="SubHead">
-            <dnn:Label ID="plQuestionField" runat="server" ControlName="QuestionField" ></dnn:Label>
+        <td valign="top" class="SubHead">
+            <dnn:Label ID="plQuestionField" runat="server" ControlName="QuestionField"></dnn:Label>
         </td>
         <td>
-            <dnn:TextEditor ID="teQuestionField" runat="server" ControlID="teQuestionField" Height="200" Width="600" HtmlEncode="True"></dnn:TextEditor>
+            <asp:TextBox ID="txtQuestionField" CssClass="NormalTextBox" runat="server" MaxLength="100" Width="400px"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="valRequiredTitle" runat="server" CssClass="NormalRed" resourcekey="valRequiredTitle" ControlToValidate="txtQuestionField" ErrorMessage="Question is required"></asp:RequiredFieldValidator>
         </td>
     </tr>
     <tr>
-        <td valign="top"  class="SubHead">
+        <td valign="top" class="SubHead">
             <dnn:Label ID="plAnswerField" runat="server" ControlName="AnswerField"></dnn:Label>
         </td>
         <td>
-            <dnn:TextEditor ID="teAnswerField" runat="server" ControlID="teAnswerField" Height="300" Width="600" HtmlEncode="True"></dnn:TextEditor>
+            <dnn:TextEditor ID="teAnswerField" runat="server" ControlID="teAnswerField" Height="300" Width="600" HtmlEncode="True" ChooseMode="False"></dnn:TextEditor>
         </td>
     </tr>
 </table>
@@ -37,5 +38,5 @@
     <dnn:CommandButton ID="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
     &nbsp;
     <dnn:CommandButton ID="cmdDelete" runat="server" ImageUrl="~/images/delete.gif" CssClass="CommandButton" CausesValidation="False" Text="Delete" />
-  </p>
+</p>
 <Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>

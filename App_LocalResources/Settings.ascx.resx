@@ -163,12 +163,6 @@
 &lt;b&gt;Answer:&lt;/b&gt; [ANSWER]
 &lt;/div&gt;</value>
   </data>
-  <data name="lblUseAjax.Text" xml:space="preserve">
-    <value>Enable AJAX</value>
-  </data>
-  <data name="lblUseAjax.Help" xml:space="preserve">
-    <value>Check this to use AJAX instead of PostBack</value>
-  </data>
   <data name="DefaultLoadingTemplate.Text" xml:space="preserve">
     <value>&lt;div Class="Normal" Style="padding: 5px;"&gt;Loading...&lt;/div&gt;</value>
   </data>

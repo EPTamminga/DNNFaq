@@ -33,24 +33,6 @@ Namespace DotNetNuke.Modules.FAQs
         Protected WithEvents drpDefaultSorting As Global.System.Web.UI.WebControls.DropDownList
 
         '''<summary>
-        '''lblUseAjax control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents lblUseAjax As Global.DotNetNuke.UI.UserControls.LabelControl
-
-        '''<summary>
-        '''chkUseAjax control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents chkUseAjax As Global.System.Web.UI.WebControls.CheckBox
-
-        '''<summary>
         '''lblQuestionTemplate control.
         '''</summary>
         '''<remarks>

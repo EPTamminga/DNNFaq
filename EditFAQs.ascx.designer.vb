@@ -42,6 +42,15 @@ Namespace DotNetNuke.Modules.FAQs
         Protected WithEvents plQuestionField As Global.DotNetNuke.UI.UserControls.LabelControl
 
         '''<summary>
+        '''valRequiredTitle control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents valRequiredTitle As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+        '''<summary>
         '''plAnswerField control.
         '''</summary>
         '''<remarks>

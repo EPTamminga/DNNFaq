@@ -160,10 +160,10 @@
     <value>Description of the Category</value>
   </data>
   <data name="rqdCategoryName.Text" xml:space="preserve">
-    <value>&lt;b&gt;Name is required&lt;/b&gt;</value>
+    <value>&lt;strong&gt;Category Name is required&lt;/strong&gt;</value>
   </data>
   <data name="rqdCategoryDescription.Text" xml:space="preserve">
-    <value>&lt;b&gt;Description is required&lt;/b&gt;</value>
+    <value>&lt;strong&gt;Category Description is required&lt;/strong&gt;</value>
   </data>
   <data name="cmdAddNew.Text" xml:space="preserve">
     <value>Add New</value>

@@ -28,7 +28,7 @@ Imports DotNetNuke.Services.Exceptions.Exceptions
 
 
 Namespace DotNetNuke.Modules.FAQs
-
+    <DNNtc.ModuleControlProperties("Settings", "FAQ Settings", DNNtc.ControlType.Admin, "http://www.dotnetnuke.com/default.aspx?tabid=892", True)> _
     Partial Class Settings
         Inherits ModuleSettingsBase
 
@@ -81,12 +81,6 @@ Namespace DotNetNuke.Modules.FAQs
                     txtLoadingTemplate.Text = Localization.GetString("DefaultLoadingTemplate", Me.LocalResourceFile)
                 End If
 
-                If Not Null.IsNull(Settings("FaqEnableAjax")) Then
-                    chkUseAjax.Checked = CType(Settings("FaqEnableAjax"), Boolean)
-                Else
-                    chkUseAjax.Checked = True
-                End If
-
                 If Not Null.IsNull(Settings("FaqDefaultSorting")) Then _
                 drpDefaultSorting.SelectedValue = Convert.ToString(Settings("FaqDefaultSorting"))
 
@@ -104,7 +98,6 @@ Namespace DotNetNuke.Modules.FAQs
                 modController.UpdateModuleSetting(ModuleId, "FaqQuestionTemplate", txtQuestionTemplate.Text)
                 modController.UpdateModuleSetting(ModuleId, "FaqAnswerTemplate", txtAnswerTemplate.Text)
                 modController.UpdateModuleSetting(ModuleId, "FaqLoadingTemplate", txtLoadingTemplate.Text)
-                modController.UpdateModuleSetting(ModuleId, "FaqEnableAjax", chkUseAjax.Checked.ToString())
                 modController.UpdateModuleSetting(ModuleId, "FaqDefaultSorting", drpDefaultSorting.SelectedValue.ToString())
 
             Catch exc As Exception 'Module failed to load

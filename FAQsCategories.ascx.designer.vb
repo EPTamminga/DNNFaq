@@ -30,7 +30,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents cmdAddNew As Global.System.Web.UI.WebControls.LinkButton
+        Protected WithEvents cmdAddNew As Global.DotNetNuke.UI.WebControls.CommandButton
 
         '''<summary>
         '''cmdGoBack control.
@@ -39,7 +39,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents cmdGoBack As Global.System.Web.UI.WebControls.LinkButton
+        Protected WithEvents cmdGoBack As Global.DotNetNuke.UI.WebControls.CommandButton
 
         '''<summary>
         '''panelAddEdit control.
@@ -138,7 +138,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents cmdUpdate As Global.System.Web.UI.WebControls.LinkButton
+        Protected WithEvents cmdUpdate As Global.DotNetNuke.UI.WebControls.CommandButton
 
         '''<summary>
         '''cmdCancel control.
@@ -147,6 +147,6 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents cmdCancel As Global.System.Web.UI.WebControls.LinkButton
+        Protected WithEvents cmdCancel As Global.DotNetNuke.UI.WebControls.CommandButton
     End Class
 End Namespace

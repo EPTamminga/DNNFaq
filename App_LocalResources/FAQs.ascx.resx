@@ -160,7 +160,7 @@
 &lt;p&gt;The FAQs Module allows Authorized Users to manage a list of Frequently Asked Questions and their corresponding answers. The question is displayed as a link, requiring the user to click on a question to view the corresponding answer.&lt;/p&gt; 
 &lt;p&gt;The FAQs Module also supports organizing Frequently Asked Questions into Categories. But you can still add Frequently Asked Questions without specifying categories if you want.&lt;/p&gt;
 &lt;p&gt;FAQs also supports AJAX functionality to display the answer when
-the user clicks on a question. The old functionality of using Post back is still supported as well. You can turn AJAX functionality ON/OFF from the Module Settings (it is OFF by default).&lt;/p&gt;
+the user clicks on a question. The old functionality of using Post back is still supported as well. &lt;/p&gt;
 &lt;p&gt;Frequently Asked Questions can be displayed to the user in a sorted order (Ascending or Descending) based on popularity or date, also specifiable from the Module Settings.&lt;/p&gt; 
 &lt;p&gt;A template for both the Question and the Answer can also be specified in Module Settings in order to have a customizable look and feel for the Frequently Asked Questions (default templates are provided).&lt;/p&gt; 
 &lt;p&gt;A number of available tokens (like question, answer, category, date added, date modified, view count, etc...) can be used when creating the templates.&lt;/p&gt;

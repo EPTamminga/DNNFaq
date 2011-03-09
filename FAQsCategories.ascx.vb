@@ -26,10 +26,11 @@ Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Services.Localization
+Imports DotNetNuke.Security
 
 Namespace DotNetNuke.Modules.FAQs
 
-    <DNNtc.ModuleControlProperties("Categories", "Edit Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
+    <DNNtc.ModuleControlProperties("Categories", "Edit FAQ Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Partial Class FAQsCategories
         Inherits PortalModuleBase
 
@@ -121,9 +122,10 @@ Namespace DotNetNuke.Modules.FAQs
 
             Dim FAQsController As New FAQsController
             Dim CategoryItem As New CategoryInfo
+            Dim objSecurity As New PortalSecurity
 
-            CategoryItem.FaqCategoryName = txtCategoryName.Text
-            CategoryItem.FaqCategoryDescription = txtCategoryDescription.Text
+            CategoryItem.FaqCategoryName = objSecurity.InputFilter(txtCategoryName.Text, PortalSecurity.FilterFlag.NoMarkup Or PortalSecurity.FilterFlag.NoScripting)
+            CategoryItem.FaqCategoryDescription = objSecurity.InputFilter(txtCategoryDescription.Text, PortalSecurity.FilterFlag.NoScripting)
             CategoryItem.ModuleId = ModuleId
 
             Try

@@ -147,4 +147,7 @@
   <data name="ControlTitle_edit.Text" xml:space="preserve">
     <value>Edit this FAQ entry</value>
   </data>
+  <data name="valRequiredTitle.Text" xml:space="preserve">
+    <value>&lt;strong&gt;Question is required&lt;/strong&gt;</value>
+  </data>
 </root>

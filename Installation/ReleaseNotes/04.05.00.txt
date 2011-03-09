@@ -14,5 +14,6 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
 <ul>
 	<li>Updated DNN Installation manifest to DNN 5 standard</li>
     <li>Changed the source solution to Visual Studio 2010 with full MS Build support</li>
-    <li>Solution back to 1 .dll</li>
+    <li>Integrated coding. Module now has only 1 .dll</li>
+    <li>Removed the setting for AJAX On/Off, since DNN5 will handle it</li>
 </ul>

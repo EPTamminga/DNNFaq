@@ -26,6 +26,7 @@ Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Services.Exceptions
 Imports DotNetNuke.Services.Localization
+Imports DotNetNuke.Security
 
 Namespace DotNetNuke.Modules.FAQs
 
@@ -54,7 +55,7 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Members"
 
-        Protected teQuestionField As TextEditor
+        Protected txtQuestionField As TextBox
         Protected teAnswerField As TextEditor
         Protected ctlAudit As ModuleAuditControl
 #End Region
@@ -111,7 +112,7 @@ Namespace DotNetNuke.Modules.FAQs
                         End If
 
                         teAnswerField.Text = FaqItem.Answer
-                        teQuestionField.Text = FaqItem.Question
+                        txtQuestionField.Text = FaqItem.Question
 
                         ctlAudit.CreatedByUser = FaqItem.CreatedByUserName
                         If FaqItem.DateModified = Null.NullDate Then
@@ -136,13 +137,16 @@ Namespace DotNetNuke.Modules.FAQs
 
             Try
                 Dim FAQsController As New FAQsController
+                Dim objSecurity As New PortalSecurity
 
                 Dim FAQsInfo As New FAQsInfo
 
                 FAQsInfo.ItemId = FaqId
                 FAQsInfo.CategoryId = CInt(drpCategory.SelectedValue.ToString())
-                FAQsInfo.Question = teQuestionField.Text
-                FAQsInfo.Answer = teAnswerField.Text
+
+                ' We do not allow for script or markup
+                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoScripting)
+                FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting)
                 FAQsInfo.CreatedByUser = UserId.ToString()
                 FAQsInfo.ViewCount = 0
                 FAQsInfo.CreatedDate = DateTime.Now
