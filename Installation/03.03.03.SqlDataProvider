@@ -65,50 +65,50 @@ GO
 /** Drop Existing Stored Procedures **/
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}AddFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}AddFAQ
+	drop procedure {databaseOwner}[{objectQualifier}AddFAQ]
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DeleteFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}DeleteFAQ
+	drop procedure {databaseOwner}[{objectQualifier}DeleteFAQ]
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}GetFAQ
+	drop procedure {databaseOwner}[{objectQualifier}GetFAQ]
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQs]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}GetFAQs
+	drop procedure {databaseOwner}[{objectQualifier}GetFAQs]
 GO
 
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}UpdateFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}UpdateFAQ
+	drop procedure {databaseOwner}[{objectQualifier}UpdateFAQ]
 GO
 
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQGet    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}FAQGet
+	drop procedure {databaseOwner}[{objectQualifier}FAQGet]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQList    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQList
+drop procedure {databaseOwner}[{objectQualifier}FAQList]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQAdd    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQAdd
+drop procedure {databaseOwner}[{objectQualifier}FAQAdd]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQUpdate    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQUpdate
+drop procedure {databaseOwner}[{objectQualifier}FAQUpdate]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQDelete    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQDelete
+drop procedure {databaseOwner}[{objectQualifier}FAQDelete]
 GO
 
 
@@ -116,7 +116,7 @@ GO
 /   Get
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQGet
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQGet]
 (
 	@ItemId   int,
 	@ModuleId int
@@ -147,7 +147,7 @@ GO
 /   List 
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQList
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQList]
 AS
 
 SELECT
@@ -170,7 +170,7 @@ GO
 /  ------------------------------------------------------------------------------------- */
 
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQAdd
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQAdd]
 	@ModuleId int,
 	@CategoryId int,
 	@Question ntext,
@@ -209,7 +209,7 @@ GO
 /   Update
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQUpdate
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQUpdate]
 	@ItemId int, 
 	@ModuleId int, 
 	@CategoryId int, 
@@ -233,7 +233,7 @@ GO
 /   Delete
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQDelete
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQDelete]
 	@ItemId int,
 	@ModuleId int
 AS
@@ -250,37 +250,37 @@ GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryGet    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryGet') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQCategoryGet
+drop procedure {databaseOwner}[{objectQualifier}FAQCategoryGet]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryList    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryList') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQCategoryList
+drop procedure {databaseOwner}[{objectQualifier}FAQCategoryList]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryAdd    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryAdd') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQCategoryAdd
+drop procedure {databaseOwner}[{objectQualifier}FAQCategoryAdd]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryUpdate    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryUpdate') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQCategoryUpdate
+drop procedure {databaseOwner}[{objectQualifier}FAQCategoryUpdate]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryDelete    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryDelete') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQCategoryDelete
+drop procedure {databaseOwner}[{objectQualifier}FAQCategoryDelete]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryDelete    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQIncrementViewCount') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQIncrementViewCount
+drop procedure {databaseOwner}[{objectQualifier}FAQIncrementViewCount]
 GO
 
 /****** Object:  Stored Procedure {databaseOwner}{objectQualifier}FAQCategoryDelete    Script Date: 23. april 2006 ******/
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQSearch') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure {databaseOwner}{objectQualifier}FAQSearch
+drop procedure {databaseOwner}[{objectQualifier}FAQSearch]
 GO
 
 
@@ -289,7 +289,7 @@ GO
 /   CategoryGet
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQCategoryGet
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryGet]
 	@FaqCategoryId int,
 	@moduleId int 
 AS
@@ -309,7 +309,7 @@ GO
 /   CategoryList 
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQCategoryList
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryList]
 (
 	@ModuleID	int
 )
@@ -328,7 +328,7 @@ GO
 /   CategoryAdd
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQCategoryAdd
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryAdd]
 	@ModuleId int,
 	@FaqCategoryName nvarchar(100),
 	@FaqCategoryDescription nvarchar(250)
@@ -351,7 +351,7 @@ GO
 /   CategoryUpdate
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQCategoryUpdate
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryUpdate]
 	@FaqCategoryId int, 
 	@ModuleId int, 
 	@FaqCategoryName nvarchar(100), 
@@ -370,7 +370,7 @@ GO
 /   CategoryDelete
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQCategoryDelete
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryDelete]
 	@FaqCategoryId int
 AS
 
@@ -388,7 +388,7 @@ GO
 /   IncrementViewCount
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQIncrementViewCount
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQIncrementViewCount]
 (
 	@ItemID	int
 )
@@ -403,7 +403,7 @@ GO
 /   FAQSearch
 /  ------------------------------------------------------------------------------------- */
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}FAQSearch
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQSearch]
 (
 	@ModuleId	int,
 	@OrderBy	int

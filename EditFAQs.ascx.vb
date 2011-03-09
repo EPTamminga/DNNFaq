@@ -29,6 +29,7 @@ Imports DotNetNuke.Services.Localization
 
 Namespace DotNetNuke.Modules.FAQs
 
+    <DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Public Class EditFAQs
         Inherits PortalModuleBase
 

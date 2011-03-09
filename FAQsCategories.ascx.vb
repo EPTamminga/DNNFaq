@@ -29,6 +29,7 @@ Imports DotNetNuke.Services.Localization
 
 Namespace DotNetNuke.Modules.FAQs
 
+    <DNNtc.ModuleControlProperties("Categories", "Edit Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Partial Class FAQsCategories
         Inherits PortalModuleBase
 

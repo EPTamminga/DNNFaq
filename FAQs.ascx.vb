@@ -29,7 +29,7 @@ Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
-
+    <DNNtc.ModuleControlProperties("View", "FAQs view", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Partial Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler

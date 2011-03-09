@@ -14,7 +14,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <OldToolsVersion>2.0</OldToolsVersion>
+    <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <SccProjectName>%24/dnnfaq</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
@@ -37,7 +37,7 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DocumentationFile>DotNetNuke.Modules.FAQs.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -55,8 +55,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetNuke, Version=5.6.1.238, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="DotNetNuke">
       <HintPath>..\..\bin\DotNetNuke.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -161,7 +160,9 @@
     <EmbeddedResource Include="App_LocalResources\Settings.ascx.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Installation\Project.targets" />
+    <None Include="Installation\Project.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Installation\Uninstall.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +170,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\Installation\Project.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -194,4 +195,5 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>
