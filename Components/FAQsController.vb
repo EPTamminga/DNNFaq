@@ -221,22 +221,49 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Helper Methods"
 
+        ''' <summary>
+        ''' Processes the tokens.
+        ''' </summary>
+        ''' <param name="FaqItem">The FAQ item.</param>
+        ''' <param name="Template">The template.</param>
+        ''' <returns>Answers in which alkl tokens are processed</returns>
         Public Function ProcessTokens(ByVal FaqItem As FAQsInfo, ByVal Template As String) As String
 
             Dim Answer As New StringBuilder(Template)
+
+            ' All replaces are repeated for the old token formats
+            Answer.Replace("[FAQ:ANSWER]", FaqItem.Answer)
             Answer.Replace("[ANSWER]", FaqItem.Answer)
+
+            Answer.Replace("[FAQ:CATEGORYNAME]", FaqItem.FaqCategoryName)
             Answer.Replace("[CATEGORYNAME]", FaqItem.FaqCategoryName)
+
+            Answer.Replace("[FAQ:CATEGORYDESC]", FaqItem.FaqCategoryDescription)
             Answer.Replace("[CATEGORYDESC]", FaqItem.FaqCategoryDescription)
+
+            Answer.Replace("[FAQ:USER]", FaqItem.CreatedByUserName)
             Answer.Replace("[USER]", FaqItem.CreatedByUserName)
+
+            Answer.Replace("[FAQ:VIEWCOUNT]", FaqItem.ViewCount.ToString())
             Answer.Replace("[VIEWCOUNT]", FaqItem.ViewCount.ToString())
+
+            Answer.Replace("[FAQ:DATECREATED]", FaqItem.CreatedDate.ToShortDateString)
             Answer.Replace("[DATECREATED]", FaqItem.CreatedDate.ToShortDateString)
+
             If Not FaqItem.DateModified = Null.NullDate Then
+                Answer.Replace("[FAQ:DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
                 Answer.Replace("[DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
             Else
+                Answer.Replace("[FAQ:DATEMODIFIED]", String.Empty)
                 Answer.Replace("[DATEMODIFIED]", String.Empty)
             End If
+
+            Answer.Replace("[FAQ:QUESTION]", FaqItem.Question)
             Answer.Replace("[QUESTION]", FaqItem.Question)
+
+            Answer.Replace("[FAQ:INDEX]", FaqItem.Index.ToString())
             Answer.Replace("[INDEX]", FaqItem.Index.ToString())
+
             Return Answer.ToString()
 
         End Function
