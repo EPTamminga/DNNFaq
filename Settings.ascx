@@ -4,10 +4,9 @@
 <table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server">
-            </dnn:label>
+            <dnn:Label ID="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server"></dnn:Label>
         </td>
-        <td valign="top" >
+        <td valign="top">
             <asp:DropDownList ID="drpDefaultSorting" runat="server" CssClass="Normal">
                 <asp:ListItem Value="0" resourcekey="OrderByDateNew">Date New</asp:ListItem>
                 <asp:ListItem Value="1" resourcekey="OrderByDateOld">Date Old</asp:ListItem>
@@ -18,47 +17,43 @@
     </tr>
     <tr valign="top">
         <td class="SubHead">
-                <dnn:label id="lblQuestionTemplate" ControlName="lblQuestionTemplate" runat="server">
-                </dnn:label>
+            <dnn:Label ID="lblQuestionTemplate" ControlName="lblQuestionTemplate" runat="server"></dnn:Label>
         </td>
         <td>
-            <asp:TextBox ID="txtQuestionTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
+            <asp:TextBox ID="txtQuestionTemplate" runat="server" Width="400px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblAnswerTemplate" ControlName="lblAnswerTemplate" runat="server">
-            </dnn:label>
+            <dnn:Label ID="lblAnswerTemplate" ControlName="lblAnswerTemplate" runat="server"></dnn:Label>
         </td>
         <td>
-            <asp:TextBox ID="txtAnswerTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
+            <asp:TextBox ID="txtAnswerTemplate" runat="server" Width="400px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblLoadingTemplate" ControlName="lblLoadingTemplate" runat="server">
-            </dnn:label>
+            <dnn:Label ID="lblLoadingTemplate" ControlName="lblLoadingTemplate" runat="server"></dnn:Label>
         </td>
         <td>
-            <asp:TextBox ID="txtLoadingTemplate" runat="server" Width="350px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
+            <asp:TextBox ID="txtLoadingTemplate" runat="server" Width="400px" CssClass="Normal" Height="104px" TextMode="MultiLine"></asp:TextBox>
         </td>
     </tr>
     <tr valign="top">
         <td class="SubHead">
-            <dnn:label id="lblAvailableTokens" ControlName="lblAvailableTokens" runat="server">
-            </dnn:label>
+            <dnn:Label ID="lblAvailableTokens" ControlName="lblAvailableTokens" runat="server"></dnn:Label>
         </td>
         <td>
-            <asp:ListBox ID="lstAvailableTokens" runat="server" Width="136px" Height="169px" CssClass="Normal">
-                <asp:ListItem Value="[QUESTION]">[QUESTION]</asp:ListItem>
-                <asp:ListItem Value="[ANSWER]">[ANSWER]</asp:ListItem>
-                <asp:ListItem Value="[USER]">[USER]</asp:ListItem>
-                <asp:ListItem Value="[VIEWCOUNT]">[VIEWCOUNT]</asp:ListItem>
-                <asp:ListItem Value="[CATEGORYNAME]">[CATEGORYNAME]</asp:ListItem>
-                <asp:ListItem Value="[CATEGORYDESC]">[CATEGORYDESC]</asp:ListItem>
-                <asp:ListItem Value="[DATECREATED]">[DATECREATED]</asp:ListItem>
-                <asp:ListItem Value="[DATEMODIFIED]">[DATEMODIFIED]</asp:ListItem>
-                <asp:ListItem Value="[INDEX]">[INDEX]</asp:ListItem>
+            <asp:ListBox ID="lstAvailableTokens" runat="server" Height="169px" CssClass="Normal">
+                <asp:ListItem Value="[FAQ:QUESTION]">[FAQ:QUESTION]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:ANSWER]">[FAQ:ANSWER]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:USER]">[FAQ:USER]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:VIEWCOUNT]">[FAQ:VIEWCOUNT]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:CATEGORYNAME]">[FAQ:CATEGORYNAME]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:CATEGORYDESC]">[FAQ:CATEGORYDESC]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:DATECREATED]">[FAQ:DATECREATED]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:DATEMODIFIED]">[FAQ:DATEMODIFIED]</asp:ListItem>
+                <asp:ListItem Value="[FAQ:INDEX]">[FAQ:INDEX]</asp:ListItem>
             </asp:ListBox>
         </td>
     </tr>

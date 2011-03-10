@@ -142,10 +142,10 @@
     <value>Question Template</value>
   </data>
   <data name="OrderByDateNew.Text" xml:space="preserve">
-    <value>Date (newest first)</value>
+    <value>Modified Date (newest first)</value>
   </data>
   <data name="OrderByDateOld.Text" xml:space="preserve">
-    <value>Date (oldest first)</value>
+    <value>Modified Date (oldest first)</value>
   </data>
   <data name="OrderByPopularityLow.Text" xml:space="preserve">
     <value>Popularity (lowest first)</value>
@@ -154,20 +154,20 @@
     <value>Popularity (highest first)</value>
   </data>
   <data name="DefaultQuestionTemplate.Text" xml:space="preserve">
-    <value>&lt;div Class="Normal"&gt;
-&lt;b&gt;Q[INDEX]. [QUESTION]&lt;/b&gt;
+    <value>&lt;div class="Normal"&gt;
+&lt;strong&gt;Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/strong&gt;
 &lt;/div&gt;</value>
   </data>
   <data name="DefaultAnswerTemplate.Text" xml:space="preserve">
-    <value>&lt;div Class="Normal" Style="padding: 5px;"&gt;
-&lt;b&gt;Answer:&lt;/b&gt; [ANSWER]
+    <value>&lt;div class="Normal" Style="padding: 5px;"&gt;
+&lt;strong&gt;Answer:&lt;/strong&gt; [FAQ:ANSWER]
 &lt;/div&gt;</value>
   </data>
   <data name="DefaultLoadingTemplate.Text" xml:space="preserve">
-    <value>&lt;div Class="Normal" Style="padding: 5px;"&gt;Loading...&lt;/div&gt;</value>
+    <value>&lt;div class="Normal" Style="padding: 5px;"&gt;Loading...&lt;/div&gt;</value>
   </data>
   <data name="lblLoadingTemplate.Help" xml:space="preserve">
-    <value>The Loading Template is displayed when the user clicks on a Question (in AJAX mode) until the Answer is fully loaded and displayed</value>
+    <value>The Loading Template is displayed when the user clicks on a Question until the Answer is fully loaded and displayed</value>
   </data>
   <data name="lblLoadingTemplate.Text" xml:space="preserve">
     <value>Loading Template</value>
