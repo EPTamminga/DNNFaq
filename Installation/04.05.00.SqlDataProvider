@@ -1,0 +1,46 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+/***** Harden the table and column structure, make sure we can do this *****/
+
+UPDATE  {databaseOwner}[{objectQualifier}FAQs] 
+SET     [CreatedDate] = '2000-01-01T00:00:00'
+WHERE   [CreatedDate] IS NULL
+GO
+
+UPDATE  {databaseOwner}[{objectQualifier}FAQs] 
+SET     [DateModified] = '2000-01-01T00:00:00'
+WHERE   [DateModified] IS NULL
+GO
+
+UPDATE  {databaseOwner}[{objectQualifier}FAQs] 
+SET     [Question] = 'Generated Question ' + CAST([ItemID] AS VARCHAR(16))
+WHERE   [Question] IS NULL
+GO
+
+
+/***** Change column properties so they are more appriopriate *****/
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs]  
+ALTER COLUMN [Question] NVARCHAR(200) NOT NULL
+GO
+   
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs] 
+ALTER COLUMN [Answer] NVARCHAR(MAX) NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs]
+ALTER COLUMN [CreatedDate] DATETIME NOT NULL
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}FAQs]
+ALTER COLUMN [DateModified] DATETIME NOT NULL
+GO
+
