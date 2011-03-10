@@ -8,9 +8,9 @@
 /*****                                                  *****/
 /************************************************************/
 
-/** Create FAQs Table **/
+/** CREATE FAQs Table **/
 
-if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}FAQs]') and OBJECTPROPERTY(id, N'IsTable') = 1)
+if not exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}FAQs]') and OBJECTPROPERTY(id, N'IsTable') = 1)
 	BEGIN
 		CREATE TABLE {databaseOwner}[{objectQualifier}FAQs]
 		(
@@ -33,38 +33,38 @@ GO
 
 /** Drop Existing Stored Procedures **/
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}AddFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}AddFAQ
+if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}{objectQualifier}AddFAQ
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}DeleteFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}DeleteFAQ
+if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}DeleteFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}{objectQualifier}DeleteFAQ
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}GetFAQ
+if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetFAQ
 GO
 
-if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQs]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}GetFAQs
-GO
-
-
-if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}UpdateFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}UpdateFAQ
+if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}GetFAQs]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}{objectQualifier}GetFAQs
 GO
 
 
-/** Create Stored Procedures **/
+if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}UpdateFAQ]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+	DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateFAQ
+GO
 
-create procedure {databaseOwner}{objectQualifier}AddFAQ
+
+/** CREATE Stored Procedures **/
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddFAQ
 
 	@ModuleId int,
 	@UserName nvarchar(100),
 	@Question ntext,
 	@Answer   ntext
 
-as
+AS
 
 insert into {objectQualifier}FAQs (
 	CreatedByUser,
@@ -73,7 +73,7 @@ insert into {objectQualifier}FAQs (
 	Question,
 	Answer
 )
-values (
+VALUES (
 	@UserName,
 	getdate(),
 	@ModuleId,
@@ -81,76 +81,76 @@ values (
 	@Answer
 )
 
-select SCOPE_IDENTITY()
+SELECT SCOPE_IDENTITY()
 
 GO
 
-create procedure {databaseOwner}{objectQualifier}DeleteFAQ
+CREATE PROCEDURE {databaseOwner}{objectQualifier}DeleteFAQ
 
 	@ItemId int
 
-as
+AS
 
-delete
-from {objectQualifier}FAQs
-where  ItemId = @ItemId
+DELETE
+FROM {objectQualifier}FAQs
+WHERE  ItemId = @ItemId
 
 GO
 
-CREATE procedure {databaseOwner}{objectQualifier}GetFAQ
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetFAQ
 
 	@ItemId   int,
 	@ModuleId int
 
-as
+AS
 
-select 
+SELECT 
 	ItemId,
     ModuleId,
     Question,
     Answer,
     'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
     {objectQualifier}FAQs.CreatedDate
-from {objectQualifier}FAQs
+FROM {objectQualifier}FAQs
 left outer join {objectQualifier}Users on {objectQualifier}FAQs.CreatedByUser = {objectQualifier}Users.UserId
-where  ItemId = @ItemId
+WHERE  ItemId = @ItemId
 and    ModuleId = @ModuleId
 
 GO
 
-CREATE procedure {databaseOwner}{objectQualifier}GetFAQs
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetFAQs
 
 	@ModuleId int
 
-as
+AS
 
-select 
+SELECT 
 	ItemId,
 	ModuleId,
     CreatedDate,
     CreatedByUser,
     Question,
     Answer
-from {objectQualifier}FAQs
-where  ModuleId = @ModuleId
+FROM {objectQualifier}FAQs
+WHERE  ModuleId = @ModuleId
 
 GO
 
-create procedure {databaseOwner}{objectQualifier}UpdateFAQ
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateFAQ
 
 	@ItemId    int,
 	@UserName  nvarchar(100),
 	@Question  ntext,
 	@Answer    ntext
 
-as
+AS
 
 update {objectQualifier}FAQs
 set    Question = @Question,
        Answer = @Answer,
        CreatedByUser = @UserName,
        CreatedDate = getdate()
-where  ItemId = @ItemId
+WHERE  ItemId = @ItemId
 
 GO
 
