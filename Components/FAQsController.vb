@@ -37,46 +37,87 @@ Namespace DotNetNuke.Modules.FAQs
         Implements ISearchable, IPortable
 
 #Region "Public FAQ Methods"
+        ''' <summary>
+        ''' Gets the FAQ.
+        ''' </summary>
+        ''' <param name="faqId">The FAQ id.</param>
+        ''' <param name="moduleId">The module id.</param>
+        ''' <returns>FAQInfo object</returns>
         Public Function GetFAQ(ByVal faqId As Integer, ByVal moduleId As Integer) As FAQsInfo
 
             Return CType(CBO.FillObject(DataProvider.Instance().GetFAQ(faqId, moduleId), GetType(FAQsInfo)), FAQsInfo)
 
         End Function
 
+        ''' <summary>
+        ''' Lists the FAQ.
+        ''' </summary>
+        ''' <param name="ModuleID">The module ID.</param>
+        ''' <param name="OrderBy">The order by.</param>
+        ''' <returns>Arrarylist of FAQs</returns>
         Public Function ListFAQ(ByVal ModuleID As Integer, ByVal OrderBy As Integer) As ArrayList
 
             Return SearchFAQList(ModuleID, OrderBy)
 
         End Function
 
+        ''' <summary>
+        ''' Lists the FAQ without order.
+        ''' </summary>
+        ''' <param name="ModuleID">The module ID.</param>
+        ''' <returns>Array list of FAQ unordered</returns>
         Public Function ListFAQWithoutOrder(ByVal ModuleID As Integer) As ArrayList
 
             Return SearchFAQList(ModuleID, 0)
 
         End Function
 
+        ''' <summary>
+        ''' Adds the FAQ.
+        ''' </summary>
+        ''' <param name="obj">The FAQInfo obj.</param>
+        ''' <returns></returns>
         Public Function AddFAQ(ByVal obj As FAQsInfo) As Integer
 
             Return CType(DataProvider.Instance().AddFAQ(obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.CreatedDate, obj.DateModified, 0), Integer)
 
         End Function
 
+        ''' <summary>
+        ''' Updates the FAQ.
+        ''' </summary>
+        ''' <param name="obj">FAQsinfo object</param>
         Public Sub UpdateFAQ(ByVal obj As FAQsInfo)
 
             DataProvider.Instance().UpdateFAQ(obj.ItemId, obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.DateModified)
 
         End Sub
 
+        ''' <summary>
+        ''' Deletes the FAQ.
+        ''' </summary>
+        ''' <param name="faqId">The FAQ id.</param>
+        ''' <param name="moduleId">The module id.</param>
         Public Sub DeleteFAQ(ByVal faqId As Integer, ByVal moduleId As Integer)
 
             DataProvider.Instance().DeleteFAQ(faqId, moduleId)
 
         End Sub
 
+        ''' <summary>
+        ''' Increments the view count.
+        ''' </summary>
+        ''' <param name="faqId">The FAQ id.</param>
         Public Sub IncrementViewCount(ByVal faqId As Integer)
             DataProvider.Instance().IncrementViewCount(faqId)
         End Sub
 
+        ''' <summary>
+        ''' Searches the FAQ list.
+        ''' </summary>
+        ''' <param name="ModuleId">The module id.</param>
+        ''' <param name="OrderBy">The order by.</param>
+        ''' <returns>FAQList with relevant searched </returns>
         Public Function SearchFAQList(ByVal ModuleId As Integer, ByVal OrderBy As Integer) As ArrayList
 
             Dim FaqList As ArrayList = CBO.FillCollection(DataProvider.Instance().SearchFAQList(ModuleId, OrderBy), GetType(FAQsInfo))
@@ -92,24 +133,44 @@ Namespace DotNetNuke.Modules.FAQs
 #End Region
 
 #Region "Public Category Methods"
+        ''' <summary>
+        ''' Gets the category.
+        ''' </summary>
+        ''' <param name="faqCategoryId">The FAQ category id.</param>
+        ''' <param name="moduleId">The module id.</param>
+        ''' <returns>Category info object</returns>
         Public Function GetCategory(ByVal faqCategoryId As Integer, ByVal moduleId As Integer) As CategoryInfo
 
             Return CType(CBO.FillObject(DataProvider.Instance().GetCategory(faqCategoryId, moduleId), GetType(CategoryInfo)), CategoryInfo)
 
         End Function
 
+        ''' <summary>
+        ''' Lists the categories.
+        ''' </summary>
+        ''' <param name="ModuleId">The module id.</param>
+        ''' <returns></returns>
         Public Function ListCategories(ByVal ModuleId As Integer) As ArrayList
 
             Return CBO.FillCollection(DataProvider.Instance().ListCategory(ModuleId), GetType(CategoryInfo))
 
         End Function
 
+        ''' <summary>
+        ''' Adds the category.
+        ''' </summary>
+        ''' <param name="objCategory">The obj category.</param>
+        ''' <returns></returns>
         Public Function AddCategory(ByVal objCategory As CategoryInfo) As Integer
 
             Return CType(DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription), Integer)
 
         End Function
 
+        ''' <summary>
+        ''' Updates the category.
+        ''' </summary>
+        ''' <param name="objCategory">The obj category.</param>
         Public Sub UpdateCategory(ByVal objCategory As CategoryInfo)
 
             DataProvider.Instance().UpdateCategory(objCategory.FaqCategoryId, objCategory.ModuleId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription)
@@ -124,6 +185,11 @@ Namespace DotNetNuke.Modules.FAQs
 #End Region
 
 #Region "Optional Interfaces"
+        ''' <summary>
+        ''' Gets the search items.
+        ''' </summary>
+        ''' <param name="ModInfo">The mod info.</param>
+        ''' <returns></returns>
         Public Function GetSearchItems(ByVal ModInfo As Entities.Modules.ModuleInfo) As Services.Search.SearchItemInfoCollection Implements Entities.Modules.ISearchable.GetSearchItems
             Dim SearchItemCollection As New SearchItemInfoCollection
 
@@ -149,6 +215,11 @@ Namespace DotNetNuke.Modules.FAQs
             Return SearchItemCollection
         End Function
 
+        ''' <summary>
+        ''' Exports the module.
+        ''' </summary>
+        ''' <param name="ModuleID">The module ID.</param>
+        ''' <returns>XML output</returns>
         Public Function ExportModule(ByVal ModuleID As Integer) As String Implements Entities.Modules.IPortable.ExportModule
             Dim strXML As String = ""
             Dim arrFAQs As ArrayList = ListFAQWithoutOrder(ModuleID)
@@ -169,6 +240,13 @@ Namespace DotNetNuke.Modules.FAQs
             Return strXML
         End Function
 
+        ''' <summary>
+        ''' Imports the module.
+        ''' </summary>
+        ''' <param name="ModuleID">The module ID.</param>
+        ''' <param name="Content">The content.</param>
+        ''' <param name="Version">The version.</param>
+        ''' <param name="UserId">The user id.</param>
         Public Sub ImportModule(ByVal ModuleID As Integer, ByVal Content As String, ByVal Version As String, ByVal UserId As Integer) Implements Entities.Modules.IPortable.ImportModule
             Dim catNames As New ArrayList
             Dim xmlFAQ As XmlNode
@@ -250,13 +328,8 @@ Namespace DotNetNuke.Modules.FAQs
             Answer.Replace("[FAQ:DATECREATED]", FaqItem.CreatedDate.ToShortDateString)
             Answer.Replace("[DATECREATED]", FaqItem.CreatedDate.ToShortDateString)
 
-            If Not FaqItem.DateModified = Null.NullDate Then
-                Answer.Replace("[FAQ:DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
-                Answer.Replace("[DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
-            Else
-                Answer.Replace("[FAQ:DATEMODIFIED]", String.Empty)
-                Answer.Replace("[DATEMODIFIED]", String.Empty)
-            End If
+            Answer.Replace("[FAQ:DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
+            Answer.Replace("[DATEMODIFIED]", FaqItem.DateModified.ToShortDateString)
 
             Answer.Replace("[FAQ:QUESTION]", FaqItem.Question)
             Answer.Replace("[QUESTION]", FaqItem.Question)

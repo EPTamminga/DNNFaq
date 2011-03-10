@@ -79,6 +79,9 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Private Methods"
 
+        ''' <summary>
+        ''' Populates the categories drop down.
+        ''' </summary>
         Private Sub PopulateCategoriesDropDown()
             Dim FAQsController As New FAQsController
 
@@ -91,6 +94,11 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Event Handlers"
 
+        ''' <summary>
+        ''' Handles the Load event of the Page control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
             If Page.IsPostBack = False Then
@@ -133,6 +141,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdUpdate control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdate.Click
 
             Try
@@ -167,6 +180,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdCancel control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCancel.Click
             Try
                 Response.Redirect(NavigateURL(), True)
@@ -175,6 +193,11 @@ Namespace DotNetNuke.Modules.FAQs
             End Try
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdDelete control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdDelete.Click
             Try
                 Dim FAQsController As New FAQsController
