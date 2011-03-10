@@ -14,12 +14,12 @@
             </asp:DropDownList>
         </td>
     </tr>
-    <tr>
+    <tr valign="top">
         <td valign="top" class="SubHead">
             <dnn:Label ID="plQuestionField" runat="server" ControlName="QuestionField"></dnn:Label>
         </td>
         <td>
-            <asp:TextBox ID="txtQuestionField" CssClass="NormalTextBox" runat="server" MaxLength="100" Width="400px"></asp:TextBox>
+            <asp:TextBox ID="txtQuestionField" CssClass="NormalTextBox" runat="server" MaxLength="200" Width="400px" Text="Put your question here" TextMode="SingleLine"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valRequiredTitle" runat="server" CssClass="NormalRed" resourcekey="valRequiredTitle" ControlToValidate="txtQuestionField" ErrorMessage="Question is required"></asp:RequiredFieldValidator>
         </td>
     </tr>

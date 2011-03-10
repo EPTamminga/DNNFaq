@@ -145,7 +145,7 @@ Namespace DotNetNuke.Modules.FAQs
                 FAQsInfo.CategoryId = CInt(drpCategory.SelectedValue.ToString())
 
                 ' We do not allow for script or markup
-                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoScripting)
+                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting)
                 FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting)
                 FAQsInfo.CreatedByUser = UserId.ToString()
                 FAQsInfo.ViewCount = 0
