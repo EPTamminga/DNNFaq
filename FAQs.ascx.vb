@@ -76,12 +76,24 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the local resource file from the settings.
+        ''' </summary>
+        ''' <value>The local resource file for settings.ascx</value>
+        Public ReadOnly Property LocalResourceFileSettings As String
+            Get
+                Return Me.TemplateSourceDirectory & "/" & DotNetNuke.Services.Localization.Localization.LocalResourceDirectory & "/Settings"
+            End Get
+        End Property
+        
         Public ReadOnly Property AnswerTemplate() As String
+
             Get
                 If Not Null.IsNull(Settings("FaqAnswerTemplate")) Then
                     Return Settings("FaqAnswerTemplate").ToString()
                 Else
-                    Return Localization.GetString("DefaultAnswerTemplate", Me.LocalResourceFile)
+                    ' Get the resource fromt he settings resources if not set yet
+                    Return Localization.GetString("DefaultAnswerTemplate", Me.LocalResourceFileSettings)
                 End If
             End Get
         End Property
@@ -91,7 +103,8 @@ Namespace DotNetNuke.Modules.FAQs
                 If Not Null.IsNull(Settings("FaqQuestionTemplate")) Then
                     Return Settings("FaqQuestionTemplate").ToString()
                 Else
-                    Return Localization.GetString("DefaultQuestionTemplate", Me.LocalResourceFile)
+                    ' Get the resource fromt he settings resources if not set yet
+                    Return Localization.GetString("DefaultQuestionTemplate", Me.LocalResourceFileSettings)
                 End If
             End Get
         End Property
@@ -101,7 +114,8 @@ Namespace DotNetNuke.Modules.FAQs
                 If Not Null.IsNull(Settings("FaqLoadingTemplate")) Then
                     Return Settings("FaqLoadingTemplate").ToString()
                 Else
-                    Return Localization.GetString("DefaultLoadingTemplate", Me.LocalResourceFile)
+                    ' Get the resource fromt he settings resources if not set yet
+                    Return Localization.GetString("DefaultLoadingTemplate", Me.LocalResourceFileSettings)
                 End If
             End Get
         End Property
