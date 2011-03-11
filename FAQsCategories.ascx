@@ -1,56 +1,56 @@
 <%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.FAQsCategories" AutoEventWireup="false" CodeBehind="FAQsCategories.ascx.vb" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
-<p>
-    <asp:DataList ID="lstCategory" DataKeyField="FaqCategoryId" runat="server">
-        <HeaderTemplate>
-            <table border="0" cellpadding="2" cellspacing="2" class="Normal">
-                <tr>
-                    <td align="center">
-                        <dnn:Label ID="plEdit" ControlName="CategoryEdit" runat="server"></dnn:Label>
-                    </td>
-                    <td>
-                        <dnn:Label ID="plName" ControlName="CategoryName" runat="server"></dnn:Label>
-                    </td>
-                    <td>
-                        <dnn:Label ID="plDescription" ControlName="CategoryDescription" runat="server"></dnn:Label>
-                    </td>
-                    <td align="center">
-                        <dnn:Label ID="plDelete" ControlName="CategoryDelete" runat="server"></dnn:Label>
-                    </td>
-                </tr>
-        </HeaderTemplate>
-        <FooterTemplate>
-            </table>
-        </FooterTemplate>
-        <ItemTemplate>
+<asp:DataList ID="lstCategory" DataKeyField="FaqCategoryId" runat="server">
+    <HeaderTemplate>
+        <table border="0" cellpadding="2" cellspacing="2" class="Normal">
             <tr>
                 <td align="center">
-                    <asp:ImageButton ID="btnEditCategory" runat="server" CommandName="Edit" ImageUrl="~/images/edit.gif"></asp:ImageButton>
+                    <dnn:Label ID="plEdit" ControlName="CategoryEdit" runat="server"></dnn:Label>
                 </td>
                 <td>
-                    <asp:Label ID="lblFaqCategoryName" runat="server">
-						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryName") %>
-                    </asp:Label>
+                    <dnn:Label ID="plName" ControlName="CategoryName" runat="server"></dnn:Label>
                 </td>
                 <td>
-                    <asp:Label ID="lblFaqCategoryDescription" runat="server">
-						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryDescription") %>
-                    </asp:Label>
+                    <dnn:Label ID="plDescription" ControlName="CategoryDescription" runat="server"></dnn:Label>
                 </td>
                 <td align="center">
-                    <asp:ImageButton ID="btnDeleteCategory" CommandName="Delete" runat="server" ImageUrl="~/images/delete.gif"></asp:ImageButton>
+                    <dnn:Label ID="plDelete" ControlName="CategoryDelete" runat="server"></dnn:Label>
                 </td>
             </tr>
-        </ItemTemplate>
-    </asp:DataList></p>
+    </HeaderTemplate>
+    <FooterTemplate>
+        </table>
+    </FooterTemplate>
+    <ItemTemplate>
+        <tr>
+            <td align="center">
+                <asp:ImageButton ID="btnEditCategory" runat="server" CommandName="Edit" ImageUrl="~/images/edit.gif"></asp:ImageButton>
+            </td>
+            <td>
+                <asp:Label ID="lblFaqCategoryName" runat="server">
+						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryName") %>
+                </asp:Label>
+            </td>
+            <td>
+                <asp:Label ID="lblFaqCategoryDescription" runat="server">
+						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryDescription") %>
+                </asp:Label>
+            </td>
+            <td align="center">
+                <asp:ImageButton ID="btnDeleteCategory" CommandName="Delete" runat="server" ImageUrl="~/images/delete.gif"></asp:ImageButton>
+            </td>
+        </tr>
+    </ItemTemplate>
+</asp:DataList></p>
 <dnn:CommandButton ID="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton" CausesValidation="False" Text="Add New" />
 &nbsp;&nbsp;
 <dnn:CommandButton ID="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
 <asp:Panel ID="panelAddEdit" runat="server" Visible="False">
     <table class="Normal" id="tblManageCategories" cellspacing="3" cellpadding="3" border="0" width="100%">
         <tr>
-        <td style="width: 150px"></td>
+            <td style="width: 150px">
+            </td>
             <td colspan="2">
                 &nbsp;
             </td>
@@ -99,4 +99,3 @@
         </tr>
     </table>
 </asp:Panel>
-</p> 

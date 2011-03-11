@@ -29,9 +29,9 @@ Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
-    <DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "05.04.02")> _
+    <DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "05.06.01")> _
     <DNNtc.ModuleControlProperties("", "FAQs view", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
-        Partial Class FAQs
+    Partial Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler
 
@@ -85,7 +85,7 @@ Namespace DotNetNuke.Modules.FAQs
                 Return Me.TemplateSourceDirectory & "/" & DotNetNuke.Services.Localization.Localization.LocalResourceDirectory & "/Settings"
             End Get
         End Property
-        
+
         Public ReadOnly Property AnswerTemplate() As String
 
             Get

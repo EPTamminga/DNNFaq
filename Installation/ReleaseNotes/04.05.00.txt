@@ -1,4 +1,5 @@
-﻿<h2>Release notes DNN FAQs 04.05.00</h2>
+﻿<div style="height:250px;width:100%;overflow:auto">
+<h2>Release notes DNN FAQs 04.05.00</h2>
 <p>FAQs 04.05.00 will work for any DNN version 5.4.2 and up.
 Full details on the changes can be found in great detail at <a href="http://dnnfaqs.codeplex.com/workitem/list/basic">http://dnnfaqs.codeplex.com/workitem/list/basic</a>.</p>
 <h3>BUG FIXES</h3>
@@ -23,4 +24,6 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
     <li>Table structure is hardened, column types choosen more appropriately</li>
     <li>Changed question to max text size of 200 chars with non-html text</li>
     <li>Verriy that text enterd does not contain script</li>
+    <li>Merged the 2 sets of default display templates into 1 in settings</li>
 </ul>
+</div>

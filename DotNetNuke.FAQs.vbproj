@@ -20,6 +20,7 @@
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs03</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -165,9 +166,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Installation\Uninstall.SqlDataProvider" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

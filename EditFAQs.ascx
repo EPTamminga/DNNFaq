@@ -6,7 +6,7 @@
 <table class="Normal" id="tblAddFaq" cellspacing="3" cellpadding="3" border="0" width="100%">
     <tr>
         <td valign="top" class="SubHead" width="128">
-            <dnn:Label ID="plCategoryField" runat="server" ControlName="Category"></dnn:Label>
+            <dnn:label id="plCategoryField" runat="server" controlname="Category"></dnn:label>
         </td>
         <td>
             <asp:DropDownList ID="drpCategory" runat="server" CssClass="Normal">
@@ -16,7 +16,7 @@
     </tr>
     <tr valign="top">
         <td valign="top" class="SubHead">
-            <dnn:Label ID="plQuestionField" runat="server" ControlName="QuestionField"></dnn:Label>
+            <dnn:label id="plQuestionField" runat="server" controlname="QuestionField"></dnn:label>
         </td>
         <td>
             <asp:TextBox ID="txtQuestionField" CssClass="NormalTextBox" runat="server" MaxLength="200" Width="400px" Text="Put your question here" TextMode="SingleLine"></asp:TextBox>
@@ -25,18 +25,18 @@
     </tr>
     <tr>
         <td valign="top" class="SubHead">
-            <dnn:Label ID="plAnswerField" runat="server" ControlName="AnswerField"></dnn:Label>
+            <dnn:label id="plAnswerField" runat="server" controlname="AnswerField"></dnn:label>
         </td>
         <td>
-            <dnn:TextEditor ID="teAnswerField" runat="server" ControlID="teAnswerField" Height="300" Width="600" HtmlEncode="True" ChooseMode="False"></dnn:TextEditor>
+            <dnn:texteditor id="teAnswerField" runat="server" controlid="teAnswerField" height="300" width="600" htmlencode="True" choosemode="False"></dnn:texteditor>
         </td>
     </tr>
 </table>
 <p>
-    <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update" />
+    <dnn:commandbutton cssclass="CommandButton" id="cmdUpdate" imageurl="~/images/save.gif" runat="server" text="Update" />
     &nbsp;
-    <dnn:CommandButton ID="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+    <dnn:commandbutton id="cmdCancel" runat="server" imageurl="~/images/cancel.gif" cssclass="CommandButton" causesvalidation="False" text="Cancel" />
     &nbsp;
-    <dnn:CommandButton ID="cmdDelete" runat="server" ImageUrl="~/images/delete.gif" CssClass="CommandButton" CausesValidation="False" Text="Delete" />
+    <dnn:commandbutton id="cmdDelete" runat="server" imageurl="~/images/delete.gif" cssclass="CommandButton" causesvalidation="False" text="Delete" />
 </p>
 <Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>
