@@ -149,7 +149,6 @@
     <None Include="Installation\03.01.00.SqlDataProvider" />
     <None Include="Installation\03.03.03.SqlDataProvider" />
     <None Include="Installation\04.05.00.SqlDataProvider" />
-    <None Include="Installation\DotNetNuke.Modules.FAQs.dnn" />
     <EmbeddedResource Include="App_LocalResources\EditFAQs.ascx.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

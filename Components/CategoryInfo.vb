@@ -21,6 +21,9 @@ Imports System
 
 Namespace DotNetNuke.Modules.FAQs
 
+    ''' <summary>
+    ''' Main info class for the supporting categories
+    ''' </summary>
     Public Class CategoryInfo
 
 #Region "Private Members"
@@ -34,6 +37,13 @@ Namespace DotNetNuke.Modules.FAQs
         Public Sub New()
         End Sub
 
+        ''' <summary>
+        ''' Initializes a new instance of the <see cref="CategoryInfo" /> class.
+        ''' </summary>
+        ''' <param name="faqCategoryId">The FAQ category id.</param>
+        ''' <param name="moduleId">The module id.</param>
+        ''' <param name="faqCategoryName">Name of the FAQ category.</param>
+        ''' <param name="faqCategoryDescription">The FAQ category description.</param>
         Public Sub New(ByVal faqCategoryId As Integer, ByVal moduleId As Integer, ByVal faqCategoryName As String, ByVal faqCategoryDescription As String)
             Me.FaqCategoryId = faqCategoryId
             Me.ModuleId = moduleId
@@ -43,6 +53,10 @@ Namespace DotNetNuke.Modules.FAQs
 #End Region
 
 #Region "Public Properties"
+        ''' <summary>
+        ''' Gets or sets the FAQ category id.
+        ''' </summary>
+        ''' <value>The FAQ category id.</value>
         Public Property FaqCategoryId() As Integer
             Get
                 Return _faqCategoryId
@@ -52,6 +66,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the module id.
+        ''' </summary>
+        ''' <value>The module id.</value>
         Public Property ModuleId() As Integer
             Get
                 Return _moduleId
@@ -61,6 +79,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the name of the FAQ category.
+        ''' </summary>
+        ''' <value>The name of the FAQ category.</value>
         Public Property FaqCategoryName() As String
             Get
                 Return _faqCategoryName
@@ -70,6 +92,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the FAQ category description.
+        ''' </summary>
+        ''' <value>The FAQ category description.</value>
         Public Property FaqCategoryDescription() As String
             Get
                 Return _faqCategoryDescription

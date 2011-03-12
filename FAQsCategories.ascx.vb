@@ -30,7 +30,7 @@ Imports DotNetNuke.Security
 
 Namespace DotNetNuke.Modules.FAQs
 
-    <DNNtc.ModuleControlProperties("Categories", "Edit FAQ Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
+    <DNNtc.ModuleControlProperties("EditCategories", "Edit FAQ Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Partial Class FAQsCategories
         Inherits PortalModuleBase
 
@@ -83,6 +83,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the ItemCreated event of the lstCategory control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.Web.UI.WebControls.DataListItemEventArgs" /> instance containing the event data.</param>
         Private Sub lstCategory_ItemCreated(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataListItemEventArgs) Handles lstCategory.ItemCreated
 
             If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
@@ -91,6 +96,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the ItemCommand event of the lstCategory control.
+        ''' </summary>
+        ''' <param name="source">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.Web.UI.WebControls.DataListCommandEventArgs" /> instance containing the event data.</param>
         Private Sub lstCategory_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataListCommandEventArgs) Handles lstCategory.ItemCommand
 
             Dim FaqCategoryId As Integer = CType(lstCategory.DataKeys(e.Item.ItemIndex), Integer)
@@ -114,10 +124,20 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdCancel control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdCancel.Click
             panelAddEdit.Visible = False
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdUpdate control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdUpdate.Click
 
             Dim FAQsController As New FAQsController
@@ -146,6 +166,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdAddNew control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdAddNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdAddNew.Click
 
             panelAddEdit.Visible = True
@@ -156,6 +181,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the Click event of the cmdGoBack control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub cmdGoBack_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdGoBack.Click
             Response.Redirect(NavigateURL())
         End Sub

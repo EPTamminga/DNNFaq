@@ -25,6 +25,10 @@ SET     [Question] = 'Generated Question ' + CAST([ItemID] AS VARCHAR(16))
 WHERE   [Question] IS NULL
 GO
 
+UPDATE  {databaseOwner}[{objectQualifier}FAQs] 
+SET     [Question] = CAST([Question] AS NVARCHAR(200))
+GO
+
 
 /***** Change column properties so they are more appriopriate *****/
 

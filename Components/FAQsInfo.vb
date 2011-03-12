@@ -22,6 +22,9 @@ Imports System
 
 Namespace DotNetNuke.Modules.FAQs
 
+    ''' <summary>
+    ''' Info class for FAQs
+    ''' </summary>
     Public Class FAQsInfo
 
 #Region "Private Members"
@@ -44,11 +47,23 @@ Namespace DotNetNuke.Modules.FAQs
         Public Sub New()
         End Sub
 
+        ''' <summary>
+        ''' Initializes a new instance of the <see cref="FAQsInfo" /> class.
+        ''' </summary>
+        ''' <param name="itemId">The item id.</param>
+        ''' <param name="moduleId">The module id.</param>
+        ''' <param name="categoryId">The category id.</param>
+        ''' <param name="questionTitle">The question title.</param>
+        ''' <param name="question">The question.</param>
+        ''' <param name="answer">The answer.</param>
+        ''' <param name="createdByUser">The created by user.</param>
+        ''' <param name="createdDate">The created date.</param>
+        ''' <param name="dateModified">The date modified.</param>
+        ''' <param name="viewCount">The view count.</param>
         Public Sub New(ByVal itemId As Integer, ByVal moduleId As Integer, ByVal categoryId As Integer, ByVal questionTitle As String, ByVal question As String, ByVal answer As String, ByVal createdByUser As String, ByVal createdDate As DateTime, ByVal dateModified As DateTime, ByVal viewCount As Integer)
             Me.ItemId = itemId
             Me.ModuleId = moduleId
             Me.CategoryId = categoryId
-
             Me.Question = question
             Me.Answer = answer
             Me.CreatedByUser = createdByUser
@@ -60,6 +75,10 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Public Properties"
 
+        ''' <summary>
+        ''' Gets or sets the item id.
+        ''' </summary>
+        ''' <value>The item id.</value>
         Public Property ItemId() As Integer
             Get
                 Return _itemId
@@ -69,6 +88,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the name of the FAQ category.
+        ''' </summary>
+        ''' <value>The name of the FAQ category.</value>
         Public Property FaqCategoryName() As String
             Get
                 Return _faqCategoryName
@@ -77,8 +100,11 @@ Namespace DotNetNuke.Modules.FAQs
                 _faqCategoryName = Value
             End Set
         End Property
-
-
+        
+        ''' <summary>
+        ''' Gets or sets the FAQ category description.
+        ''' </summary>
+        ''' <value>The FAQ category description.</value>
         Public Property FaqCategoryDescription() As String
             Get
                 Return _faqCategoryDescription
@@ -88,6 +114,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the module id.
+        ''' </summary>
+        ''' <value>The module id.</value>
         Public Property ModuleId() As Integer
             Get
                 Return _moduleId
@@ -97,6 +127,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the category id.
+        ''' </summary>
+        ''' <value>The category id.</value>
         Public Property CategoryId() As Integer
             Get
                 Return _categoryId
@@ -106,6 +140,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the question.
+        ''' </summary>
+        ''' <value>The question.</value>
         Public Property Question() As String
             Get
                 Return _question
@@ -115,6 +153,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the answer.
+        ''' </summary>
+        ''' <value>The answer.</value>
         Public Property Answer() As String
             Get
                 Return _answer
@@ -124,6 +166,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the created by user.
+        ''' </summary>
+        ''' <value>The created by user.</value>
         Public Property CreatedByUser() As String
             Get
                 Return _createdByUser
@@ -133,6 +179,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the name of the created by user.
+        ''' </summary>
+        ''' <value>The name of the created by user.</value>
         Public Property CreatedByUserName() As String
             Get
                 Return _createdByUserName
@@ -142,6 +192,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the created date.
+        ''' </summary>
+        ''' <value>The created date.</value>
         Public Property CreatedDate() As DateTime
             Get
                 Return _createdDate
@@ -151,6 +205,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the date modified.
+        ''' </summary>
+        ''' <value>The date modified.</value>
         Public Property DateModified() As DateTime
             Get
                 Return _dateModified
@@ -160,6 +218,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the view count.
+        ''' </summary>
+        ''' <value>The view count.</value>
         Public Property ViewCount() As Integer
             Get
                 Return _viewCount
@@ -169,6 +231,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Set
         End Property
 
+        ''' <summary>
+        ''' Gets or sets the index.
+        ''' </summary>
+        ''' <value>The index.</value>
         Public Property Index() As Integer
             Get
                 Return _index

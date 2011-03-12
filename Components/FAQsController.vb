@@ -32,6 +32,9 @@ Imports DotNetNuke.Services.Search
 
 Namespace DotNetNuke.Modules.FAQs
 
+    ''' <summary>
+    ''' Main controller class for FAQs
+    ''' </summary>
     <DNNtc.BusinessControllerClass()> _
     Public Class FAQsController
         Implements ISearchable, IPortable

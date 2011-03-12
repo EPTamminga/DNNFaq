@@ -30,7 +30,7 @@ Imports DotNetNuke.Services.Exceptions.Exceptions
 
 Namespace DotNetNuke.Modules.FAQs
     <DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "05.06.01")> _
-    <DNNtc.ModuleControlProperties("", "FAQs view", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
+    <DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
     Partial Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler
@@ -86,8 +86,11 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the answer template.
+        ''' </summary>
+        ''' <value>The answer template.</value>
         Public ReadOnly Property AnswerTemplate() As String
-
             Get
                 If Not Null.IsNull(Settings("FaqAnswerTemplate")) Then
                     Return Settings("FaqAnswerTemplate").ToString()
@@ -98,6 +101,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the question template.
+        ''' </summary>
+        ''' <value>The question template.</value>
         Public ReadOnly Property QuestionTemplate() As String
             Get
                 If Not Null.IsNull(Settings("FaqQuestionTemplate")) Then
@@ -109,6 +116,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the loading template.
+        ''' </summary>
+        ''' <value>The loading template.</value>
         Public ReadOnly Property LoadingTemplate() As String
             Get
                 If Not Null.IsNull(Settings("FaqLoadingTemplate")) Then
@@ -120,6 +131,10 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        ''' <summary>
+        ''' Gets the module actions.
+        ''' </summary>
+        ''' <value>The module actions.</value>
         Public ReadOnly Property ModuleActions() As ModuleActionCollection Implements IActionable.ModuleActions
             Get
                 Dim actions As New DotNetNuke.Entities.Modules.Actions.ModuleActionCollection
@@ -135,23 +150,34 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Private Methods"
 
+        ''' <summary>
+        ''' Binds the data.
+        ''' </summary>
         Private Sub BindData()
             Dim FAQsController As New FAQsController
             lstFAQs.DataSource = FAQsController.ListFAQ(ModuleId, DefaultSorting)
             lstFAQs.DataBind()
         End Sub
 
+        ''' <summary>
+        ''' Increments the view count.
+        ''' </summary>
+        ''' <param name="FaqId">The FAQ id.</param>
         Private Sub IncrementViewCount(ByVal FaqId As Integer)
-
             Dim objFAQs As New FAQsController
             objFAQs.IncrementViewCount(FaqId)
-
+            
         End Sub
 
 #End Region
 
 #Region "Public Methods"
 
+        ''' <summary>
+        ''' HTMLs the decode.
+        ''' </summary>
+        ''' <param name="strValue">The STR value.</param>
+        ''' <returns></returns>
         Public Function HtmlDecode(ByVal strValue As String) As String
             Try
                 Return Server.HtmlDecode(strValue)
@@ -163,6 +189,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Function
 
+        ''' <summary>
+        ''' Raises the client API callback event.
+        ''' </summary>
+        ''' <param name="eventArgument">The event argument.</param>
+        ''' <returns></returns>
         Public Function RaiseClientAPICallbackEvent(ByVal eventArgument As String) As String Implements UI.Utilities.IClientAPICallbackEventHandler.RaiseClientAPICallbackEvent
 
             Try
@@ -187,6 +218,11 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Event Handlers"
 
+        ''' <summary>
+        ''' Handles the Load event of the Page control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
         Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
             Try
@@ -210,6 +246,11 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Handles the ItemDataBound event of the lstFAQs control.
+        ''' </summary>
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.Web.UI.WebControls.DataListItemEventArgs" /> instance containing the event data.</param>
         Private Sub lstFAQs_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataListItemEventArgs) Handles lstFAQs.ItemDataBound
 
             If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
@@ -259,6 +300,11 @@ Namespace DotNetNuke.Modules.FAQs
             End If
         End Sub
 
+        ''' <summary>
+        ''' Handles the Select event of the lstFAQs control.
+        ''' </summary>
+        ''' <param name="source">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.Web.UI.WebControls.DataListCommandEventArgs" /> instance containing the event data.</param>
         Private Sub lstFAQs_Select(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataListCommandEventArgs) Handles lstFAQs.ItemCommand
             If Not SupportsClientAPI Then
                 Try

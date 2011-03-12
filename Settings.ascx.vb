@@ -59,6 +59,9 @@ Namespace DotNetNuke.Modules.FAQs
 
 #Region "Public Methods"
 
+        ''' <summary>
+        ''' Loads the settings.
+        ''' </summary>
         Public Overrides Sub LoadSettings()
 
             Try
@@ -90,6 +93,9 @@ Namespace DotNetNuke.Modules.FAQs
 
         End Sub
 
+        ''' <summary>
+        ''' Updates the settings.
+        ''' </summary>
         Public Overrides Sub UpdateSettings()
 
             Try
