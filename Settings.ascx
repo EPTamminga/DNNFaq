@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
     <tr valign="top">
-        <td class="SubHead">
+        <td class="SubHead" style="width: 150px">
             <dnn:Label ID="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server"></dnn:Label>
         </td>
         <td valign="top">
