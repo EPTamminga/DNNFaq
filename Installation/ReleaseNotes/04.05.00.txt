@@ -1,6 +1,10 @@
 ﻿<h2>Release notes DNN FAQs 04.05.00</h2>
 <p>FAQs 04.05.00 will work for any DNN version 5.4.2 and up.
 Full details on the changes can be found in great detail at <a href="http://dnnfaqs.codeplex.com/workitem/list/basic">http://dnnfaqs.codeplex.com/workitem/list/basic</a>.</p>
+<h3>NEW FEATURES</h3>
+<ul>
+	<li>Enhanced sorting setting to display on FAQ creation date as well</li>
+</ul>
 <h3>BUG FIXES</h3>
 <ul>
 	<li>Corrected the SQLProvider scripts for better {databaseOwner} and {obJectQualifier} support</li>
