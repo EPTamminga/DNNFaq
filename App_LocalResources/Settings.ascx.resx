@@ -177,4 +177,10 @@ Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/div&gt;&lt;div&gt;&lt;p&gt;Created on: [FAQ:DAT
   <data name="ControlTitle_settings.Text" xml:space="preserve">
     <value>FAQs Settings</value>
   </data>
+  <data name="OrderByDateCreatedOriginal.Text" xml:space="preserve">
+    <value>Creation Date (oldest first)</value>
+  </data>
+  <data name="OrderByDateCreatedReverse.Text" xml:space="preserve">
+    <value>Creation Date newest first)</value>
+  </data>
 </root>
