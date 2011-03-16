@@ -9,14 +9,14 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
 <ul>
 	<li>Corrected the SQLProvider scripts for better {databaseOwner} and {obJectQualifier} support</li>
     <li>Changed lay-out to comply to XHTML standards</li>
-    <li>Cleaned the language files from non used text elements</li>
+    <li>Removed obsolete text elements from language files</li>
 </ul>
 <h3>ENHANCEMENTS</h3>
 <ul>
 	<li>Added support for DNN 5.x</li>
-    <li>Standardised token names for display</li>
+    <li>Standardized token names for display</li>
     <li>Improved display defaults<li>
-    <li>Standardised the action links with standard DNN icons</li>
+    <li>Standardized the action links with standard DNN icons</li>
 </ul>
 <h3>CHANGES</h3>
 <ul>
@@ -25,7 +25,7 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
     <li>Changed the source solution to Visual Studio 2010 with full MS Build support</li>
     <li>Integrated coding. Module now has only 1 .dll</li>
     <li>Removed the setting for AJAX On/Off, since DNN5 will handle it</li>
-    <li>Table structure is hardened, column types choosen more appropriately</li>
-    <li>Verriy that text entered does not contain script</li>
+    <li>Table structure is hardened, column types chosen more appropriately</li>
+    <li>Verify that text entered does not contain script</li>
     <li>Merged the 2 sets of default display templates into 1 set located in settings</li>
 </ul>
