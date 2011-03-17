@@ -156,7 +156,7 @@
   <data name="DefaultQuestionTemplate.Text" xml:space="preserve">
     <value>&lt;div class="Normal" style="width: 100%;"&gt;
 &lt;div style="border-width: thin; background-color: #E0E0E0; font-weight: bold; padding-top: 5px; padding-bottom: 5px;"&gt;
-Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/div&gt;&lt;div&gt;&lt;p&gt;Created on: [FAQ:DATECREATED]; Updated on [FAQ:DATECREATED]; [FAQ:CATEGORYNAME]&lt;/p&gt;&lt;/div&gt;
+Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/div&gt;&lt;div&gt;&lt;p&gt;Created on: [FAQ:DATECREATED]; Modified on [FAQ:DATEMODIFIED]; [FAQ:CATEGORYNAME]&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</value>
   </data>
   <data name="DefaultAnswerTemplate.Text" xml:space="preserve">
