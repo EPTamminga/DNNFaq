@@ -89,7 +89,7 @@
   <ItemGroup>
     <Content Include="Installation\CleanUp\04.05.00.txt" />
     <Content Include="Installation\License.txt" />
-    <Content Include="Installation\ReleaseNotes\04.05.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.04.05.00.txt" />
     <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="EditFAQs.ascx">
       <SubType>ASPXCodeBehind</SubType>
@@ -173,18 +173,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62597</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/dnn5faqdev/DesktopModules/FAQs</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost/dnn5faqdev</IISAppRootUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
