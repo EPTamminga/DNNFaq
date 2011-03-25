@@ -366,7 +366,7 @@
             <Output TaskParameter="Include" ItemName="ZipInstallFiles" />
         </CreateItem>
         <Zip Files="@(ZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmp"
-             ZipFileName="$(InstallDir)\$(ModuleName).$(FileMajor).$(FileMinor).$(FileBuild).Install.zip" />
+             ZipFileName="$(InstallDir)\$(ModuleName)_$(FileMajor).$(FileMinor).$(FileBuild)_Install.zip" />
 
         <!-- Cleanup -->
         <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
@@ -445,7 +445,7 @@
             <Output TaskParameter="Include" ItemName="srcZipInstallFiles" />
         </CreateItem>
         <Zip Files="@(srcZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmpsrc"
-             ZipFileName="$(InstallDir)\$(ModuleName).$(FileMajor).$(FileMinor).$(FileBuild).Sources.zip" />
+             ZipFileName="$(InstallDir)\$(ModuleName)_$(FileMajor).$(FileMinor).$(FileBuild)_Source.zip" />
 
         <!-- Cleanup -->
         <FileUpdate Files="@(srcModulednnFile)" Regex="sources.zip" ReplacementText="resources.zip" />
