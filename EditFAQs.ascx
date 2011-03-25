@@ -28,7 +28,7 @@
             <dnn:label id="plAnswerField" runat="server" controlname="AnswerField"></dnn:label>
         </td>
         <td>
-            <dnn:texteditor id="teAnswerField" runat="server" controlid="teAnswerField" height="300" width="600" htmlencode="True" choosemode="False"></dnn:texteditor>
+            <dnn:texteditor id="teAnswerField" runat="server" controlid="teAnswerField" height="300" width="600" choosemode="False"></dnn:texteditor>
         </td>
     </tr>
 </table>

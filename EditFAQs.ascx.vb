@@ -154,18 +154,22 @@ Namespace DotNetNuke.Modules.FAQs
 
                 Dim FAQsInfo As New FAQsInfo
 
-                FAQsInfo.ItemId = FaqId
-                FAQsInfo.CategoryId = CInt(drpCategory.SelectedValue.ToString())
+                With FAQsInfo
+                    .ItemId = FaqId
+                    .CategoryId = CInt(drpCategory.SelectedValue.ToString())
 
-                ' We do not allow for script or markup
-                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting)
-                FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting)
-                FAQsInfo.CreatedByUser = UserId.ToString()
-                FAQsInfo.ViewCount = 0
-                FAQsInfo.CreatedDate = DateTime.Now
-                FAQsInfo.DateModified = DateTime.Now
-                FAQsInfo.ModuleId = ModuleId
+                    ' We do not allow for script or markup in the question
+                    .Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoMarkup)
+                    .Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoMarkup)
 
+                    .CreatedByUser = UserId.ToString()
+                    .ViewCount = 0
+                    .CreatedDate = DateTime.Now
+                    .DateModified = DateTime.Now
+                    .ModuleId = ModuleId
+                End With
+
+                ' Do we add of update? The Id will tell us
                 If FaqId <> -1 Then
                     FAQsController.UpdateFAQ(FAQsInfo)
                 Else

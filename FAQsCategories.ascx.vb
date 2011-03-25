@@ -20,7 +20,6 @@
 
 Imports System
 Imports System.Web.UI.WebControls
-Imports System.Web.UI.HtmlControls
 Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
@@ -144,9 +143,12 @@ Namespace DotNetNuke.Modules.FAQs
             Dim CategoryItem As New CategoryInfo
             Dim objSecurity As New PortalSecurity
 
-            CategoryItem.FaqCategoryName = objSecurity.InputFilter(txtCategoryName.Text, PortalSecurity.FilterFlag.NoMarkup Or PortalSecurity.FilterFlag.NoScripting)
-            CategoryItem.FaqCategoryDescription = objSecurity.InputFilter(txtCategoryDescription.Text, PortalSecurity.FilterFlag.NoScripting)
-            CategoryItem.ModuleId = ModuleId
+            ' We do not allow for script or markup
+            With CategoryItem
+                .FaqCategoryName = objSecurity.InputFilter(txtCategoryName.Text, PortalSecurity.FilterFlag.NoMarkup Or PortalSecurity.FilterFlag.NoScripting)
+                .FaqCategoryDescription = objSecurity.InputFilter(txtCategoryDescription.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoMarkup)
+                .ModuleId = ModuleId
+            End With
 
             Try
 
