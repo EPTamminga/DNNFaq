@@ -15,7 +15,7 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
 <ul>
 	<li>Added support for DNN 5.x</li>
     <li>Standardized token names for display</li>
-    <li>Improved display defaults<li>
+    <li>Improved display defaults</li>
     <li>Standardized the action links with standard DNN icons</li>
 </ul>
 <h3>CHANGES</h3>
