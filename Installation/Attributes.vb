@@ -38,21 +38,39 @@ Namespace DNNtc
         End Sub
     End Class
 
+    ''' <summary>
+    ''' Defines the businessControllerClass
+    ''' </summary>
     Public Class BusinessControllerClass
         Inherits Attribute
         'Intentially left empty
     End Class
 
+    ''' <summary>
+    ''' Defines the Upgradable interface implementations
+    ''' </summary>
     Public Class UpgradeEventMessage
         Inherits Attribute
+        ''' <summary>
+        ''' Initializes a new instance of the <see cref="UpgradeEventMessage" /> class.
+        ''' </summary>
+        ''' <param name="VersionList">The version list.</param>
         Public Sub New(ByVal VersionList As String)
             'Intentially left empty
         End Sub
     End Class
 
+    ''' <summary>
+    ''' Define the Module dependencies
+    ''' </summary>
     <AttributeUsage(AttributeTargets.[Class], AllowMultiple:=True)> _
     Public Class ModuleDependencies
         Inherits Attribute
+        ''' <summary>
+        ''' Initializes a new instance of the <see cref="ModuleDependencies" /> class.
+        ''' </summary>
+        ''' <param name="Type">The type.</param>
+        ''' <param name="Value">The value.</param>
         Public Sub New(ByVal Type As ModuleDependency, ByVal Value As String)
             'Intentially left empty
         End Sub
@@ -62,19 +80,55 @@ Namespace DNNtc
 
 #Region " Enums "
 
+    ''' <summary>
+    ''' Different type of controls
+    ''' </summary>
     Public Enum ControlType
+        ''' <summary>
+        ''' This is a SkinObkect control
+        ''' </summary>
         SkinObject
+        ''' <summary>
+        ''' This is an Anonymous control
+        ''' </summary>
         Anonymous
+        ''' <summary>
+        ''' This is a View control
+        ''' </summary>
         View
+        ''' <summary>
+        ''' This is an edit control
+        ''' </summary>
         Edit
+        ''' <summary>
+        ''' This is an Admin control
+        ''' </summary>
         Admin
+        ''' <summary>
+        ''' This is a Host Control
+        ''' </summary>
         Host
     End Enum
 
+    ''' <summary>
+    ''' Dependencytpe of a module
+    ''' </summary>
     Public Enum ModuleDependency
+        ''' <summary>
+        ''' Depends on a minimum core version
+        ''' </summary>
         CoreVersion
+        ''' <summary>
+        ''' Depends on the installation of a packages
+        ''' </summary>
         Package
+        ''' <summary>
+        ''' Depends on a permission
+        ''' </summary>
         Permission
+        ''' <summary>
+        ''' Permission Type
+        ''' </summary>
         Type
     End Enum
 
