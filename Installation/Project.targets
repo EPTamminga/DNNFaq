@@ -433,7 +433,7 @@
       <Output TaskParameter="Include" ItemName="ZipInstallFiles" />
     </CreateItem>
     <Zip Files="@(ZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmp"
-         ZipFileName="$(InstallDir)\$(ModuleName).$(FileMajor).$(FileMinor).$(FileBuild).Install.zip" />
+         ZipFileName="$(InstallDir)\$(ModuleName)_$(FileMajor).$(FileMinor).$(FileBuild)_Install.zip" />
 
     <!-- Cleanup -->
     <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
