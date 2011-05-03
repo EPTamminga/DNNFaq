@@ -235,6 +235,8 @@ Namespace DotNetNuke.Modules.FAQs
                     strXML += "<answer>" & XmlUtils.XMLEncode(objFAQs.Answer) & "</answer>"
                     strXML += "<catname>" & XmlUtils.XMLEncode(objFAQs.FaqCategoryName) & "</catname>"
                     strXML += "<catdescription>" & XmlUtils.XMLEncode(objFAQs.FaqCategoryDescription) & "</catdescription>"
+                    strXML += "<creationdate>" & XmlUtils.XMLEncode(CStr(objFAQs.CreatedDate)) & "</creationdate>"
+                    strXML += "<datemodified>" & XmlUtils.XMLEncode(CStr(objFAQs.DateModified)) & "</datemodified>"
                     strXML += "</faq>"
                 Next
                 strXML += "</faqs>"
@@ -275,10 +277,10 @@ Namespace DotNetNuke.Modules.FAQs
                 objFAQs.Answer = xmlFAQ.Item("answer").InnerText
                 objFAQs.FaqCategoryName = xmlFAQ.Item("catname").InnerText
                 objFAQs.FaqCategoryDescription = xmlFAQ.Item("catdescription").InnerText
+                objFAQs.CreatedDate = CDate(xmlFAQ.Item("creationdate").InnerText)
+                objFAQs.DateModified = CDate(xmlFAQ.Item("datemodified").InnerText)
 
                 objFAQs.CreatedByUser = UserId.ToString()
-                objFAQs.CreatedDate = DateTime.Now
-                objFAQs.DateModified = DateTime.Now
 
                 Dim foundCat As Boolean = False
                 For Each objCat As CategoryInfo In ListCategories(ModuleID)
