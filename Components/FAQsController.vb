@@ -226,8 +226,26 @@ Namespace DotNetNuke.Modules.FAQs
         Public Function ExportModule(ByVal ModuleID As Integer) As String Implements Entities.Modules.IPortable.ExportModule
             Dim strXML As String = ""
             Dim arrFAQs As ArrayList = ListFAQWithoutOrder(ModuleID)
+            Dim arrCats As ArrayList = ListCategories(ModuleID)
+
+            strXML += "<faqs>"
+            If arrCats.Count <> 0 Then
+
+                Dim objCats As CategoryInfo
+                For Each objCats In arrCats
+                    strXML += "<faq>"
+                    strXML += "<question></question>"
+                    strXML += "<answer></answer>"
+                    strXML += "<catname>" & XmlUtils.XMLEncode(objCats.FaqCategoryName) & "</catname>"
+                    strXML += "<catdescription>" & XmlUtils.XMLEncode(objCats.FaqCategoryDescription) & "</catdescription>"
+                    strXML += "<creationdate></creationdate>"
+                    strXML += "<datemodified></datemodified>"
+                    strXML += "</faq>"
+                Next
+
+            End If
+
             If arrFAQs.Count <> 0 Then
-                strXML += "<faqs>"
                 Dim objFAQs As FAQsInfo
                 For Each objFAQs In arrFAQs
                     strXML += "<faq>"
@@ -239,8 +257,8 @@ Namespace DotNetNuke.Modules.FAQs
                     strXML += "<datemodified>" & XmlUtils.XMLEncode(CStr(objFAQs.DateModified)) & "</datemodified>"
                     strXML += "</faq>"
                 Next
-                strXML += "</faqs>"
             End If
+            strXML += "</faqs>"
 
             Return strXML
         End Function
@@ -256,7 +274,7 @@ Namespace DotNetNuke.Modules.FAQs
             Dim catNames As New ArrayList
             Dim xmlFAQ As XmlNode
             Dim xmlFAQs As XmlNode = GetContent(Content, "faqs")
-
+            '' check if category exists. if not create category
             For Each xmlFAQ In xmlFAQs
                 If (xmlFAQ.Item("catname").InnerText <> Null.NullString) And (Not catNames.Contains(xmlFAQ.Item("catname").InnerText)) Then
                     catNames.Add(xmlFAQ.Item("catname").InnerText)
@@ -269,33 +287,36 @@ Namespace DotNetNuke.Modules.FAQs
                     AddCategory(objCat)
                 End If
             Next
-
+            '' check is question is empty. if empty do not import.
             For Each xmlFAQ In xmlFAQs
-                Dim objFAQs As New FAQsInfo
-                objFAQs.ModuleId = ModuleID
-                objFAQs.Question = xmlFAQ.Item("question").InnerText
-                objFAQs.Answer = xmlFAQ.Item("answer").InnerText
-                objFAQs.FaqCategoryName = xmlFAQ.Item("catname").InnerText
-                objFAQs.FaqCategoryDescription = xmlFAQ.Item("catdescription").InnerText
-                objFAQs.CreatedDate = CDate(xmlFAQ.Item("creationdate").InnerText)
-                objFAQs.DateModified = CDate(xmlFAQ.Item("datemodified").InnerText)
+                If (xmlFAQ.Item("question").InnerText <> Null.NullString And xmlFAQ.Item("question").InnerText <> String.Empty) Then
 
-                objFAQs.CreatedByUser = UserId.ToString()
+                    Dim objFAQs As New FAQsInfo
+                    objFAQs.ModuleId = ModuleID
+                    objFAQs.Question = xmlFAQ.Item("question").InnerText
+                    objFAQs.Answer = xmlFAQ.Item("answer").InnerText
+                    objFAQs.FaqCategoryName = xmlFAQ.Item("catname").InnerText
+                    objFAQs.FaqCategoryDescription = xmlFAQ.Item("catdescription").InnerText
+                    objFAQs.CreatedDate = CDate(xmlFAQ.Item("creationdate").InnerText)
+                    objFAQs.DateModified = CDate(xmlFAQ.Item("datemodified").InnerText)
 
-                Dim foundCat As Boolean = False
-                For Each objCat As CategoryInfo In ListCategories(ModuleID)
-                    If (objFAQs.FaqCategoryName = objCat.FaqCategoryName) Then
-                        objFAQs.CategoryId = objCat.FaqCategoryId
-                        foundCat = True
-                        Exit For
+                    objFAQs.CreatedByUser = UserId.ToString()
+
+                    Dim foundCat As Boolean = False
+                    For Each objCat As CategoryInfo In ListCategories(ModuleID)
+                        If (objFAQs.FaqCategoryName = objCat.FaqCategoryName) Then
+                            objFAQs.CategoryId = objCat.FaqCategoryId
+                            foundCat = True
+                            Exit For
+                        End If
+                    Next
+
+                    If Not foundCat Then
+                        objFAQs.CategoryId = Null.NullInteger
                     End If
-                Next
 
-                If Not foundCat Then
-                    objFAQs.CategoryId = Null.NullInteger
+                    AddFAQ(objFAQs)
                 End If
-
-                AddFAQ(objFAQs)
             Next
 
         End Sub
