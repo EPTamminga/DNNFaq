@@ -272,6 +272,7 @@ Namespace DotNetNuke.Modules.FAQs
         ''' <param name="UserId">The user id.</param>
         Public Sub ImportModule(ByVal ModuleID As Integer, ByVal Content As String, ByVal Version As String, ByVal UserId As Integer) Implements Entities.Modules.IPortable.ImportModule
             Dim catNames As New ArrayList
+            Dim Question As New ArrayList
             Dim xmlFAQ As XmlNode
             Dim xmlFAQs As XmlNode = GetContent(Content, "faqs")
             '' check if category exists. if not create category
@@ -287,8 +288,9 @@ Namespace DotNetNuke.Modules.FAQs
                     AddCategory(objCat)
                 End If
             Next
-            '' check is question is empty. if empty do not import.
+            '' check is question is empty. if empty is category.
             For Each xmlFAQ In xmlFAQs
+
                 If (xmlFAQ.Item("question").InnerText <> Null.NullString And xmlFAQ.Item("question").InnerText <> String.Empty) Then
 
                     Dim objFAQs As New FAQsInfo
@@ -297,9 +299,14 @@ Namespace DotNetNuke.Modules.FAQs
                     objFAQs.Answer = xmlFAQ.Item("answer").InnerText
                     objFAQs.FaqCategoryName = xmlFAQ.Item("catname").InnerText
                     objFAQs.FaqCategoryDescription = xmlFAQ.Item("catdescription").InnerText
-                    objFAQs.CreatedDate = CDate(xmlFAQ.Item("creationdate").InnerText)
-                    objFAQs.DateModified = CDate(xmlFAQ.Item("datemodified").InnerText)
-
+                    ''Check if creationdate exists in export, if nothing set current date. else import 
+                    If (xmlFAQ.Item("creationdate") Is Nothing) Then
+                        objFAQs.CreatedDate = DateTime.Now
+                        objFAQs.DateModified = DateTime.Now
+                    Else
+                        objFAQs.CreatedDate = CDate(xmlFAQ.Item("creationdate").InnerText)
+                        objFAQs.DateModified = CDate(xmlFAQ.Item("datemodified").InnerText)
+                    End If
                     objFAQs.CreatedByUser = UserId.ToString()
 
                     Dim foundCat As Boolean = False
