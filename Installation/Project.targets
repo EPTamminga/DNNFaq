@@ -286,6 +286,16 @@
         <!--replace tabs-->
         <FileUpdate Files="@(ModulednnFile)" Regex="@tab@" ReplacementText="  " />
 
+        <!-- Start formatting of DNN manifest file -->
+        <ItemGroup>
+            <DnnXmlFileComponentToFormat Include="@(ModulednnFile)" />
+        </ItemGroup>
+        <Message Text="Dnn file found = $(ModulednnFile)"/>
+        <FormatDnnXmlFileComponent DnnFiles="@(DnnXmlFileComponentToFormat)">
+            <Output TaskParameter="ResultString" PropertyName="formatDnnXmlFileComponent" />
+        </FormatDnnXmlFileComponent>
+        <!-- End formatting of DNN manifest file -->
+
     </Target>
 
     <!-- Install zip file -->
