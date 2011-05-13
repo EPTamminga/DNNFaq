@@ -88,9 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Installation\CleanUp\Cleanup.04.05.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.04.05.01.txt" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.04.05.00.txt" />
-    <None Include="Installation\04.06.00.SqlDataProvider" />
+    <None Include="Installation\04.05.01.SqlDataProvider" />
+    <Content Include="Installation\ReleaseNotes\Release.04.05.01.txt" />
     <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="EditFAQs.ascx">
       <SubType>ASPXCodeBehind</SubType>

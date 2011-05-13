@@ -160,7 +160,7 @@ Namespace DotNetNuke.Modules.FAQs
 
                     ' We do not allow for script or markup in the question
                     .Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoMarkup)
-                    .Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting Or PortalSecurity.FilterFlag.NoMarkup)
+                    .Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting)
 
                     .CreatedByUser = UserId.ToString()
                     .ViewCount = 0

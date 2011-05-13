@@ -425,7 +425,7 @@
     <CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
       <Output TaskParameter="Include" ItemName="sql"/>
     </CreateItem>
-    <CreateItem Include="**\bin\$(ModuleName).dll;@(AssemblyFileToInclude)" >
+    <CreateItem Include="**\bin\$(AssemblyName).dll;@(AssemblyFileToInclude)" >
       <Output TaskParameter="Include" ItemName="dll"/>
     </CreateItem>
     
