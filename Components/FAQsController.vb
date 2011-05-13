@@ -28,6 +28,7 @@ Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Services.Search
+Imports System.IO
 
 
 Namespace DotNetNuke.Modules.FAQs
@@ -260,8 +261,53 @@ Namespace DotNetNuke.Modules.FAQs
             End If
             strXML += "</faqs>"
 
+            strXML = FormatXml(strXML)
+
             Return strXML
         End Function
+        Private Function FormatXml(ByVal sUnformattedXml As String) As String
+            'load unformatted xml into a dom
+
+            Dim xd As New XmlDocument()
+            xd.LoadXml(sUnformattedXml)
+
+            'will hold formatted xml
+
+            Dim sb As New StringBuilder()
+
+            'pumps the formatted xml into the StringBuilder above
+
+            Dim sw As New StringWriter(sb)
+
+            'does the formatting
+
+            Dim xtw As XmlTextWriter = Nothing
+
+            Try
+                'point the xtw at the StringWriter
+
+                xtw = New XmlTextWriter(sw)
+
+                'we want the output formatted
+
+                xtw.Formatting = Formatting.Indented
+
+                'get the dom to dump its contents into the xtw 
+
+                xd.WriteTo(xtw)
+            Finally
+                'clean up even if error
+
+                If xtw IsNot Nothing Then
+                    xtw.Close()
+                End If
+            End Try
+
+            'return the formatted xml
+
+            Return sb.ToString()
+        End Function
+
 
         ''' <summary>
         ''' Imports the module.
