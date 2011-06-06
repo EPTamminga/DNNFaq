@@ -86,7 +86,7 @@ Namespace DotNetNuke.Modules.FAQs
             Dim FAQsController As New FAQsController
 
             For Each category As CategoryInfo In FAQsController.ListCategories(ModuleId)
-                drpCategory.Items.Add(New ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()))
+                                drpCategory.Items.Add(New ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()))
             Next
         End Sub
 

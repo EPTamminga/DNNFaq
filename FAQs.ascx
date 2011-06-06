@@ -1,5 +1,13 @@
 <%@ Register TagPrefix="dnnsc" Namespace="DotNetNuke.UI.WebControls" Assembly="DotNetNuke" %>
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.FAQs" AutoEventWireup="false" CodeBehind="FAQs.ascx.vb" %>
+<telerik:RadComboBox runat="server" ID="RadComboBoxCats" HighlightTemplatedItems="true" DataSourceID="ObjectDataSourceCats" DataTextField=" FaqCategoryName" DataValueField="FaqCategoryId" >
+                    <Items>
+                </Items>
+            <ItemTemplate>
+                    <asp:CheckBox runat="server" ID="CheckBox" onclick="stopPropagation(event);" Text=""/> <%# DataBinder.Eval(Container, "Text") %>
+                </ItemTemplate>
+            </telerik:RadComboBox>
 <asp:DataList ID="lstFAQs" runat="server" CellPadding="0" DataKeyField="ItemId" RepeatLayout="Flow">
     <ItemTemplate>
         <div>
@@ -13,3 +21,4 @@
         </div>
     </ItemTemplate>
 </asp:DataList>
+<asp:ObjectDataSource ID="ObjectDataSourceCats" runat="server" TypeName="DotNetNuke.Modules.FAQs.FAQs" SelectMethod="GetCats"></asp:ObjectDataSource>

@@ -19,6 +19,7 @@
 '
 
 Imports System
+Imports System.Collections
 Imports System.Web.UI.WebControls
 Imports System.Web.UI.HtmlControls
 Imports DotNetNuke.UI.Utilities
@@ -239,6 +240,7 @@ Namespace DotNetNuke.Modules.FAQs
 
                 If Not IsPostBack Then
                     BindData()
+                    RadComboBoxCats.DataBind()
                 End If
             Catch exc As Exception 'Module failed to load
                 ProcessModuleLoadException(Me, exc)
@@ -325,8 +327,15 @@ Namespace DotNetNuke.Modules.FAQs
                 End Try
             End If
         End Sub
-
-
+        ''' <summary>
+        ''' Fills Combobox with available Category's 
+        ''' </summary>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Private Function GetCats() As ArrayList '(Of CategoryInfo)
+            Dim FAQsController As New FAQsController
+            Return FAQsController.ListCategories(ModuleId)
+        End Function
 #End Region
 
     End Class
