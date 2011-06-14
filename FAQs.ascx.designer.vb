@@ -24,6 +24,15 @@ Namespace DotNetNuke.Modules.FAQs
         Protected WithEvents RadListBoxCats As Global.DotNetNuke.Web.UI.WebControls.DnnListBox
 
         '''<summary>
+        '''chkCatagorie control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents chkCatagorie As Global.System.Web.UI.WebControls.CheckBox
+
+        '''<summary>
         '''lstFAQs control.
         '''</summary>
         '''<remarks>

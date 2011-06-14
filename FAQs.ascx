@@ -1,17 +1,17 @@
 <%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.FAQs" AutoEventWireup="true" CodeBehind="FAQs.ascx.vb" %>
 <%@ Register TagPrefix="dnnsc" Namespace="DotNetNuke.UI.WebControls" Assembly="DotNetNuke" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
 
 
 <table border="0" cellpadding="10" cellspacing="0" width="100%">
     <tr>
         <td style="width:10%; vertical-align:top;">
             <div class="telerikList">
-                <telerik:RadListBox runat="server" ID="RadListBoxCats" >
+                <dnn:DnnListBox runat="server" ID="RadListBoxCats" >
                     <ItemTemplate>
                         <asp:CheckBox ID="chkCatagorie" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCatagorie_CheckedChanged" AutoPostBack="true" />
                     </ItemTemplate>
-                </telerik:RadListBox>
+                </dnn:DnnListBox>
             </div>
         </td>
         <td style="vertical-align:top;">
