@@ -3,16 +3,18 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
 
 
-<table border="0" cellpadding="10" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
     <tr>
-        <td style="width:10%; vertical-align:top;">
-            <div class="telerikList">
-                <dnn:DnnListBox runat="server" ID="RadListBoxCats" >
-                    <ItemTemplate>
-                        <asp:CheckBox ID="chkCatagorie" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCatagorie_CheckedChanged" AutoPostBack="true" />
-                    </ItemTemplate>
-                </dnn:DnnListBox>
-            </div>
+        <td style="width:1px; vertical-align:top;">
+            <asp:Panel ID="pnlShowCatagories" runat="server" Visible="false">
+                <div class="categorieList">
+                    <dnn:DnnListBox runat="server" ID="dnnListBoxCats" >
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkCatagorie" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCatagorie_CheckedChanged" AutoPostBack="true" />
+                        </ItemTemplate>
+                    </dnn:DnnListBox>
+                </div>
+            </asp:Panel>
         </td>
         <td style="vertical-align:top;">
             <asp:DataList ID="lstFAQs" runat="server" CellPadding="0" DataKeyField="ItemId" RepeatLayout="Flow">

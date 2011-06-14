@@ -1,4 +1,4 @@
-﻿.telerikList span {padding:2px 20px 3px 0px;}
-.telerikList label {vertical-align:middle;}
-.telerikList input[type=checkbox] {vertical-align:middle;}
-.telerikList ul li {list-style-type:none; }
+﻿.categorieList {padding: 0px 20px 0px 5px;}
+.categorieList label {vertical-align:middle;}
+.categorieList input[type=checkbox] {vertical-align:middle;}
+.categorieList ul li {list-style-type:none; padding: 2px 10px 2px 2px; }

@@ -195,8 +195,9 @@ Namespace DotNetNuke.Modules.FAQs
         Private Sub BindCategories()
             'Build the Catagories List.
             Dim FAQsController As New FAQsController
-            RadListBoxCats.DataSource = FAQsController.ListCategories(ModuleId)
-            RadListBoxCats.DataBind()
+            dnnListBoxCats.DataSource = FAQsController.ListCategories(ModuleId)
+            dnnListBoxCats.DataBind()
+            pnlShowCatagories.Visible = Convert.ToBoolean(Settings("ShowCategories"))
         End Sub
 
         ''' <summary>
@@ -208,11 +209,11 @@ Namespace DotNetNuke.Modules.FAQs
             Dim noneChecked As Boolean = True
 
             'Filter on the checked items
-            For Each item As RadListBoxItem In RadListBoxCats.Items
+            For Each item As RadListBoxItem In dnnListBoxCats.Items
 
                 'Get the checkbox in the Control
                 Dim chkCatagorie As CheckBox = CType(item.FindControl("chkCatagorie"), CheckBox)
-                
+
                 'If checked the faq module is being filtered on one or more category's
                 If chkCatagorie.Checked Then
 

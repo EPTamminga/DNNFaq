@@ -15,13 +15,22 @@ Namespace DotNetNuke.Modules.FAQs
     Partial Public Class FAQs
 
         '''<summary>
-        '''RadListBoxCats control.
+        '''pnlShowCatagories control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents RadListBoxCats As Global.DotNetNuke.Web.UI.WebControls.DnnListBox
+        Protected WithEvents pnlShowCatagories As Global.System.Web.UI.WebControls.Panel
+
+        '''<summary>
+        '''dnnListBoxCats control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents dnnListBoxCats As Global.DotNetNuke.Web.UI.WebControls.DnnListBox
 
         '''<summary>
         '''chkCatagorie control.

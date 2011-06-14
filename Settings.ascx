@@ -3,6 +3,14 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
     <tr valign="top">
+        <td class="SubHead">
+            <dnn:Label ID="lblShowCatagories" ControlName="lblShowCatagories" runat="server"></dnn:Label>
+        </td>
+        <td>
+            <asp:CheckBox ID="chkShowCatagories" runat="server" />
+        </td>
+    </tr>
+    <tr valign="top">
         <td class="SubHead" style="width: 150px">
             <dnn:Label ID="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server"></dnn:Label>
         </td>

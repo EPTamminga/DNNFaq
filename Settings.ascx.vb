@@ -65,6 +65,12 @@ Namespace DotNetNuke.Modules.FAQs
 
             Try
 
+                If Not Null.IsNull(Settings("ShowCategories")) Then
+                    chkShowCatagories.Checked = Convert.ToBoolean(Settings("ShowCategories"))
+                Else
+                    chkShowCatagories.Checked = False
+                End If
+
                 If Not Null.IsNull(Settings("FaqQuestionTemplate")) Then
                     txtQuestionTemplate.Text = Convert.ToString(Settings("FaqQuestionTemplate"))
                 Else
@@ -100,6 +106,8 @@ Namespace DotNetNuke.Modules.FAQs
             Try
 
                 Dim modController As New DotNetNuke.Entities.Modules.ModuleController
+
+                modController.UpdateModuleSetting(ModuleId, "ShowCategories", chkShowCatagories.Checked.ToString)
                 modController.UpdateModuleSetting(ModuleId, "FaqQuestionTemplate", txtQuestionTemplate.Text)
                 modController.UpdateModuleSetting(ModuleId, "FaqAnswerTemplate", txtAnswerTemplate.Text)
                 modController.UpdateModuleSetting(ModuleId, "FaqLoadingTemplate", txtLoadingTemplate.Text)

@@ -15,13 +15,31 @@ Namespace DotNetNuke.Modules.FAQs
     Partial Public Class Settings
 
         '''<summary>
+        '''lblShowCatagories control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents lblShowCatagories As Global.System.Web.UI.UserControl
+
+        '''<summary>
+        '''chkShowCatagories control.
+        '''</summary>
+        '''<remarks>
+        '''Auto-generated field.
+        '''To modify move field declaration from designer file to code-behind file.
+        '''</remarks>
+        Protected WithEvents chkShowCatagories As Global.System.Web.UI.WebControls.CheckBox
+
+        '''<summary>
         '''lblDefaultSorting control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents lblDefaultSorting As Global.DotNetNuke.UI.UserControls.LabelControl
+        Protected WithEvents lblDefaultSorting As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''drpDefaultSorting control.
@@ -39,7 +57,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents lblQuestionTemplate As Global.DotNetNuke.UI.UserControls.LabelControl
+        Protected WithEvents lblQuestionTemplate As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''txtQuestionTemplate control.
@@ -57,7 +75,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents lblAnswerTemplate As Global.DotNetNuke.UI.UserControls.LabelControl
+        Protected WithEvents lblAnswerTemplate As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''txtAnswerTemplate control.
@@ -75,7 +93,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents lblLoadingTemplate As Global.DotNetNuke.UI.UserControls.LabelControl
+        Protected WithEvents lblLoadingTemplate As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''txtLoadingTemplate control.
@@ -93,7 +111,7 @@ Namespace DotNetNuke.Modules.FAQs
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents lblAvailableTokens As Global.DotNetNuke.UI.UserControls.LabelControl
+        Protected WithEvents lblAvailableTokens As Global.System.Web.UI.UserControl
 
         '''<summary>
         '''lstAvailableTokens control.
