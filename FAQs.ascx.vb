@@ -195,7 +195,16 @@ Namespace DotNetNuke.Modules.FAQs
         Private Sub BindCategories()
             'Build the Catagories List.
             Dim FAQsController As New FAQsController
-            dnnListBoxCats.DataSource = FAQsController.ListCategories(ModuleId)
+
+            'Empty Categorie
+            Dim categories As ArrayList = New ArrayList
+            Dim emptyCategory As CategoryInfo = New CategoryInfo
+            emptyCategory.FaqCategoryId = -1
+            emptyCategory.FaqCategoryName = Localization.GetString("EmptyCategory", LocalResourceFile)
+            categories.Add(emptyCategory)
+            categories.AddRange(FAQsController.ListCategories(ModuleId))
+            
+            dnnListBoxCats.DataSource = categories
             dnnListBoxCats.DataBind()
             pnlShowCatagories.Visible = Convert.ToBoolean(Settings("ShowCategories"))
         End Sub
@@ -224,7 +233,7 @@ Namespace DotNetNuke.Modules.FAQs
                     Dim category As String = chkCatagorie.Text
 
                     'Get the elements that match the catagory
-                    If fData.FaqCategoryName = category Then
+                    If (fData.FaqCategoryName = category) Or (fData.CategoryId < 0 And category = Localization.GetString("EmptyCategory", LocalResourceFile)) Then
                         match = True
                     End If
 

@@ -8,7 +8,7 @@
         <td style="width:1px; vertical-align:top;">
             <asp:Panel ID="pnlShowCatagories" runat="server" Visible="false">
                 <div class="categorieList">
-                    <dnn:DnnListBox runat="server" ID="dnnListBoxCats" >
+                    <dnn:DnnListBox runat="server" ID="dnnListBoxCats" CssClass="categorieListControl"  >
                         <ItemTemplate>
                             <asp:CheckBox ID="chkCatagorie" runat="server" Text='<%# Eval("FaqCategoryName") %>' OnCheckedChanged="chkCatagorie_CheckedChanged" AutoPostBack="true" />
                         </ItemTemplate>

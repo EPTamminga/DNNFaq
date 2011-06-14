@@ -171,4 +171,7 @@ the user clicks on a question. The old functionality of using Post back is still
 &lt;li&gt;At &lt;b&gt;Answer&lt;/b&gt;, enter an answer to the question.&lt;/li&gt;
 &lt;li&gt;Click &lt;b&gt;Update&lt;/b&gt;.&lt;/li&gt;&lt;/ol&gt;</value>
   </data>
+  <data name="EmptyCategory.Text" xml:space="preserve">
+    <value>Unassigned questions</value>
+  </data>
 </root>
