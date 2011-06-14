@@ -15,13 +15,13 @@ Namespace DotNetNuke.Modules.FAQs
     Partial Public Class FAQs
 
         '''<summary>
-        '''RadComboBoxCats control.
+        '''RadListBoxCats control.
         '''</summary>
         '''<remarks>
         '''Auto-generated field.
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
-        Protected WithEvents RadComboBoxCats As Global.Telerik.Web.UI.RadComboBox
+        Protected WithEvents RadListBoxCats As Global.DotNetNuke.Web.UI.WebControls.DnnListBox
 
         '''<summary>
         '''lstFAQs control.
@@ -31,14 +31,5 @@ Namespace DotNetNuke.Modules.FAQs
         '''To modify move field declaration from designer file to code-behind file.
         '''</remarks>
         Protected WithEvents lstFAQs As Global.System.Web.UI.WebControls.DataList
-
-        '''<summary>
-        '''ObjectDataSourceCats control.
-        '''</summary>
-        '''<remarks>
-        '''Auto-generated field.
-        '''To modify move field declaration from designer file to code-behind file.
-        '''</remarks>
-        Protected WithEvents ObjectDataSourceCats As Global.System.Web.UI.WebControls.ObjectDataSource
     End Class
 End Namespace

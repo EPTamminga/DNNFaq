@@ -24,6 +24,7 @@ Namespace DotNetNuke.Modules.FAQs
     ''' <summary>
     ''' Main info class for the supporting categories
     ''' </summary>
+    <Serializable()>
     Public Class CategoryInfo
 
 #Region "Private Members"

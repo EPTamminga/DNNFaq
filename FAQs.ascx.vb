@@ -28,11 +28,12 @@ Imports DotNetNuke.Entities.Modules.Actions
 Imports DotNetNuke.Entities.Modules
 Imports DotNetNuke.Services.Localization
 Imports DotNetNuke.Services.Exceptions.Exceptions
+Imports Telerik.Web.UI
 
 Namespace DotNetNuke.Modules.FAQs
     <DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "05.06.01")> _
     <DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", False)> _
-    Partial Class FAQs
+    Partial Public Class FAQs
         Inherits PortalModuleBase
         Implements IActionable, IClientAPICallbackEventHandler
 
@@ -58,7 +59,7 @@ Namespace DotNetNuke.Modules.FAQs
 #Region "Members"
 
         Private SupportsClientAPI As Boolean = False
-
+        
 #End Region
 
 #Region "Properties"
@@ -147,18 +148,96 @@ Namespace DotNetNuke.Modules.FAQs
             End Get
         End Property
 
+        Private Property FaqData() As ArrayList
+            Get
+                If ViewState("FaqData") Is Nothing Then
+                    Dim FAQsController As New FAQsController
+                    Dim fData As ArrayList = FAQsController.ListFAQ(ModuleId, DefaultSorting)
+                    ViewState("FaqData") = fData
+                    Return fData
+                Else
+                    Return CType(ViewState("FaqData"), ArrayList)
+                End If
+            End Get
+            Set(value As ArrayList)
+                ViewState("FaqData") = value
+            End Set
+        End Property
+
 #End Region
 
 #Region "Private Methods"
 
         ''' <summary>
-        ''' Binds the data.
+        ''' Binds the (filtered) faq data.
         ''' </summary>
         Private Sub BindData()
-            Dim FAQsController As New FAQsController
-            lstFAQs.DataSource = FAQsController.ListFAQ(ModuleId, DefaultSorting)
+            
+            'Get the complete array of FAQ items
+            Dim filterData As ArrayList = New ArrayList
+
+            'Filter
+            For Each item As FAQsInfo In FaqData
+                If MatchElement(item) Then
+                    filterData.Add(item)
+                End If
+            Next
+            
+            'Bind Data
+            lstFAQs.DataSource = filterData
             lstFAQs.DataBind()
+            
         End Sub
+
+        ''' <summary>
+        ''' Binds the categories.
+        ''' </summary>
+        Private Sub BindCategories()
+            'Build the Catagories List.
+            Dim FAQsController As New FAQsController
+            RadListBoxCats.DataSource = FAQsController.ListCategories(ModuleId)
+            RadListBoxCats.DataBind()
+        End Sub
+
+        ''' <summary>
+        ''' Determines if the element matches the filter input.
+        ''' </summary>
+        Private Function MatchElement(ByVal fData As FAQsInfo) As Boolean
+
+            Dim match As Boolean = False
+            Dim noneChecked As Boolean = True
+
+            'Filter on the checked items
+            For Each item As RadListBoxItem In RadListBoxCats.Items
+
+                'Get the checkbox in the Control
+                Dim chkCatagorie As CheckBox = CType(item.FindControl("chkCatagorie"), CheckBox)
+                
+                'If checked the faq module is being filtered on one or more category's
+                If chkCatagorie.Checked Then
+
+                    'Set Checked Flag
+                    noneChecked = False
+
+                    'Get the filtered catagory
+                    Dim category As String = chkCatagorie.Text
+
+                    'Get the elements that match the catagory
+                    If fData.FaqCategoryName = category Then
+                        match = True
+                    End If
+
+                End If
+
+            Next
+
+            If noneChecked Then
+                Return True
+            End If
+
+            Return match
+
+        End Function
 
         ''' <summary>
         ''' Increments the view count.
@@ -167,7 +246,7 @@ Namespace DotNetNuke.Modules.FAQs
         Private Sub IncrementViewCount(ByVal FaqId As Integer)
             Dim objFAQs As New FAQsController
             objFAQs.IncrementViewCount(FaqId)
-            
+
         End Sub
 
 #End Region
@@ -239,9 +318,13 @@ Namespace DotNetNuke.Modules.FAQs
                 End If
 
                 If Not IsPostBack Then
+                    'Fill the categories panel
+                    BindCategories()
+
+                    'Bind the FAQ data
                     BindData()
-                    RadComboBoxCats.DataBind()
                 End If
+
             Catch exc As Exception 'Module failed to load
                 ProcessModuleLoadException(Me, exc)
             End Try
@@ -327,15 +410,17 @@ Namespace DotNetNuke.Modules.FAQs
                 End Try
             End If
         End Sub
+
         ''' <summary>
-        ''' Fills Combobox with available Category's 
+        ''' Handles the CheckedChanged event of the Category controls.
         ''' </summary>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Private Function GetCats() As ArrayList '(Of CategoryInfo)
-            Dim FAQsController As New FAQsController
-            Return FAQsController.ListCategories(ModuleId)
-        End Function
+        ''' <param name="sender">The source of the event.</param>
+        ''' <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+        Protected Sub chkCatagorie_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs)
+            'Rebind Data
+            BindData()
+        End Sub
+
 #End Region
 
     End Class

@@ -25,6 +25,7 @@ Namespace DotNetNuke.Modules.FAQs
     ''' <summary>
     ''' Info class for FAQs
     ''' </summary>
+    <Serializable()>
     Public Class FAQsInfo
 
 #Region "Private Members"
@@ -100,7 +101,7 @@ Namespace DotNetNuke.Modules.FAQs
                 _faqCategoryName = Value
             End Set
         End Property
-        
+
         ''' <summary>
         ''' Gets or sets the FAQ category description.
         ''' </summary>

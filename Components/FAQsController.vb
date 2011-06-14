@@ -23,6 +23,7 @@ Imports System.XML
 Imports System.Text
 Imports System.Collections
 Imports System.Web.HttpUtility
+Imports System.Collections.Generic
 Imports Microsoft.VisualBasic
 Imports DotNetNuke.Common
 Imports DotNetNuke.Common.Utilities
@@ -155,9 +156,7 @@ Namespace DotNetNuke.Modules.FAQs
         ''' <param name="ModuleId">The module id.</param>
         ''' <returns></returns>
         Public Function ListCategories(ByVal ModuleId As Integer) As ArrayList
-
             Return CBO.FillCollection(DataProvider.Instance().ListCategory(ModuleId), GetType(CategoryInfo))
-
         End Function
 
         ''' <summary>
