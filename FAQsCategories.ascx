@@ -43,9 +43,9 @@
         </tr>
     </ItemTemplate>
 </asp:DataList></p>
-<dnn:CommandButton ID="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton" CausesValidation="False" Text="Add New" />
+<dnn:CommandButton ID="cmdAddNew" ResourceKey="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton" CausesValidation="False" Text="Add New" />
 &nbsp;&nbsp;
-<dnn:CommandButton ID="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+<dnn:CommandButton ID="cmdGoBack" ResourceKey="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
 <asp:Panel ID="panelAddEdit" runat="server" Visible="False">
     <table class="Normal" id="tblManageCategories" cellspacing="3" cellpadding="3" border="0" width="100%">
         <tr>
@@ -92,9 +92,9 @@
                 &nbsp;
             </td>
             <td colspan="2">
-                <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update" />
+                <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ResourceKey="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update" />
                 &nbsp;&nbsp;
-                <dnn:CommandButton ID="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+                <dnn:CommandButton ID="cmdCancel" ResourceKey="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
             </td>
         </tr>
     </table>

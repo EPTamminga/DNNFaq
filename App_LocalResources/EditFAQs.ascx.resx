@@ -150,4 +150,13 @@
   <data name="valRequiredTitle.Text" xml:space="preserve">
     <value>&lt;strong&gt;Question is required&lt;/strong&gt;</value>
   </data>
+  <data name="cmdCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="cmdDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="cmdUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
 </root>

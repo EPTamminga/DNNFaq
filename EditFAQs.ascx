@@ -33,10 +33,10 @@
     </tr>
 </table>
 <p>
-    <dnn:commandbutton cssclass="CommandButton" id="cmdUpdate" imageurl="~/images/save.gif" runat="server" text="Update" />
+    <dnn:commandbutton cssclass="CommandButton" id="cmdUpdate" resourcekey="cmdUpdate" imageurl="~/images/save.gif" runat="server" text="Update" />
     &nbsp;
-    <dnn:commandbutton id="cmdCancel" runat="server" imageurl="~/images/cancel.gif" cssclass="CommandButton" causesvalidation="False" text="Cancel" />
+    <dnn:commandbutton id="cmdCancel" resourcekey="cmdCancel" runat="server" imageurl="~/images/cancel.gif" cssclass="CommandButton" causesvalidation="False" text="Cancel" />
     &nbsp;
-    <dnn:commandbutton id="cmdDelete" runat="server" imageurl="~/images/delete.gif" cssclass="CommandButton" causesvalidation="False" text="Delete" />
+    <dnn:commandbutton id="cmdDelete" resourcekey="cmdDelete" runat="server" imageurl="~/images/delete.gif" cssclass="CommandButton" causesvalidation="False" text="Delete" />
 </p>
 <Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>
