@@ -20,8 +20,11 @@
 
 using System;
 using System.Data;
+using System.Globalization;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Users;
+using DotNetNuke.Services.Tokens;
 
 namespace DotNetNuke.Modules.FAQs
 {
@@ -30,7 +33,7 @@ namespace DotNetNuke.Modules.FAQs
 	/// Info class for FAQs
 	/// </summary>
 	[Serializable()]
-	public class FAQsInfo:IHydratable
+	public class FAQsInfo:IHydratable,IPropertyAccess
 	{
 		#region Private Members
 
@@ -322,6 +325,45 @@ namespace DotNetNuke.Modules.FAQs
 		}
 
 		#endregion
+
+		#region Implementation of IPropertyAccess
+
+		public string GetProperty(string strPropertyName, string strFormat, CultureInfo formatProvider, UserInfo AccessingUser, Scope AccessLevel, ref bool PropertyNotFound)
+		{
+
+			PropertyNotFound = false;
+			switch (strPropertyName.ToLower())
+			{
+				case "question":
+					return PropertyAccess.FormatString(_question, strFormat);
+				case "answer":
+					return PropertyAccess.FormatString(_answer, strFormat);
+				case "user":
+					return PropertyAccess.FormatString(_createdByUserName, strFormat);
+				case "viewcount":
+					return _viewCount.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+				case "categoryname":
+					return PropertyAccess.FormatString(_faqCategoryName, strFormat);
+				case "categorydesc":
+					return PropertyAccess.FormatString(_faqCategoryDescription, strFormat);
+				case "datecreated":
+					return _createdDate.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
+				case "datemodified":
+					return _dateModified.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
+				case "index":
+					return _index.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+				default:
+					PropertyNotFound = true;
+					return String.Empty;
+			}
+		}
+
+		public CacheLevel Cacheability
+		{
+			get { return CacheLevel.fullyCacheable; }
+		}
+
+		#endregion 
 	}
 	
 }

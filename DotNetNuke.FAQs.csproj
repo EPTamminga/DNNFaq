@@ -127,6 +127,7 @@
     <Compile Include="Components\DataProvider.cs" />
     <Compile Include="Components\FAQsController.cs" />
     <Compile Include="Components\FAQsInfo.cs" />
+    <Compile Include="Components\FAQsTokenReplace.cs" />
     <Compile Include="Components\SqlDataProvider.cs" />
     <Compile Include="EditFAQs.ascx.cs">
       <DependentUpon>EditFAQs.ascx</DependentUpon>

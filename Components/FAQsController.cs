@@ -378,37 +378,21 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns>Answers in which all tokens are processed</returns>
 		public string ProcessTokens(FAQsInfo faqItem, string template)
 		{
-			var answer = new StringBuilder(template);
-			
-			// All replaces are repeated for the old token formats
-			answer.Replace("[FAQ:ANSWER]", faqItem.Answer);
-			answer.Replace("[ANSWER]", faqItem.Answer);
-			
-			answer.Replace("[FAQ:CATEGORYNAME]", faqItem.FaqCategoryName);
-			answer.Replace("[CATEGORYNAME]", faqItem.FaqCategoryName);
-			
-			answer.Replace("[FAQ:CATEGORYDESC]", faqItem.FaqCategoryDescription);
-			answer.Replace("[CATEGORYDESC]", faqItem.FaqCategoryDescription);
-			
-			answer.Replace("[FAQ:USER]", faqItem.CreatedByUserName);
-			answer.Replace("[USER]", faqItem.CreatedByUserName);
-			
-			answer.Replace("[FAQ:VIEWCOUNT]", faqItem.ViewCount.ToString());
-			answer.Replace("[VIEWCOUNT]", faqItem.ViewCount.ToString());
-			
-			answer.Replace("[FAQ:DATECREATED]", faqItem.CreatedDate.ToShortDateString());
-			answer.Replace("[DATECREATED]", faqItem.CreatedDate.ToShortDateString());
-			
-			answer.Replace("[FAQ:DATEMODIFIED]", faqItem.DateModified.ToShortDateString());
-			answer.Replace("[DATEMODIFIED]", faqItem.DateModified.ToShortDateString());
-			
-			answer.Replace("[FAQ:QUESTION]", faqItem.Question);
-			answer.Replace("[QUESTION]", faqItem.Question);
-			
-			answer.Replace("[FAQ:INDEX]", faqItem.Index.ToString());
-			answer.Replace("[INDEX]", faqItem.Index.ToString());
-			
-			return answer.ToString();
+			// For compability issues we need to convert old tokens to new tokens (sigh...)
+			StringBuilder compatibleTemplate = new StringBuilder(template);
+			compatibleTemplate.Replace("[ANSWER]", "[FAQ:ANSWER]");
+			compatibleTemplate.Replace("[CATEGORYNAME]", "[FAQ:CATEGORYNAME]");
+			compatibleTemplate.Replace("[CATEGORYDESC]", "[FAQ:CATEGORYDESC]");
+			compatibleTemplate.Replace("[USER]", "[FAQ:USER]");
+			compatibleTemplate.Replace("[VIEWCOUNT]", "[FAQ:VIEWCOUNT]");
+			compatibleTemplate.Replace("[DATECREATED]", "[FAQ:DATECREATED]");
+			compatibleTemplate.Replace("[DATEMODIFIED]", "[FAQ:DATEMODIFIED]");
+			compatibleTemplate.Replace("[QUESTION]", "[FAQ:QUESTION]");
+			compatibleTemplate.Replace("[INDEX]", "[FAQ:INDEX]");
+
+			// Now we can call TokenReplace
+			FAQsTokenReplace tokenReplace = new FAQsTokenReplace(faqItem);
+			return tokenReplace.ReplaceFAQsTokens(template);
 		}
 		
 		#endregion
