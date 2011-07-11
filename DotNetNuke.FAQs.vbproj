@@ -105,12 +105,12 @@
   <ItemGroup>
     <Content Include="Installation\CleanUp\Cleanup.04.05.00.txt" />
     <Content Include="Installation\CleanUp\Cleanup.04.05.01.txt" />
-    <Content Include="Installation\CleanUp\Cleanup.04.06.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.05.00.00.txt" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.04.05.00.txt" />
     <None Include="Installation\04.05.01.SqlDataProvider" />
     <Content Include="Installation\ReleaseNotes\Release.04.05.01.txt" />
-    <Content Include="Installation\ReleaseNotes\Release.04.06.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.05.00.00.txt" />
     <Content Include="module.css" />
     <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="EditFAQs.ascx">
@@ -187,13 +187,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Installation\Uninstall.SqlDataProvider" />
-    <Content Include="web.config" />
-    <Content Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </Content>
-    <Content Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
