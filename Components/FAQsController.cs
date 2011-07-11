@@ -185,23 +185,22 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns>Collection of SearchItems</returns>
 		public SearchItemInfoCollection GetSearchItems(ModuleInfo modInfo)
 		{
-			SearchItemInfoCollection SearchItemCollection = new SearchItemInfoCollection();
-			ArrayList FAQs = ListFAQWithoutOrder(Convert.ToInt32(modInfo.ModuleID));
+			var searchItemCollection = new SearchItemInfoCollection();
+			var FAQs = ListFAQWithoutOrder(Convert.ToInt32(modInfo.ModuleID));
 			
 			foreach (object objFaq in FAQs)
 			{
-				SearchItemInfo SearchItem;
-				FAQsInfo faq = ((FAQsInfo) objFaq);
+			    var faq = ((FAQsInfo) objFaq);
 				int UserId = Null.NullInteger;
 				int.TryParse(faq.CreatedByUser, out UserId);
 				
 				string strContent = System.Web.HttpUtility.HtmlDecode(faq.Question + " " + faq.Answer);
 				string strDescription = HtmlUtils.Shorten(HtmlUtils.Clean(System.Web.HttpUtility.HtmlDecode(faq.Question), false), 100, "...");
 				
-				SearchItem = new SearchItemInfo(modInfo.ModuleTitle, strDescription, UserId, faq.CreatedDate, modInfo.ModuleID, faq.ItemId.ToString(), strContent);
-				SearchItemCollection.Add(SearchItem);
+				var searchItem = new SearchItemInfo(modInfo.ModuleTitle, strDescription, UserId, faq.CreatedDate, modInfo.ModuleID, faq.ItemId.ToString(), strContent);
+				searchItemCollection.Add(searchItem);
 			}
-			return SearchItemCollection;
+			return searchItemCollection;
 		}
 		
 		/// <summary>
@@ -379,7 +378,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns>Answers in which all tokens are processed</returns>
 		public string ProcessTokens(FAQsInfo faqItem, string template)
 		{
-			StringBuilder answer = new StringBuilder(template);
+			var answer = new StringBuilder(template);
 			
 			// All replaces are repeated for the old token formats
 			answer.Replace("[FAQ:ANSWER]", faqItem.Answer);
