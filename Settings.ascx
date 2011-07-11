@@ -1,4 +1,4 @@
-<%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.Settings" AutoEventWireup="false" CodeBehind="Settings.ascx.vb" %>
+<%@ Control Language="C#" Inherits="DotNetNuke.Modules.FAQs.Settings" AutoEventWireup="true" CodeBehind="Settings.ascx.cs" %>
 <%@ Register TagPrefix="dnn" TagName="SectionHead" Src="~/controls/SectionHeadControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <table id="Table2" cellspacing="0" cellpadding="3" border="0" width="100%">
@@ -68,3 +68,4 @@
         </td>
     </tr>
 </table>
+

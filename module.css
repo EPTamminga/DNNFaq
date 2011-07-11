@@ -1,7 +1,7 @@
-﻿.categorieList {padding: 0px 20px 0px 5px; }
-.categorieList label {vertical-align:middle;white-space:nowrap; padding: 2px 10px 2px 2px; }
-.categorieList input[type=checkbox] {vertical-align:middle;}
-.categorieList ul li {list-style-type:none; padding: 5px 10px 5px 5px;}
+﻿.categoryList {padding: 0px 20px 0px 5px; }
+.categoryList label {vertical-align:middle;white-space:nowrap; padding: 2px 10px 2px 2px; }
+.categoryList input[type=checkbox] {vertical-align:middle;}
+.categoryList ul li {list-style-type:none; padding: 5px 10px 5px 5px;}
 .rlbItem {white-space:nowrap;}
 .RadListBox {width:auto !important;}
 .rlbItem > span {white-space:nowrap !important; padding: 3px;} 
