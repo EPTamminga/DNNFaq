@@ -1,7 +1,10 @@
-<%@ Control Language="vb" Inherits="DotNetNuke.Modules.FAQs.FAQsCategories" AutoEventWireup="false" CodeBehind="FAQsCategories.ascx.vb" %>
+<%@ Control Language="C#" Inherits="DotNetNuke.Modules.FAQs.FAQsCategories" AutoEventWireup="true" CodeBehind="FAQsCategories.ascx.cs" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
-<asp:DataList ID="lstCategory" DataKeyField="FaqCategoryId" runat="server">
+<asp:DataList ID="lstCategory" runat="server" 
+	DataKeyField="FaqCategoryId" 
+	onitemcreated="lstCategory_ItemCreated" 
+	onitemcommand="lstCategory_ItemCommand">
     <HeaderTemplate>
         <table border="0" cellpadding="2" cellspacing="2" class="Normal">
             <tr>
@@ -42,10 +45,10 @@
             </td>
         </tr>
     </ItemTemplate>
-</asp:DataList></p>
-<dnn:CommandButton ID="cmdAddNew" ResourceKey="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton" CausesValidation="False" Text="Add New" />
+</asp:DataList>
+<dnn:CommandButton ID="cmdAddNew" ResourceKey="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton"  CausesValidation="False" Text="Add New"  OnCommand="cmdAddNew_Click"/>
 &nbsp;&nbsp;
-<dnn:CommandButton ID="cmdGoBack" ResourceKey="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+<dnn:CommandButton ID="cmdGoBack" ResourceKey="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel"  OnCommand="cmdGoBack_Click"/>
 <asp:Panel ID="panelAddEdit" runat="server" Visible="False">
     <table class="Normal" id="tblManageCategories" cellspacing="3" cellpadding="3" border="0" width="100%">
         <tr>
@@ -92,10 +95,11 @@
                 &nbsp;
             </td>
             <td colspan="2">
-                <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ResourceKey="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update" />
+                <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ResourceKey="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update"  OnCommand="cmdUpdate_Click"/>
                 &nbsp;&nbsp;
-                <dnn:CommandButton ID="cmdCancel" ResourceKey="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" />
+                <dnn:CommandButton ID="cmdCancel" ResourceKey="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel"  OnCommand="cmdCancel_Click"/>
             </td>
         </tr>
     </table>
 </asp:Panel>
+
