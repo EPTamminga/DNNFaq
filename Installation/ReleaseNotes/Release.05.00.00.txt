@@ -3,7 +3,7 @@
 Full details on the changes can be found in great detail at <a href="http://dnnfaqs.codeplex.com/workitem/list/basic">dnnfaqs.codeplex.com</a>.</p>
 <h3>BUG FIXES</h3>
 <ul>
-	<li>Manage Categories button text was not localized</lI>
+    <li>Manage Categories button text was not localized</lI>
     <li>Edit/Add FAQ Entry: button text was not localized</li>
 </ul>
 <h3>NEW FEATURES</h3>
