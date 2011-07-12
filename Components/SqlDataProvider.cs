@@ -120,11 +120,6 @@ namespace DotNetNuke.Modules.FAQs
 			return ((IDataReader) (SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQGet", faqId, moduleId)));
 		}
 		
-		public override IDataReader ListFAQ(int moduleId)
-		{
-			return ((IDataReader) (SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQList", moduleId)));
-		}
-		
 		public override int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount)
 		{
 			return System.Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQAdd", moduleId, categoryId, question, answer, createdByUser, dateAdded, dateModified, viewCount));

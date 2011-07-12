@@ -63,7 +63,6 @@ namespace DotNetNuke.Modules.FAQs
 		
 		#region FAQ Methods
 		public abstract IDataReader GetFAQ(int faqId, int moduleId);
-		public abstract IDataReader ListFAQ(int moduleId);
 		public abstract int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount);
 		public abstract void UpdateFAQ(int faqId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateModified);
 		public abstract void DeleteFAQ(int faqId, int moduleId);

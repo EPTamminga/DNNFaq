@@ -43,3 +43,8 @@ ORDER BY
   CASE WHEN @OrderBy=5 THEN f.CreatedDate END ASC
 
 GO
+
+/*** Remove unused procedure ***/
+if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}ListFAQ') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}[{objectQualifier}ListFAQ]
+GO
