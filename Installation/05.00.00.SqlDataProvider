@@ -1,5 +1,5 @@
 ﻿/****
-SqlDataProvider script
+SqlDataProvider script DNN_FAQ 05.00.00
 
 Note: 
 To manually execute this script you must  perform a search and replace operation for {databaseOwner} and {objectQualifier}  
@@ -24,7 +24,7 @@ SELECT
 	f.Question,
 	f.Answer,
 	f.CreatedByUser,
-	'CreatedByUserName' = Users.FirstName + ' ' + Users.LastName,
+	'CreatedByUserName' = U.FirstName + ' ' + U.LastName,
 	f.CreatedDate,
 	f.DateModified,
 	f.ViewCount,
@@ -32,7 +32,7 @@ SELECT
 	c.FaqCategoryDescription
 FROM {databaseOwner}[{objectQualifier}FAQs] f
 left outer join {databaseOwner}[{objectQualifier}FAQsCategory] c on f.CategoryId = c.FaqCategoryId
-left outer join {databaseOwner}[{objectQualifier}Users] on f.CreatedByUser = Users.UserId
+left outer join {databaseOwner}[{objectQualifier}Users] U on f.CreatedByUser = U.UserId
 where f.ModuleId = @ModuleId
 ORDER BY
   CASE WHEN @OrderBy=0 THEN f.DateModified END DESC,

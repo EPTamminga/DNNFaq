@@ -16,5 +16,6 @@ Full details on the changes can be found in great detail at <a href="http://dnnf
 </ul>
 <h3>CHANGES</h3>
 <ul>
-	<li></li>
+	<li>Removed unused SPROC and related methods</li>
+	<li>Improved fault tolerance of SQL Uninstall script</li>
 </ul>
