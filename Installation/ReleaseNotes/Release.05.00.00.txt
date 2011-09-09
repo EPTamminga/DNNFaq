@@ -2,7 +2,7 @@
 <p>FAQs 05.00.00 will work for any DNN version 5.6.1 and up.
 It is the first version which is rewritten in C#. 
 Full details on the changes can be found in great detail at 
-<a href="http://dnnfaqs.codeplex.com/workitem/list/basic">dnnfaqs.codeplex.com</a>.</p>
+<a href="http://dnnfaq.codeplex.com/workitem/list/basic">dnnfaq.codeplex.com</a>.</p>
 <h3>BUG FIXES</h3>
 <ul>
     <li>Manage Categories button text was not localized</lI>
