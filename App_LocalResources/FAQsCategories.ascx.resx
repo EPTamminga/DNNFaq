@@ -180,4 +180,13 @@
   <data name="ControlTitle_editcategories.Text" xml:space="preserve">
     <value>Manage Categories</value>
   </data>
+  <data name="plParentCategoryField.Help" xml:space="preserve">
+    <value>Select a parent category (optional)</value>
+  </data>
+  <data name="plParentCategoryField.Text" xml:space="preserve">
+    <value>Parent Category</value>
+  </data>
+  <data name="SelectParentCategory.Text" xml:space="preserve">
+    <value>&lt;Select Parent Category&gt;</value>
+  </data>
 </root>

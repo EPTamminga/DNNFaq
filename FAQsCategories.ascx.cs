@@ -94,7 +94,12 @@ namespace DotNetNuke.Modules.FAQs
 				case "edit":
 					panelAddEdit.Visible = true;
 					rowFaqCategoryId.Visible = true;
+					PopulateCategoriesDropDown(faqCategoryId);
 					CategoryInfo categoryItem = faqsController.GetCategory(faqCategoryId, ModuleId);
+					int parentCategoryId = categoryItem.FaqCategoryParentId;
+					if (parentCategoryId == 0)
+						parentCategoryId = -1;
+					drpParentCategory.SelectedValue = parentCategoryId.ToString();
 					txtCategoryName.Text = categoryItem.FaqCategoryName;
 					txtCategoryDescription.Text = categoryItem.FaqCategoryDescription;
 					lblId.Text = categoryItem.FaqCategoryId.ToString();
@@ -130,7 +135,12 @@ namespace DotNetNuke.Modules.FAQs
 			CategoryInfo categoryItem = new CategoryInfo();
 			PortalSecurity objSecurity = new PortalSecurity();
 
+			int parentCategoryId = Convert.ToInt32(drpParentCategory.SelectedValue);
+			if (parentCategoryId < 0) 
+				parentCategoryId = 0;
+
 			// We do not allow for script or markup
+			categoryItem.FaqCategoryParentId = parentCategoryId;
 			categoryItem.FaqCategoryName = objSecurity.InputFilter(txtCategoryName.Text, PortalSecurity.FilterFlag.NoMarkup | PortalSecurity.FilterFlag.NoScripting);
 			categoryItem.FaqCategoryDescription = objSecurity.InputFilter(txtCategoryDescription.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
 			categoryItem.ModuleId = ModuleId;
@@ -167,6 +177,7 @@ namespace DotNetNuke.Modules.FAQs
 			rowFaqCategoryId.Visible = false;
 			txtCategoryDescription.Text = "";
 			txtCategoryName.Text = "";
+			PopulateCategoriesDropDown(-1);
 		}
 
 		/// <summary>
@@ -186,10 +197,24 @@ namespace DotNetNuke.Modules.FAQs
 		private void BindData()
 		{
 			FAQsController FAQsController = new FAQsController();
-			lstCategory.DataSource = FAQsController.ListCategories(ModuleId);
+			lstCategory.DataSource = FAQsController.ListCategories(ModuleId,false);
 			lstCategory.DataBind();
 		}
 
+		/// <summary>
+		/// Populates the (Parent-)categories drop down.
+		/// </summary>
+		private void PopulateCategoriesDropDown(int faqCategoryId)
+		{
+			drpParentCategory.Items.Clear();
+			drpParentCategory.Items.Add(new ListItem(Localization.GetString("SelectParentCategory.Text",this.LocalResourceFile), "-1"));
+			FAQsController FAQsController = new FAQsController();
+			foreach (CategoryInfo category in FAQsController.ListCategories(ModuleId, false))
+			{
+				if (faqCategoryId != category.FaqCategoryId)
+					drpParentCategory.Items.Add(new ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()));
+			}
+		}
 		#endregion
 	}
 }

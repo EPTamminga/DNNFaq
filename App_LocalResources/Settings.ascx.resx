@@ -155,14 +155,15 @@
   </data>
   <data name="DefaultQuestionTemplate.Text" xml:space="preserve">
     <value>&lt;div class="Normal" style="width: 100%;"&gt;
-&lt;div style="border-width: thin; background-color: #E0E0E0; font-weight: bold; padding-top: 5px; padding-bottom: 5px;"&gt;
-Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/div&gt;&lt;div&gt;&lt;p&gt;Created on: [FAQ:DATECREATED]; Modified on [FAQ:DATEMODIFIED]; [FAQ:CATEGORYNAME]&lt;/p&gt;&lt;/div&gt;
+   &lt;div style="font-weight: bold;background-color:#E0E0E0;padding-top:2px;padding-bottom:2px;"&gt;
+      &lt;img src="images/action.gif" /&gt;[FAQ:QUESTION]
+   &lt;/div&gt;
 &lt;/div&gt;</value>
   </data>
   <data name="DefaultAnswerTemplate.Text" xml:space="preserve">
-    <value>&lt;div class="Normal" style="width: 100%; margin-left: 12pt;"&gt;
-&lt;div&gt;&lt;strong&gt;Answer:&lt;/strong&gt; [FAQ:ANSWER]&lt;/div&gt;
-&lt;div style="padding-top: 6pt"&gt;Viewed: [FAQ:VIEWCOUNT] times&lt;/div&gt;
+    <value>&lt;div class="Normal" style="width: 100%; margin-left: 12pt;padding-top:6px;"&gt;
+&lt;div&gt;[FAQ:ANSWER]&lt;/div&gt;
+&lt;div style="padding-top: 6pt;font-size:x-small;"&gt;&lt;strong&gt;Viewed:&lt;/strong&gt; [FAQ:VIEWCOUNT] times • &lt;strong&gt;Created on:&lt;/strong&gt; [FAQ:DATECREATED]  • &lt;strong&gt;Modified on&lt;/strong&gt; [FAQ:DATEMODIFIED]&lt;/div&gt;
 &lt;/div&gt;</value>
   </data>
   <data name="DefaultLoadingTemplate.Text" xml:space="preserve">
@@ -175,18 +176,54 @@ Q[FAQ:INDEX]. [FAQ:QUESTION]&lt;/div&gt;&lt;div&gt;&lt;p&gt;Created on: [FAQ:DAT
     <value>Loading Template</value>
   </data>
   <data name="ControlTitle_settings.Text" xml:space="preserve">
-    <value>FAQs Settings</value>
+    <value>FAQs Module Settings</value>
   </data>
   <data name="OrderByDateCreatedOriginal.Text" xml:space="preserve">
     <value>Creation Date (oldest first)</value>
   </data>
   <data name="OrderByDateCreatedReverse.Text" xml:space="preserve">
-    <value>Creation Date newest first)</value>
+    <value>Creation Date (newest first)</value>
   </data>
   <data name="lblShowCatagories.Help" xml:space="preserve">
     <value>When selected, a listbox of categories is shown on the lefthand side. A user can filter by category by checking the corresponding checkboxes</value>
   </data>
   <data name="lblShowCatagories.Text" xml:space="preserve">
     <value>Show question categories</value>
+  </data>
+  <data name="ShowCategoryTypeList.Text" xml:space="preserve">
+    <value>List with checkboxes</value>
+  </data>
+  <data name="ShowCategoryTypeTree.Text" xml:space="preserve">
+    <value>Treeview</value>
+  </data>
+  <data name="lblShowCategoryType.Help" xml:space="preserve">
+    <value>Select the type of control which shows the categories</value>
+  </data>
+  <data name="lblShowCategoryType.Text" xml:space="preserve">
+    <value>Show categories as</value>
+  </data>
+  <data name="lblShowToolTips.Help" xml:space="preserve">
+    <value>Check if you want to show the category description as a tooltip</value>
+  </data>
+  <data name="lblShowToolTips.Text" xml:space="preserve">
+    <value>Show Tooltips</value>
+  </data>
+  <data name="shCategories.Text" xml:space="preserve">
+    <value>Category Settings</value>
+  </data>
+  <data name="shFaqs.Text" xml:space="preserve">
+    <value>FAQ Settings</value>
+  </data>
+  <data name="OrderByViewOrder.Text" xml:space="preserve">
+    <value>Predefined Order</value>
+  </data>
+  <data name="ShowCategoryTypeDropDown.Text" xml:space="preserve">
+    <value>Dropdown</value>
+  </data>
+  <data name="lblUserSort.Help" xml:space="preserve">
+    <value>Check if the user should be able to sort questions</value>
+  </data>
+  <data name="lblUserSort.Text" xml:space="preserve">
+    <value>User can sort</value>
   </data>
 </root>

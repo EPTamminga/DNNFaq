@@ -13,13 +13,31 @@ namespace DotNetNuke.Modules.FAQs {
     public partial class Settings {
         
         /// <summary>
+        /// shCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.SectionHeadControl shCategories;
+        
+        /// <summary>
+        /// pnlCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlCategories;
+        
+        /// <summary>
         /// lblShowCatagories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblShowCatagories;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblShowCatagories;
         
         /// <summary>
         /// chkShowCatagories control.
@@ -31,13 +49,76 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::System.Web.UI.WebControls.CheckBox chkShowCatagories;
         
         /// <summary>
+        /// pnlShowCategoryType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlShowCategoryType;
+        
+        /// <summary>
+        /// lblShowToolTips control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblShowToolTips;
+        
+        /// <summary>
+        /// chkShowToolTips control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkShowToolTips;
+        
+        /// <summary>
+        /// lblShowCategoryType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblShowCategoryType;
+        
+        /// <summary>
+        /// rblShowCategoryType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblShowCategoryType;
+        
+        /// <summary>
+        /// shFaqs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.SectionHeadControl shFaqs;
+        
+        /// <summary>
+        /// pnlFaqs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlFaqs;
+        
+        /// <summary>
         /// lblDefaultSorting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblDefaultSorting;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblDefaultSorting;
         
         /// <summary>
         /// drpDefaultSorting control.
@@ -49,13 +130,31 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::System.Web.UI.WebControls.DropDownList drpDefaultSorting;
         
         /// <summary>
+        /// lblUserSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblUserSort;
+        
+        /// <summary>
+        /// chkUserSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkUserSort;
+        
+        /// <summary>
         /// lblQuestionTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblQuestionTemplate;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblQuestionTemplate;
         
         /// <summary>
         /// txtQuestionTemplate control.
@@ -73,7 +172,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblAnswerTemplate;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblAnswerTemplate;
         
         /// <summary>
         /// txtAnswerTemplate control.
@@ -91,7 +190,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblLoadingTemplate;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblLoadingTemplate;
         
         /// <summary>
         /// txtLoadingTemplate control.
@@ -109,7 +208,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblAvailableTokens;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblAvailableTokens;
         
         /// <summary>
         /// lstAvailableTokens control.

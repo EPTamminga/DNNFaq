@@ -80,7 +80,7 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			FAQsController FAQsController = new FAQsController();
 			
-			foreach (CategoryInfo category in FAQsController.ListCategories(ModuleId))
+			foreach (CategoryInfo category in FAQsController.ListCategories(ModuleId,false))
 			{
 				drpCategory.Items.Add(new ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()));
 			}

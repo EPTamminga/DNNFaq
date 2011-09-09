@@ -53,10 +53,39 @@ namespace DotNetNuke.Modules.FAQs
 				if (! Null.IsNull(Settings["ShowCategories"]))
 				{
 					chkShowCatagories.Checked = Convert.ToBoolean(Settings["ShowCategories"]);
+					pnlShowCategoryType.Visible = chkShowCatagories.Checked;
 				}
 				else
 				{
 					chkShowCatagories.Checked = false;
+					pnlShowCategoryType.Visible = false;
+				}
+
+				if (!Null.IsNull(Settings["ShowToolTips"]))
+				{
+					chkShowToolTips.Checked = Convert.ToBoolean(Settings["ShowToolTips"]);
+				}
+				else
+				{
+					chkShowToolTips.Checked = false;
+				}
+				
+				if (!Null.IsNull(Settings["ShowCategoryType"]))
+				{
+					rblShowCategoryType.SelectedValue = (string)Settings["ShowCategoryType"];
+				}
+				else
+				{
+					rblShowCategoryType.SelectedIndex = 0;
+				}
+
+				if (!Null.IsNull(Settings["UserSort"]))
+				{
+					chkUserSort.Checked = Convert.ToBoolean(Settings["UserSort"]);
+				}
+				else
+				{
+					chkUserSort.Checked = false;
 				}
 				
 				if (! Null.IsNull(Settings["FaqQuestionTemplate"]))
@@ -111,10 +140,13 @@ namespace DotNetNuke.Modules.FAQs
 				ModuleController modController = new ModuleController();
 				
 				modController.UpdateModuleSetting(ModuleId, "ShowCategories", chkShowCatagories.Checked.ToString());
+				modController.UpdateModuleSetting(ModuleId, "ShowToolTips", chkShowToolTips.Checked.ToString());
+				modController.UpdateModuleSetting(ModuleId, "ShowCategoryType", rblShowCategoryType.SelectedValue);
+				modController.UpdateModuleSetting(ModuleId, "UserSort", chkUserSort.Checked.ToString());
 				modController.UpdateModuleSetting(ModuleId, "FaqQuestionTemplate", txtQuestionTemplate.Text);
 				modController.UpdateModuleSetting(ModuleId, "FaqAnswerTemplate", txtAnswerTemplate.Text);
 				modController.UpdateModuleSetting(ModuleId, "FaqLoadingTemplate", txtLoadingTemplate.Text);
-				modController.UpdateModuleSetting(ModuleId, "FaqDefaultSorting", drpDefaultSorting.SelectedValue.ToString());
+				modController.UpdateModuleSetting(ModuleId, "FaqDefaultSorting", drpDefaultSorting.SelectedValue);
 				
 			}
 			catch (Exception exc) //Module failed to load
@@ -125,6 +157,11 @@ namespace DotNetNuke.Modules.FAQs
 		}
 		
 		#endregion
+
+		protected void chkShowCatagories_CheckedChanged(object sender, EventArgs e)
+		{
+			pnlShowCategoryType.Visible = chkShowCatagories.Checked;
+		}
 		
 	}
 	

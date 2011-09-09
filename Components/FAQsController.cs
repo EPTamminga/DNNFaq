@@ -78,7 +78,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns></returns>
 		public int AddFAQ(FAQsInfo obj)
 		{
-			return Convert.ToInt32(DataProvider.Instance().AddFAQ(obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.CreatedDate, obj.DateModified, 0));
+			return Convert.ToInt32(DataProvider.Instance().AddFAQ(obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.CreatedDate, obj.DateModified, 0, obj.ViewOrder));
 		}
 		
 		/// <summary>
@@ -87,7 +87,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="obj">FAQsinfo object</param>
 		public void UpdateFAQ(FAQsInfo obj)
 		{
-			DataProvider.Instance().UpdateFAQ(obj.ItemId, obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.DateModified);
+			DataProvider.Instance().UpdateFAQ(obj.ItemId, obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.DateModified,obj.ViewOrder);
 		}
 		
 		/// <summary>
@@ -99,7 +99,14 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			DataProvider.Instance().DeleteFAQ(faqId, moduleId);
 		}
-		
+
+		/// <summary>
+		/// Reorders the FAQ.
+		/// </summary>
+		public void ReorderFAQ(int faqId1, int faqId2, int moduleId)
+		{
+			DataProvider.Instance().ReorderFAQ(faqId1, faqId2, moduleId);
+		}
 		/// <summary>
 		/// Increments the view count.
 		/// </summary>
@@ -145,10 +152,11 @@ namespace DotNetNuke.Modules.FAQs
 		/// Lists the categories.
 		/// </summary>
 		/// <param name="moduleId">The module id.</param>
+		/// <param name="onlyUsedCategories">true if only categories are returned that are used in Faq's</param>
 		/// <returns></returns>
-		public ArrayList ListCategories(int moduleId)
+		public ArrayList ListCategories(int moduleId, bool onlyUsedCategories)
 		{
-			return CBO.FillCollection(DataProvider.Instance().ListCategory(moduleId), typeof(CategoryInfo));
+			return CBO.FillCollection(DataProvider.Instance().ListCategories(moduleId, onlyUsedCategories), typeof(CategoryInfo));
 		}
 		
 		/// <summary>
@@ -158,7 +166,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns></returns>
 		public int AddCategory(CategoryInfo objCategory)
 		{
-			return System.Convert.ToInt32(DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription));
+			return System.Convert.ToInt32(DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.FaqCategoryParentId,objCategory.FaqCategoryName, objCategory.FaqCategoryDescription));
 		}
 		
 		/// <summary>
@@ -167,7 +175,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="objCategory">The obj category.</param>
 		public void UpdateCategory(CategoryInfo objCategory)
 		{
-			DataProvider.Instance().UpdateCategory(objCategory.FaqCategoryId, objCategory.ModuleId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription);
+			DataProvider.Instance().UpdateCategory(objCategory.FaqCategoryId, objCategory.ModuleId, objCategory.FaqCategoryParentId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription);
 		}
 		
 		public void DeleteCategory(int faqCategoryId)
@@ -212,7 +220,7 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			string strXML = "";
 			ArrayList arrFAQs = ListFAQWithoutOrder(moduleID);
-			ArrayList arrCats = ListCategories(moduleID);
+			ArrayList arrCats = ListCategories(moduleID,false);
 			
 			strXML += "<faqs>";
 			if (arrCats.Count != 0)
@@ -226,6 +234,7 @@ namespace DotNetNuke.Modules.FAQs
 					strXML += "<catdescription>" + XmlUtils.XMLEncode(objCats.FaqCategoryDescription) + "</catdescription>";
 					strXML += "<creationdate></creationdate>";
 					strXML += "<datemodified></datemodified>";
+					strXML += "<vieworder></vieworder>";
 					strXML += "</faq>";
 				}
 			}
@@ -242,6 +251,7 @@ namespace DotNetNuke.Modules.FAQs
 					strXML += "<catdescription>" + XmlUtils.XMLEncode(objFAQs.FaqCategoryDescription) + "</catdescription>";
 					strXML += "<creationdate>" + XmlUtils.XMLEncode(objFAQs.CreatedDate.ToString()) + "</creationdate>";
 					strXML += "<datemodified>" + XmlUtils.XMLEncode(objFAQs.DateModified.ToString()) + "</datemodified>";
+					strXML += "<vieworder>" + XmlUtils.XMLEncode(objFAQs.ViewOrder.ToString()) + "</vieworder>";
 					strXML += "</faq>";
 				}
 			}
@@ -318,8 +328,10 @@ namespace DotNetNuke.Modules.FAQs
 				}
 			}
 			// check is question is empty. if empty is category.
+			int loop = 0;
 			foreach (XmlNode tempLoopVar_xmlFAQ in xmlFaqs)
 			{
+				loop++;
 				xmlFaq = tempLoopVar_xmlFAQ;
 				
 				if (xmlFaq["question"].InnerText != Null.NullString && xmlFaq["question"].InnerText != string.Empty)
@@ -342,10 +354,19 @@ namespace DotNetNuke.Modules.FAQs
 						objFAQs.CreatedDate = DateTime.Parse(xmlFaq["creationdate"].InnerText);
 						objFAQs.DateModified = DateTime.Parse(xmlFaq["datemodified"].InnerText);
 					}
+
+					if (xmlFaq["vieworder"] != null)
+					{
+						objFAQs.ViewOrder = int.Parse(xmlFaq["vieworder"].InnerText);
+					}
+					else
+					{
+						objFAQs.ViewOrder = loop;
+					}
 					objFAQs.CreatedByUser = userId.ToString();
 					
 					bool foundCat = false;
-					foreach (CategoryInfo objCat in ListCategories(moduleID))
+					foreach (CategoryInfo objCat in ListCategories(moduleID,false))
 					{
 						if (objFAQs.FaqCategoryName == objCat.FaqCategoryName)
 						{

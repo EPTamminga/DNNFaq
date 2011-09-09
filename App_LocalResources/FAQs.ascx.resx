@@ -174,4 +174,22 @@ the user clicks on a question. The old functionality of using Post back is still
   <data name="EmptyCategory.Text" xml:space="preserve">
     <value>Unassigned questions</value>
   </data>
+  <data name="AllCategory.Text" xml:space="preserve">
+    <value>All questions</value>
+  </data>
+  <data name="lblSelectCategory.Text" xml:space="preserve">
+    <value>Select Category</value>
+  </data>
+  <data name="lblSort.Text" xml:space="preserve">
+    <value>Select Sort Order</value>
+  </data>
+  <data name="OrderByDateCreatedOriginal.Text" xml:space="preserve">
+    <value>Creation Date (oldest first)</value>
+  </data>
+  <data name="OrderByDateCreatedReverse.Text" xml:space="preserve">
+    <value>Creation Date newest first)</value>
+  </data>
+  <data name="OrderByViewOrder.Text" xml:space="preserve">
+    <value>Predefined Order</value>
+  </data>
 </root>

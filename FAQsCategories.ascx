@@ -68,6 +68,14 @@
             <td>
             </td>
         </tr>
+		<tr id="rowFaqCategoryParentId" runat="server">
+			<td valign="top" class="SubHead" width="128">
+				<dnn:Label id="plParentCategoryField" runat="server" controlname="drpParentCategory"></dnn:Label>
+			</td>
+			<td>
+				<asp:DropDownList ID="drpParentCategory" runat="server" CssClass="Normal" />
+			</td>
+		</tr>
         <tr>
             <td valign="top" class="SubHead" style="width: 150px">
                 <dnn:Label ID="plCategoryName" runat="server" ControlName="CategoryEdit"></dnn:Label>

@@ -22,13 +22,103 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::System.Web.UI.WebControls.Panel pnlShowCategories;
         
         /// <summary>
-        /// dnnListBoxCats control.
+        /// mvShowCategoryType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.Web.UI.WebControls.DnnListBox dnnListBoxCats;
+        protected global::System.Web.UI.WebControls.MultiView mvShowCategoryType;
+        
+        /// <summary>
+        /// vShowCategoryTypeList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View vShowCategoryTypeList;
+        
+        /// <summary>
+        /// listCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.Web.UI.WebControls.DnnListBox listCategories;
+        
+        /// <summary>
+        /// vShowCategoryTypeTree control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.View vShowCategoryTypeTree;
+        
+        /// <summary>
+        /// treeCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.Web.UI.WebControls.DnnTreeView treeCategories;
+        
+        /// <summary>
+        /// pnlSortbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSortbox;
+        
+        /// <summary>
+        /// lblSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblSort;
+        
+        /// <summary>
+        /// drpSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpSort;
+        
+        /// <summary>
+        /// pnlShowCategoryTypeDropdown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlShowCategoryTypeDropdown;
+        
+        /// <summary>
+        /// lblSelectCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblSelectCategory;
+        
+        /// <summary>
+        /// drpCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpCategories;
         
         /// <summary>
         /// lstFAQs control.

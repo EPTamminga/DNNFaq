@@ -35,6 +35,7 @@ namespace DotNetNuke.Modules.FAQs
 		#region Private Members
 
 		private int _faqCategoryId;
+		private int _faqCategoryParentId;
 		private int _moduleId;
 		private string _faqCategoryName;
 		private string _faqCategoryDescription;
@@ -52,18 +53,37 @@ namespace DotNetNuke.Modules.FAQs
 		/// </summary>
 		/// <param name="faqCategoryId">The FAQ category id.</param>
 		/// <param name="moduleId">The module id.</param>
+		/// <param name="faqCategoryParentId">The FAQ parent category id.</param>
 		/// <param name="faqCategoryName">Name of the FAQ category.</param>
 		/// <param name="faqCategoryDescription">The FAQ category description.</param>
-		public CategoryInfo(int faqCategoryId, int moduleId, string faqCategoryName, string faqCategoryDescription)
+		public CategoryInfo(int faqCategoryId, int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription)
 		{
 			this.FaqCategoryId = faqCategoryId;
 			this.ModuleId = moduleId;
+			this.FaqCategoryParentId = faqCategoryParentId;
 			this.FaqCategoryName = faqCategoryName;
 			this.FaqCategoryDescription = faqCategoryDescription;
 		}
 		#endregion
 		
 		#region Public Properties
+		/// <summary>
+		/// Gets or sets the FAQ category parent id.
+		/// </summary>
+		/// <value>The FAQ category parent id.</value>
+		public int FaqCategoryParentId
+		{
+			get
+			{
+				return _faqCategoryParentId;
+			}
+			set
+			{
+				_faqCategoryParentId = value;
+			}
+		}
+		
+		
 		/// <summary>
 		/// Gets or sets the FAQ category id.
 		/// </summary>
@@ -133,6 +153,7 @@ namespace DotNetNuke.Modules.FAQs
 
 		public void Fill(IDataReader dr)
 		{
+			_faqCategoryParentId = Null.SetNullInteger(dr["FaqCategoryParentId"]);
 			_faqCategoryId = Null.SetNullInteger(dr["FaqCategoryId"]);
 			_moduleId = Null.SetNullInteger(dr["ModuleId"]);
 			_faqCategoryName = Null.SetNullString(dr["FaqCategoryName"]);

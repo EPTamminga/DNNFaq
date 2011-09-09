@@ -64,7 +64,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl plCategoryId;
+        protected global::DotNetNuke.UI.UserControls.LabelControl plCategoryId;
         
         /// <summary>
         /// lblId control.
@@ -76,13 +76,40 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::System.Web.UI.WebControls.Label lblId;
         
         /// <summary>
+        /// rowFaqCategoryParentId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow rowFaqCategoryParentId;
+        
+        /// <summary>
+        /// plParentCategoryField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DotNetNuke.UI.UserControls.LabelControl plParentCategoryField;
+        
+        /// <summary>
+        /// drpParentCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpParentCategory;
+        
+        /// <summary>
         /// plCategoryName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl plCategoryName;
+        protected global::DotNetNuke.UI.UserControls.LabelControl plCategoryName;
         
         /// <summary>
         /// txtCategoryName control.
@@ -109,7 +136,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl plCategoryDescription;
+        protected global::DotNetNuke.UI.UserControls.LabelControl plCategoryDescription;
         
         /// <summary>
         /// txtCategoryDescription control.

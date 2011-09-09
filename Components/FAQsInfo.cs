@@ -47,6 +47,7 @@ namespace DotNetNuke.Modules.FAQs
 		private DateTime _createdDate;
 		private DateTime _dateModified;
 		private int _viewCount;
+		private int _viewOrder;
 		private string _faqCategoryName;
 		private string _faqCategoryDescription;
 		private int _index;
@@ -71,7 +72,8 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="createdDate">The created date.</param>
 		/// <param name="dateModified">The date modified.</param>
 		/// <param name="viewCount">The view count.</param>
-		public FAQsInfo(int itemId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime createdDate, DateTime dateModified, int viewCount)
+		/// <param name="viewOrder">The view order.</param>
+		public FAQsInfo(int itemId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime createdDate, DateTime dateModified, int viewCount, int viewOrder)
 		{
 			_itemId = itemId;
 			_moduleId = moduleId;
@@ -82,6 +84,7 @@ namespace DotNetNuke.Modules.FAQs
 			_createdDate = createdDate;
 			_dateModified = dateModified;
 			_viewCount = viewCount;
+			_viewOrder = viewOrder;
 			_createdByUserName = "";
 			_faqCategoryDescription = "";
 			_faqCategoryName = "";
@@ -282,6 +285,22 @@ namespace DotNetNuke.Modules.FAQs
 				_viewCount = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets the view order.
+		/// </summary>
+		/// <value>The view order.</value>
+		public int ViewOrder
+		{
+			get
+			{
+				return _viewOrder;
+			}
+			set
+			{
+				_viewOrder = value;
+			}
+		}
 		
 		/// <summary>
 		/// Gets or sets the index.
@@ -314,6 +333,7 @@ namespace DotNetNuke.Modules.FAQs
 			_createdDate = Null.SetNullDateTime(dr["CreatedDate"]);
 			_dateModified = Null.SetNullDateTime(dr["DateModified"]);
 			_viewCount = Null.SetNullInteger(dr["ViewCount"]);
+			_viewOrder = Null.SetNullInteger(dr["ViewOrder"]);
 			_faqCategoryName = Null.SetNullString(dr["FaqCategoryName"]);
 			_faqCategoryDescription = Null.SetNullString(dr["FaqCategoryDescription"]);
 		}
@@ -342,6 +362,8 @@ namespace DotNetNuke.Modules.FAQs
 					return PropertyAccess.FormatString(_createdByUserName, strFormat);
 				case "viewcount":
 					return _viewCount.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+				case "vieworder":
+					return _viewOrder.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
 				case "categoryname":
 					return PropertyAccess.FormatString(_faqCategoryName, strFormat);
 				case "categorydesc":

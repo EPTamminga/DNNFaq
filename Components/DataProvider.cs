@@ -63,18 +63,20 @@ namespace DotNetNuke.Modules.FAQs
 		
 		#region FAQ Methods
 		public abstract IDataReader GetFAQ(int faqId, int moduleId);
-		public abstract int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount);
-		public abstract void UpdateFAQ(int faqId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateModified);
+		//public abstract IDataReader ListFAQ(int moduleId);
+		public abstract int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount, int viewOrder);
+		public abstract void UpdateFAQ(int faqId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateModified, int viewOrder);
 		public abstract void DeleteFAQ(int faqId, int moduleId);
-		public abstract void IncrementViewCount(int faqId);
+		public abstract void ReorderFAQ(int faqId1, int faqId2, int moduleId);
 		public abstract IDataReader SearchFAQList(int moduleId, int orderBy);
+		public abstract void IncrementViewCount(int faqId);
 		#endregion
 		
 #		region Category Methods
 		public abstract IDataReader GetCategory(int faqCategoryId, int moduleId);
-		public abstract IDataReader ListCategory(int moduleId);
-		public abstract int AddCategory(int moduleId, string faqCategoryName, string faqCategoryDescription);
-		public abstract void UpdateCategory(int faqCategoryId, int moduleId, string faqCategoryName, string faqCategoryDescription);
+		public abstract IDataReader ListCategories(int moduleId, bool onlyUsedCategories);
+		public abstract int AddCategory(int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription);
+		public abstract void UpdateCategory(int faqCategoryId, int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription);
 		public abstract void DeleteCategory(int faqCategoryId);
 		#endregion
 		
