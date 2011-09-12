@@ -219,7 +219,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQUpdate]
 	@DateModified datetime
 AS
 
-UPDATE {objectQualifier}FAQs SET
+UPDATE {databaseOwner}[{objectQualifier}FAQs] SET
 	[CategoryId] = @CategoryId,
 	[Question] = @Question,
 	[Answer] = @Answer,
@@ -393,7 +393,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQIncrementViewCount]
 	@ItemID	int
 )
 AS
-update {objectQualifier}FAQs
+update {databaseOwner}[{objectQualifier}FAQs]
 set ViewCount = ViewCount + 1
 where ItemID = @ItemID
 GO

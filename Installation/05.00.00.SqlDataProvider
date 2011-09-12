@@ -35,7 +35,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQAdd]
 )
 AS
 
-INSERT INTO FAQs (
+INSERT INTO {databaseOwner}[{objectQualifier}FAQs] (
 	[ModuleId],
 	[CategoryId],
 	[Question],
@@ -78,7 +78,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQUpdate]
 	@ViewOrder int
 AS
 
-UPDATE FAQs SET
+UPDATE {databaseOwner}[{objectQualifier}FAQs] SET
 	[CategoryId] = @CategoryId,
 	[Question] = @Question,
 	[Answer] = @Answer,
@@ -121,7 +121,7 @@ SELECT
 	c.FaqCategoryName,
 	c.FaqCategoryDescription
 	
-FROM FAQs f
+FROM {databaseOwner}[{objectQualifier}FAQs] f
 left outer join FAQsCategory c on f.CategoryId = c.FaqCategoryId
 left outer join Users u on f.CreatedByUser = u.UserId
 where f.ModuleId = @ModuleId and
@@ -201,7 +201,7 @@ WITH tmpReorder(ViewOrder,ItemId) AS
 	SELECT TOP 1000 row_number() OVER (ORDER BY f.ViewOrder) as rank, f.ItemId
 	FROM {databaseOwner}[{objectQualifier}FAQs] f
 	WHERE f.ModuleId = @ModuleId
-    ORDER BY rank 
+	ORDER BY rank 
 )
 UPDATE {databaseOwner}[{objectQualifier}FAQs] 
 	SET ViewOrder = (SELECT ViewOrder FROM tmpReorder r WHERE r.ItemId = {databaseOwner}[{objectQualifier}FAQs].ItemId)

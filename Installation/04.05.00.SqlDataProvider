@@ -76,7 +76,7 @@ SELECT
 	f.ViewCount,
 	c.FaqCategoryName,
 	c.FaqCategoryDescription
-FROM {objectQualifier}FAQs f
+FROM {databaseOwner}[{objectQualifier}FAQs] f
 left outer join {objectQualifier}FAQsCategory c on
 f.CategoryId = c.FaqCategoryId
 where f.ModuleId = @ModuleId
@@ -89,7 +89,3 @@ ORDER BY
   CASE WHEN @OrderBy=5 THEN f.CreatedDate END ASC
 
 GO
-
-
-
-
