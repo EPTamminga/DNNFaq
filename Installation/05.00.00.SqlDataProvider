@@ -122,8 +122,8 @@ SELECT
 	c.FaqCategoryDescription
 	
 FROM {databaseOwner}[{objectQualifier}FAQs] f
-left outer join FAQsCategory c on f.CategoryId = c.FaqCategoryId
-left outer join Users u on f.CreatedByUser = u.UserId
+LEFT OUTER JOIN {databaseOwner}[{objectQualifier}FAQsCategory] c on f.CategoryId = c.FaqCategoryId
+LEFT OUTER JOIN {databaseOwner}[{objectQualifier}Users] u on f.CreatedByUser = u.UserId
 where f.ModuleId = @ModuleId and
 f.ItemId = @ItemId
 
