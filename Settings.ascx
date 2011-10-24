@@ -5,7 +5,7 @@
 <div id="pnlCategories" runat="server">
 <table id="tbl1" cellspacing="0" cellpadding="3" border="0" width="100%" >
     <tr valign="top"> 
-        <td class="SubHead">
+        <td class="SubHead" width="200px">
             <dnn:Label ID="lblShowCatagories" ControlName="chkShowCatagories" runat="server"></dnn:Label>
         </td>
         <td>
@@ -27,7 +27,7 @@
 				<dnn:Label ID="lblShowCategoryType" ControlName="rblShowCategoryType" runat="server"></dnn:Label>
 			</td>
 			<td>
-				<asp:RadioButtonList ID="rblShowCategoryType" runat="server" CssClass="NormalTextBox">
+				<asp:RadioButtonList ID="rblShowCategoryType" runat="server" CssClass="Normal">
 					<asp:ListItem Value="0" meta:resourcekey="ShowCategoryTypeList">List with checkboxes</asp:ListItem>
 					<asp:ListItem Value="1" meta:resourcekey="ShowCategoryTypeTree">Treeview</asp:ListItem>
 					<asp:ListItem Value="2" meta:resourcekey="ShowCategoryTypeDropDown">Dropdown</asp:ListItem>
@@ -42,7 +42,7 @@
 <div id="pnlFaqs" runat="server">
 <table id="tbl2" cellspacing="0" cellpadding="3" border="0" width="100%" >
     <tr valign="top">
-        <td class="SubHead">
+        <td class="SubHead" width="200px">
             <dnn:Label ID="lblDefaultSorting" ControlName="lblDefaultSorting" runat="server"></dnn:Label>
         </td>
         <td valign="top">
@@ -109,4 +109,3 @@
     </tr>
 </table>
 </div>
-
