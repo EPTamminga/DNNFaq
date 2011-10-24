@@ -5,7 +5,7 @@ Full details on the changes can be found in great detail at
 <a href="http://dnnfaq.codeplex.com/workitem/list/basic">dnnfaq.codeplex.com</a>.</p>
 <h3>BUG FIXES</h3>
 <ul>
-    <li>Manage Categories button text was not localized</lI>
+    <li>Manage Categories button text was not localized</li>
     <li>Edit/Add FAQ Entry: button text was not localized</li>
 </ul>
 <h3>ENHANCEMENTS</h3>
