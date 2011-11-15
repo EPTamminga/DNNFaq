@@ -144,9 +144,9 @@
 		<!--Replace Module description-->
 		<FileUpdate Files="@(ModulednnFile)" Regex="@Description@" ReplacementText="$(ModuleDescription)" />
 		<!--Replace Module iconfile -->
-        <FileUpdate Files="@(ModulednnFile)" Regex="@iconFile@" ReplacementText="DesktopModules\$(FolderName)\$(IconFile)" Condition="Exists('$(MSBuildProjectDirectory)\Installation\$(IconFile)')" />
-        <FileUpdate Files="@(ModulednnFile)" Regex="@iconFile@" ReplacementText=' ' Condition="!Exists('$(MSBuildProjectDirectory)\Installation\$(IconFile)')" />
-        <!--Replace Foldername-->
+		<FileUpdate Files="@(ModulednnFile)" Regex="@iconFile@" ReplacementText="DesktopModules\$(FolderName)\$(IconFile)" Condition="Exists('$(MSBuildProjectDirectory)\Installation\$(IconFile)')" />
+		<FileUpdate Files="@(ModulednnFile)" Regex="@iconFile@" ReplacementText=' ' Condition="!Exists('$(MSBuildProjectDirectory)\Installation\$(IconFile)')" />
+		<!--Replace Foldername-->
 		<FileUpdate Files="@(ModulednnFile)" Regex="@FolderName@" ReplacementText="$(FolderName)" />
 		<!--Replace Friendlyname-->
 		<FileUpdate Files="@(ModulednnFile)" Regex="@FriendlyName@" ReplacementText="$(FriendlyName)" />
@@ -338,116 +338,118 @@
 		<CreateItem
           Exclude="**\.svn\**;
             $(MSBuildProjectDirectory)\_*\**;
-						$(MSBuildProjectDirectory)\obj\**;
-						$(MSBuildProjectDirectory)\bin\**;
-						$(MSBuildProjectDirectory)\My Project\*.*;
-						$(MSBuildProjectDirectory)\Properties\*.*;
-						$(MSBuildProjectDirectory)\Dependencies\*.*; 
-						$(MSBuildProjectDirectory)\*ReSharper*\**;
+            $(MSBuildProjectDirectory)\obj\**;
+            $(MSBuildProjectDirectory)\**\obj\**;
+            $(MSBuildProjectDirectory)\bin\**;
+            $(MSBuildProjectDirectory)\My Project\*.*;
+            $(MSBuildProjectDirectory)\Properties\*.*;
+            $(MSBuildProjectDirectory)\Dependencies\*.*; 
+            $(MSBuildProjectDirectory)\*ReSharper*\**;
             $(MSBuildProjectDirectory)\Installation\*.png;
+            $(MSBuildProjectDirectory)\Installation\Config\*.*;
             $(MSBuildProjectDirectory)\tmpCompressScript\**;
 			$(MSBuildProjectDirectory)\tmpCompressCSS\**"
           Include="$(MSBuildProjectDirectory)\**\*.ascx;
-						$(MSBuildProjectDirectory)\**\*.aspx;
-						$(MSBuildProjectDirectory)\**\*.css;
-						$(MSBuildProjectDirectory)\**\*.xml;
-						$(MSBuildProjectDirectory)\**\*.xslt;
-						$(MSBuildProjectDirectory)\**\*.resx;
-						$(MSBuildProjectDirectory)\**\*.rpt;
-						$(MSBuildProjectDirectory)\**\*.gif;
-						$(MSBuildProjectDirectory)\**\*.jpg;
-						$(MSBuildProjectDirectory)\**\*.png;
+            $(MSBuildProjectDirectory)\**\*.aspx;
+            $(MSBuildProjectDirectory)\**\*.css;
+            $(MSBuildProjectDirectory)\**\*.xml;
+            $(MSBuildProjectDirectory)\**\*.xslt;
+            $(MSBuildProjectDirectory)\**\*.resx;
+            $(MSBuildProjectDirectory)\**\*.rpt;
+            $(MSBuildProjectDirectory)\**\*.gif;
+            $(MSBuildProjectDirectory)\**\*.jpg;
+            $(MSBuildProjectDirectory)\**\*.png;
             $(MSBuildProjectDirectory)\**\*.js;">
 			<Output TaskParameter="Include" ItemName="resources" />
 		</CreateItem>
 		<!-- Include module png as IconFile in resources zip -->
 		<!-- First copy it to the root of the module because else the Installation folder will be in the Resources zip -->
-        <CreateItem Include="$(MSBuildProjectDirectory)\Installation\$(IconFile);" >
-            <Output TaskParameter="Include" ItemName="moduleIconFile"/>
-        </CreateItem>
-        <Message Text="ModuleIconFile: @(moduleIconFile)" />
-        <Copy ContinueOnError="true" SourceFiles="@(moduleIconFile)" DestinationFolder="$(MSBuildProjectDirectory)">
-        </Copy>
-        <CreateItem Include="$(MSBuildProjectDirectory)\$(IconFile);">
-            <Output TaskParameter="Include" ItemName="resources" />
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\Resources.zip;
+		<CreateItem Include="$(MSBuildProjectDirectory)\Installation\$(IconFile);" >
+			<Output TaskParameter="Include" ItemName="moduleIconFile"/>
+		</CreateItem>
+		<Message Text="ModuleIconFile: @(moduleIconFile)" />
+		<Copy ContinueOnError="true" SourceFiles="@(moduleIconFile)" DestinationFolder="$(MSBuildProjectDirectory)">
+		</Copy>
+		<CreateItem Include="$(MSBuildProjectDirectory)\$(IconFile);">
+			<Output TaskParameter="Include" ItemName="resources" />
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\resources.zip;
 					$(dnnFile);
           $(InstallDir)\License.txt;
           $(InstallDir)\ReleaseNotes\Release.$(FileMajor).$(FileMinor).$(FileBuild).txt;" >
-            <Output TaskParameter="Include" ItemName="install"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
-            <Output TaskParameter="Include" ItemName="sql"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\CleanUp\*.txt;" >
-            <Output TaskParameter="Include" ItemName="cleanup"/>
-        </CreateItem>
-        <CreateItem Include="**\bin\$(AssemblyName).dll;@(AssemblyFileToInclude)" >
-            <Output TaskParameter="Include" ItemName="dll"/>
-        </CreateItem>
-        <!-- Create Resources.zip -->
-        <Zip Files="@(resources)"
+			<Output TaskParameter="Include" ItemName="install"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
+			<Output TaskParameter="Include" ItemName="sql"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\CleanUp\*.txt;" >
+			<Output TaskParameter="Include" ItemName="cleanup"/>
+		</CreateItem>
+		<CreateItem Include="**\bin\$(AssemblyName).dll;@(AssemblyFileToInclude)" >
+			<Output TaskParameter="Include" ItemName="dll"/>
+		</CreateItem>
+		<!-- Create resources.zip -->
+		<Zip Files="@(resources)"
          WorkingDirectory="$(MSBuildProjectDirectory)"
-         ZipFileName="$(InstallDir)\Resources.zip" />
-        <!-- Copy installation files to tmp and creates installation zip -->
-        <Copy ContinueOnError="true" SourceFiles="@(install)" DestinationFolder="$(InstallDir)\tmp">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(sql)" DestinationFolder="$(InstallDir)\tmp\Installation">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(cleanup)" DestinationFolder="$(InstallDir)\tmp\Installation\CleanUp">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(dll)" DestinationFolder="$(InstallDir)\tmp\bin">
-        </Copy>
-        <CreateItem Include="$(InstallDir)\tmp\**\*.*">
-            <Output TaskParameter="Include" ItemName="ZipInstallFiles" />
-        </CreateItem>
-        <Zip Files="@(ZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmp"
+         ZipFileName="$(InstallDir)\resources.zip" />
+		<!-- Copy installation files to tmp and creates installation zip -->
+		<Copy ContinueOnError="true" SourceFiles="@(install)" DestinationFolder="$(InstallDir)\tmp">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(sql)" DestinationFolder="$(InstallDir)\tmp\Installation">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(cleanup)" DestinationFolder="$(InstallDir)\tmp\Installation\CleanUp">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(dll)" DestinationFolder="$(InstallDir)\tmp\bin">
+		</Copy>
+		<CreateItem Include="$(InstallDir)\tmp\**\*.*">
+			<Output TaskParameter="Include" ItemName="ZipInstallFiles" />
+		</CreateItem>
+		<Zip Files="@(ZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmp"
          ZipFileName="$(InstallDir)\$(ModuleName)_$(FileMajor).$(FileMinor).$(FileBuild)_Install.zip" />
-        <!-- Cleanup -->
-        <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
-        <Delete Files="$(InstallDir)\Resources.zip">
-        </Delete>
-        <!-- Cleanup copied Iconfile from root -->
-        <Delete Files="$(MSBuildProjectDirectory)\$(IconFile)">
-        </Delete>
-    </Target>
-    <Target Name="ResetScripts">
-        <Message Text="Start Reset Scripts" />
-        <!--Select backupped script files -->
-        <CreateItem Include="$(MSBuildProjectDirectory)\tmpCompressScript\**\*.js">
-            <Output TaskParameter="Include" ItemName="resetScriptFiles"/>
-        </CreateItem>
-        <!--Select backupped css files -->
-        <CreateItem Include="$(MSBuildProjectDirectory)\tmpCompressCSS\**\*.css">
-            <Output TaskParameter="Include" ItemName="resetCssFiles"/>
-        </CreateItem>
-        <Message Text="Build dir = $(MSBuildProjectDirectory)" />
-        <!-- Restore the original script files to the original location -->
-        <Copy ContinueOnError="true" SourceFiles="@(resetScriptFiles)" DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)">
-        </Copy>
-        <!-- Restore the original css files to the original location -->
-        <Copy ContinueOnError="true" SourceFiles="@(resetCssFiles)" DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)">
-        </Copy>
-        <Message Text="END Reset Scripts" />
-        <!-- Remove tmp script and CSS location -->
-        <RemoveDir ContinueOnError="true" Directories="$(MSBuildProjectDirectory)\tmpCompressScript" />
-        <RemoveDir ContinueOnError="true" Directories="$(MSBuildProjectDirectory)\tmpCompressCSS" />
-    </Target>
-    <!--####################################################################### -->
-    <!-- Source code zip file -->
-    <Target Name="ZipSource">
-        <!-- zip source code -->
-        <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmpsrc" />
-        <MakeDir Directories="$(InstallDir)\tmpsrc" />
-        <!--change dnn file-->
-        <CreateItem Include="$(dnnFile)" >
-            <Output TaskParameter="Include" ItemName="srcModulednnFile"/>
-        </CreateItem>
-        <!--replace Modulename-->
-        <FileUpdate Files="@(srcModulednnFile)" Regex="Resources.zip" ReplacementText="Sources.zip" />
-        <!-- Get files -->
-        <CreateItem
+		<!-- Cleanup -->
+		<RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmp" />
+		<Delete Files="$(InstallDir)\resources.zip">
+		</Delete>
+		<!-- Cleanup copied Iconfile from root -->
+		<Delete Files="$(MSBuildProjectDirectory)\$(IconFile)">
+		</Delete>
+	</Target>
+	<Target Name="ResetScripts">
+		<Message Text="Start Reset Scripts" />
+		<!--Select backupped script files -->
+		<CreateItem Include="$(MSBuildProjectDirectory)\tmpCompressScript\**\*.js">
+			<Output TaskParameter="Include" ItemName="resetScriptFiles"/>
+		</CreateItem>
+		<!--Select backupped css files -->
+		<CreateItem Include="$(MSBuildProjectDirectory)\tmpCompressCSS\**\*.css">
+			<Output TaskParameter="Include" ItemName="resetCssFiles"/>
+		</CreateItem>
+		<Message Text="Build dir = $(MSBuildProjectDirectory)" />
+		<!-- Restore the original script files to the original location -->
+		<Copy ContinueOnError="true" SourceFiles="@(resetScriptFiles)" DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)">
+		</Copy>
+		<!-- Restore the original css files to the original location -->
+		<Copy ContinueOnError="true" SourceFiles="@(resetCssFiles)" DestinationFolder="$(MSBuildProjectDirectory)\%(RecursiveDir)">
+		</Copy>
+		<Message Text="END Reset Scripts" />
+		<!-- Remove tmp script and CSS location -->
+		<RemoveDir ContinueOnError="true" Directories="$(MSBuildProjectDirectory)\tmpCompressScript" />
+		<RemoveDir ContinueOnError="true" Directories="$(MSBuildProjectDirectory)\tmpCompressCSS" />
+	</Target>
+	<!--####################################################################### -->
+	<!-- Source code zip file -->
+	<Target Name="ZipSource">
+		<!-- zip source code -->
+		<RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmpsrc" />
+		<MakeDir Directories="$(InstallDir)\tmpsrc" />
+		<!--change dnn file-->
+		<CreateItem Include="$(dnnFile)" >
+			<Output TaskParameter="Include" ItemName="srcModulednnFile"/>
+		</CreateItem>
+		<!--replace Modulename-->
+		<FileUpdate Files="@(srcModulednnFile)" Regex="resources.zip" ReplacementText="sources.zip" />
+		<!-- Get files -->
+		<CreateItem
           Exclude="**\.svn\**;
             $(MSBuildProjectDirectory)\**\*.vspscc;
             $(MSBuildProjectDirectory)\**\*.vssscc;
@@ -455,82 +457,82 @@
             $(MSBuildProjectDirectory)\**\*.user;
             $(MSBuildProjectDirectory)\**\*.zip;
             $(MSBuildProjectDirectory)\_ReSharper.*\**;
-						$(MSBuildProjectDirectory)\obj\**;
-						$(MSBuildProjectDirectory)\bin\**"
+            $(MSBuildProjectDirectory)\obj\**;
+            $(MSBuildProjectDirectory)\bin\**"
           Include="$(MSBuildProjectDirectory)\**\*.*" >
-            <Output TaskParameter="Include" ItemName="srcsources" />
-        </CreateItem>
-        <!-- Include module png as IconFile in resources zip -->
-        <!-- First copy it to the root of the module for correct Installation -->
-        <Message Text="ModuleIconFile: @(moduleIconFile)" />
-        <Copy ContinueOnError="true" SourceFiles="@(moduleIconFile)" DestinationFolder="$(MSBuildProjectDirectory)">
-        </Copy>
-        <CreateItem Include="$(MSBuildProjectDirectory)\$(IconFile);">
-            <Output TaskParameter="Include" ItemName="srcsources" />
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\Sources.zip;
+			<Output TaskParameter="Include" ItemName="srcsources" />
+		</CreateItem>
+		<!-- Include module png as IconFile in resources zip -->
+		<!-- First copy it to the root of the module for correct Installation -->
+		<Message Text="ModuleIconFile: @(moduleIconFile)" />
+		<Copy ContinueOnError="true" SourceFiles="@(moduleIconFile)" DestinationFolder="$(MSBuildProjectDirectory)">
+		</Copy>
+		<CreateItem Include="$(MSBuildProjectDirectory)\$(IconFile);">
+			<Output TaskParameter="Include" ItemName="srcsources" />
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\sources.zip;
 					$(dnnFile); 
           $(InstallDir)\License.txt;
           $(InstallDir)\ReleaseNotes\Release.$(FileMajor).$(FileMinor).$(FileBuild).txt;" >
-            <Output TaskParameter="Include" ItemName="srcinstall"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
-            <Output TaskParameter="Include" ItemName="srcsql"/>
-        </CreateItem>
-        <CreateItem Include="$(BinDir)\*.dll;" >
-            <Output TaskParameter="Include" ItemName="srcdll"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\*.txt;" >
-            <Output TaskParameter="Include" ItemName="srcLicense"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\CleanUp\*.txt;" >
-            <Output TaskParameter="Include" ItemName="srcCleanUp"/>
-        </CreateItem>
-        <CreateItem Include="$(InstallDir)\Config\*.txt;" >
-            <Output TaskParameter="Include" ItemName="srcConfig"/>
-        </CreateItem>
-        <!-- Create Sources.zip -->
-        <Zip Files="@(srcsources)"
+			<Output TaskParameter="Include" ItemName="srcinstall"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\*.SqlDataProvider;" >
+			<Output TaskParameter="Include" ItemName="srcsql"/>
+		</CreateItem>
+		<CreateItem Include="$(BinDir)\*.dll;" >
+			<Output TaskParameter="Include" ItemName="srcdll"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\*.txt;" >
+			<Output TaskParameter="Include" ItemName="srcLicense"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\CleanUp\*.txt;" >
+			<Output TaskParameter="Include" ItemName="srcCleanUp"/>
+		</CreateItem>
+		<CreateItem Include="$(InstallDir)\Config\*.txt;" >
+			<Output TaskParameter="Include" ItemName="srcConfig"/>
+		</CreateItem>
+		<!-- Create Sources.zip -->
+		<Zip Files="@(srcsources)"
          WorkingDirectory="$(MSBuildProjectDirectory)"
-         ZipFileName="$(InstallDir)\Sources.zip" />
-        <!-- Copy installation files to tmp and creates installation zip -->
-        <Copy ContinueOnError="true" SourceFiles="@(srcinstall)" DestinationFolder="$(InstallDir)\tmpsrc">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcsql)" DestinationFolder="$(InstallDir)\tmpsrc\Installation">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcdll)" DestinationFolder="$(InstallDir)\tmpsrc\bin">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcCleanUp)" DestinationFolder="$(InstallDir)\tmpsrc\Installation\CleanUp">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcConfig)" DestinationFolder="$(InstallDir)\tmpsrc\Installation\Config">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcReleaseNotes)" DestinationFolder="$(InstallDir)\tmpsrc">
-        </Copy>
-        <Copy ContinueOnError="true" SourceFiles="@(srcLicense)" DestinationFolder="$(InstallDir)\tmpsrc">
-        </Copy>
-        <CreateItem
-      Exclude="$(InstallDir)\**\Resources.zip;"
+         ZipFileName="$(InstallDir)\sources.zip" />
+		<!-- Copy installation files to tmp and creates installation zip -->
+		<Copy ContinueOnError="true" SourceFiles="@(srcinstall)" DestinationFolder="$(InstallDir)\tmpsrc">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcsql)" DestinationFolder="$(InstallDir)\tmpsrc\Installation">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcdll)" DestinationFolder="$(InstallDir)\tmpsrc\bin">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcCleanUp)" DestinationFolder="$(InstallDir)\tmpsrc\Installation\CleanUp">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcConfig)" DestinationFolder="$(InstallDir)\tmpsrc\Installation\Config">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcReleaseNotes)" DestinationFolder="$(InstallDir)\tmpsrc">
+		</Copy>
+		<Copy ContinueOnError="true" SourceFiles="@(srcLicense)" DestinationFolder="$(InstallDir)\tmpsrc">
+		</Copy>
+		<CreateItem
+      Exclude="$(InstallDir)\**\resources.zip;" 
       Include="$(InstallDir)\tmpsrc\**\*.*">
-            <Output TaskParameter="Include" ItemName="srcZipInstallFiles" />
-        </CreateItem>
-        <Zip Files="@(srcZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmpsrc"
+			<Output TaskParameter="Include" ItemName="srcZipInstallFiles" />
+		</CreateItem>
+		<Zip Files="@(srcZipInstallFiles)" WorkingDirectory="$(InstallDir)\tmpsrc"
          ZipFileName="$(InstallDir)\$(ModuleName)_$(FileMajor).$(FileMinor).$(FileBuild)_Source.zip" />
-        <!-- Cleanup -->
-        <FileUpdate Files="@(srcModulednnFile)" Regex="Sources.zip" ReplacementText="Resources.zip" />
-        <RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmpsrc" />
-        <Delete Files="$(InstallDir)\Sources.zip">
-        </Delete>
-        <!-- Cleanup copied Iconfile from root -->
-        <Delete Files="$(MSBuildProjectDirectory)\$(IconFile)">
-        </Delete>
-    </Target>
-    <!-- Copy files to dev folder -->
-    <Target Name="CopyDeployFiles">
-        <!--Get the .dll .pdb files-->
-        <CreateItem Include=" $(BinDir)\*.pdb;$(BinDir)\*.dll">
-            <Output TaskParameter="Include" ItemName="BinFiles" />
-        </CreateItem>
-        <!--Copy the files-->
-        <Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" />
-    </Target>
+		<!-- Cleanup -->
+		<FileUpdate Files="@(srcModulednnFile)" Regex="sources.zip" ReplacementText="resources.zip" />
+		<RemoveDir ContinueOnError="true" Directories="$(InstallDir)\tmpsrc" />
+		<Delete Files="$(InstallDir)\sources.zip">
+		</Delete>
+		<!-- Cleanup copied Iconfile from root -->
+		<Delete Files="$(MSBuildProjectDirectory)\$(IconFile)">
+		</Delete>
+	</Target>
+	<!-- Copy files to dev folder -->
+	<Target Name="CopyDeployFiles">
+		<!--Get the .dll .pdb files-->
+		<CreateItem Include=" $(BinDir)\*.pdb;$(BinDir)\*.dll">
+			<Output TaskParameter="Include" ItemName="BinFiles" />
+		</CreateItem>
+		<!--Copy the files-->
+		<Copy SourceFiles="@(BinFiles)" DestinationFolder="..\..\bin\" SkipUnchangedFiles="true" ContinueOnError="false" />
+	</Target>
 </Project>
