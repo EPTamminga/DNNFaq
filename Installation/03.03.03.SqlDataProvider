@@ -27,7 +27,7 @@ GO
 if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}FAQs]') and OBJECTPROPERTY(id, N'IsTable') = 1)
 	BEGIN
 		CREATE TABLE {databaseOwner}[{objectQualifier}FAQs](
-			[ItemID] [int] NOT NULL IDENTITY(1, 1),	
+			[ItemID] [int] NOT NULL IDENTITY(0, 1),	
 			[ModuleID] [int] NOT NULL,
 			[CreatedByUser] [nvarchar] (100) NULL,
 			[CreatedDate] [datetime] NULL,
@@ -43,7 +43,7 @@ if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwne
 		CREATE NONCLUSTERED INDEX [IX_{objectQualifier}FAQs] ON {databaseOwner}[{objectQualifier}FAQs] ([ModuleID])
 
 		ALTER TABLE {databaseOwner}[{objectQualifier}FAQs] WITH NOCHECK ADD
-		CONSTRAINT [FK_{objectQualifier}FAQs_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE NOT FOR REPLICATION
+		CONSTRAINT [FK_{objectQualifier}FAQs_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE
 	END
 GO
 
@@ -54,7 +54,7 @@ GO
 if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}FAQsCategory]') and OBJECTPROPERTY(id, N'IsTable') = 1)
 	BEGIN
 		CREATE TABLE {databaseOwner}[{objectQualifier}FAQsCategory](
-			[FaqCategoryId] [int] PRIMARY KEY CLUSTERED IDENTITY(1,1) NOT NULL,
+			[FaqCategoryId] [int] PRIMARY KEY CLUSTERED IDENTITY(0,1) NOT NULL,
 			[ModuleId] [int] NOT NULL,
 			[FaqCategoryName] [nvarchar](100) NOT NULL,
 			[FaqCategoryDescription] [nvarchar](250) NOT NULL
@@ -128,7 +128,7 @@ SELECT
 	f.CategoryId,
 	f.Question,
 	f.Answer,
-	'CreatedByUserName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+	[CreatedByUserName] = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
 	f.CreatedDate,
 	f.DateModified,
 	f.ViewCount,
@@ -156,7 +156,7 @@ SELECT
 	[CategoryId],
 	[Question],
 	[Answer],
-	'CreatedByUserName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+	[CreatedByUserName] = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
 	[CreatedDate],
 	[DateModified],
 	[ViewCount]
@@ -219,7 +219,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQUpdate]
 	@DateModified datetime
 AS
 
-UPDATE {databaseOwner}[{objectQualifier}FAQs] SET
+UPDATE {objectQualifier}FAQs SET
 	[CategoryId] = @CategoryId,
 	[Question] = @Question,
 	[Answer] = @Answer,
@@ -393,7 +393,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}FAQIncrementViewCount]
 	@ItemID	int
 )
 AS
-update {databaseOwner}[{objectQualifier}FAQs]
+update {objectQualifier}FAQs
 set ViewCount = ViewCount + 1
 where ItemID = @ItemID
 GO
