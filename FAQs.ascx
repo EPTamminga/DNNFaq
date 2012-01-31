@@ -33,13 +33,13 @@
 			<asp:Panel ID="pnlSortbox" runat="server" Visible="false">
 				<dnn:Label ID="lblSort" runat="server" ControlName="drpSort" CssClass="SubHead" />
 				<asp:DropDownList ID="drpSort" runat="server" CssClass="NormalTextBox" AutoPostBack="true" OnSelectedIndexChanged="drpSort_SelectedIndexChanged">
-					<asp:ListItem Value="6" meta:resourcekey="OrderByViewOrder">Predefined Order</asp:ListItem>
-					<asp:ListItem Value="0" meta:resourcekey="OrderByDateNew">Date New</asp:ListItem>
-					<asp:ListItem Value="1" meta:resourcekey="OrderByDateOld">Date Old</asp:ListItem>
-					<asp:ListItem Value="2" meta:resourcekey="OrderByPopularityHigh">Popularity High</asp:ListItem>
-					<asp:ListItem Value="3" meta:resourcekey="OrderByPopularityLow">Popularity Low</asp:ListItem>
-					<asp:ListItem Value="4" meta:resourcekey="OrderByDateCreatedReverse">Creation Date Descending</asp:ListItem>
-					<asp:ListItem Value="5" meta:resourcekey="OrderByDateCreatedOriginal">Creation Date Ascending</asp:ListItem>
+					<asp:ListItem Value="6" resourcekey="OrderByViewOrder">Predefined Order</asp:ListItem>
+					<asp:ListItem Value="0" resourcekey="OrderByDateNew">Date New</asp:ListItem>
+					<asp:ListItem Value="1" resourcekey="OrderByDateOld">Date Old</asp:ListItem>
+					<asp:ListItem Value="2" resourcekey="OrderByPopularityHigh">Popularity High</asp:ListItem>
+					<asp:ListItem Value="3" esourcekey="OrderByPopularityLow">Popularity Low</asp:ListItem>
+					<asp:ListItem Value="4" resourcekey="OrderByDateCreatedReverse">Creation Date Descending</asp:ListItem>
+					<asp:ListItem Value="5" resourcekey="OrderByDateCreatedOriginal">Creation Date Ascending</asp:ListItem>
 				</asp:DropDownList>
 				<br />
 				<br />
