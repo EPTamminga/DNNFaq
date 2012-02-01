@@ -37,7 +37,7 @@
 					<asp:ListItem Value="0" resourcekey="OrderByDateNew">Date New</asp:ListItem>
 					<asp:ListItem Value="1" resourcekey="OrderByDateOld">Date Old</asp:ListItem>
 					<asp:ListItem Value="2" resourcekey="OrderByPopularityHigh">Popularity High</asp:ListItem>
-					<asp:ListItem Value="3" esourcekey="OrderByPopularityLow">Popularity Low</asp:ListItem>
+					<asp:ListItem Value="3" resourcekey="OrderByPopularityLow">Popularity Low</asp:ListItem>
 					<asp:ListItem Value="4" resourcekey="OrderByDateCreatedReverse">Creation Date Descending</asp:ListItem>
 					<asp:ListItem Value="5" resourcekey="OrderByDateCreatedOriginal">Creation Date Ascending</asp:ListItem>
 				</asp:DropDownList>
