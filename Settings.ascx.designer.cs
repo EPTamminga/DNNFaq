@@ -13,24 +13,6 @@ namespace DotNetNuke.Modules.FAQs {
     public partial class Settings {
         
         /// <summary>
-        /// shCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl shCategories;
-        
-        /// <summary>
-        /// pnlCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlCategories;
-        
-        /// <summary>
         /// lblShowCatagories control.
         /// </summary>
         /// <remarks>
@@ -92,24 +74,6 @@ namespace DotNetNuke.Modules.FAQs {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblShowCategoryType;
-        
-        /// <summary>
-        /// shFaqs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl shFaqs;
-        
-        /// <summary>
-        /// pnlFaqs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlFaqs;
         
         /// <summary>
         /// lblDefaultSorting control.
