@@ -1,0 +1,8 @@
+﻿/****
+SqlDataProvider script DNN_FAQ 05.00.01
+
+Note: 
+To manually execute this script you must  perform a search and replace operation for {databaseOwner} and {objectQualifier}  
+
+***/
+

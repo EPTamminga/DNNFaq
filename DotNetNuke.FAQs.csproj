@@ -166,6 +166,7 @@
     <None Include="Installation\04.05.00.SqlDataProvider" />
     <None Include="Installation\04.05.01.SqlDataProvider" />
     <None Include="Installation\05.00.00.SqlDataProvider" />
+    <None Include="Installation\05.00.01.SqlDataProvider" />
     <None Include="Installation\DNN_FAQs.dnn5" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
@@ -180,11 +181,13 @@
     <Content Include="Installation\CleanUp\Cleanup.04.05.00.txt" />
     <Content Include="Installation\CleanUp\Cleanup.04.05.01.txt" />
     <Content Include="Installation\CleanUp\Cleanup.05.00.00.txt" />
+    <Content Include="Installation\CleanUp\Cleanup.05.00.01.txt" />
     <Content Include="Installation\DNN_FAQs.png" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.04.05.00.txt" />
     <Content Include="Installation\ReleaseNotes\Release.04.05.01.txt" />
     <Content Include="Installation\ReleaseNotes\Release.05.00.00.txt" />
+    <Content Include="Installation\ReleaseNotes\Release.05.00.01.txt" />
     <Content Include="Scripts\AjaxFaq.js" />
     <Content Include="Settings.ascx" />
   </ItemGroup>
