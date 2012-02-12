@@ -80,9 +80,9 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			FAQsController FAQsController = new FAQsController();
 			
-			foreach (CategoryInfo category in FAQsController.ListCategories(ModuleId,false))
+			foreach (CategoryInfo category in FAQsController.ListCategoriesHierarchical(ModuleId,false))
 			{
-				drpCategory.Items.Add(new ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()));
+				drpCategory.Items.Add(new ListItem(new string('.',category.Level * 3) + category.FaqCategoryName, category.FaqCategoryId.ToString()));
 			}
 		}
 		
@@ -119,7 +119,16 @@ namespace DotNetNuke.Modules.FAQs
 						{
 							drpCategory.SelectedValue = FaqItem.CategoryId.ToString();
 						}
-						
+
+						chkFaqHide.Checked = FaqItem.FaqHide;
+						datepickerPublishDate.SelectedDate = null;
+						if (FaqItem.PublishDate > DateTime.MinValue)
+							datepickerPublishDate.SelectedDate = FaqItem.PublishDate;
+
+						datepickerExpireDate.SelectedDate = null;
+						if (FaqItem.ExpireDate > DateTime.MinValue)
+							datepickerExpireDate.SelectedDate = FaqItem.ExpireDate;
+
 						teAnswerField.Text = FaqItem.Answer;
 						txtQuestionField.Text = FaqItem.Question;
 						
@@ -166,7 +175,11 @@ namespace DotNetNuke.Modules.FAQs
 				
 				FAQsInfo.ItemId = FaqId;
 				FAQsInfo.CategoryId = int.Parse(drpCategory.SelectedValue.ToString());
-				
+
+				FAQsInfo.FaqHide = chkFaqHide.Checked;
+				FAQsInfo.PublishDate = datepickerPublishDate.SelectedDate ?? DateTime.MinValue;
+				FAQsInfo.ExpireDate = datepickerExpireDate.SelectedDate ?? DateTime.MinValue;
+
 				// We do not allow for script or markup in the question
 				FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
 				FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting);

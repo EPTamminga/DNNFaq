@@ -51,6 +51,9 @@ namespace DotNetNuke.Modules.FAQs
 		private string _faqCategoryName;
 		private string _faqCategoryDescription;
 		private int _index;
+		private bool _faqHide;
+		private DateTime _expireDate;
+		private DateTime _publishDate;
 		
 		#endregion
 		
@@ -73,7 +76,12 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="dateModified">The date modified.</param>
 		/// <param name="viewCount">The view count.</param>
 		/// <param name="viewOrder">The view order.</param>
-		public FAQsInfo(int itemId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime createdDate, DateTime dateModified, int viewCount, int viewOrder)
+		/// <param name="faqHide">Hide this Faq (disable)</param>
+		/// <param name="publishDate">Date on which this Faq is shown first</param>
+		/// <param name="expireDate">Date on which this Faq is shown last</param>
+		public FAQsInfo(int itemId, int moduleId, int categoryId, string question, string answer, 
+			string createdByUser, DateTime createdDate, DateTime dateModified, int viewCount, int viewOrder,
+			bool faqHide, DateTime publishDate, DateTime expireDate)
 		{
 			_itemId = itemId;
 			_moduleId = moduleId;
@@ -89,6 +97,9 @@ namespace DotNetNuke.Modules.FAQs
 			_faqCategoryDescription = "";
 			_faqCategoryName = "";
 			_index = 0;
+			_faqHide = faqHide;
+			_publishDate = publishDate;
+			_expireDate = expireDate;
 		}
 		#endregion
 		
@@ -317,6 +328,48 @@ namespace DotNetNuke.Modules.FAQs
 				_index = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets the visibility of the Faq-Item
+		/// </summary>
+		/// <value>the Hide flag. </value>
+		public Boolean FaqHide
+		{
+			get { return _faqHide; }
+			set { _faqHide = value; }
+		}
+
+		/// <summary>
+		/// Gets or sets the publish date.
+		/// </summary>
+		/// <value>The publish date.</value>
+		public DateTime PublishDate
+		{
+			get
+			{
+				return _publishDate;
+			}
+			set
+			{
+				_publishDate = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the expiration date.
+		/// </summary>
+		/// <value>The expiration date.</value>
+		public DateTime ExpireDate
+		{
+			get
+			{
+				return _expireDate;
+			}
+			set
+			{
+				_expireDate = value;
+			}
+		}
 		
 		#endregion
 
@@ -336,6 +389,9 @@ namespace DotNetNuke.Modules.FAQs
 			_viewOrder = Null.SetNullInteger(dr["ViewOrder"]);
 			_faqCategoryName = Null.SetNullString(dr["FaqCategoryName"]);
 			_faqCategoryDescription = Null.SetNullString(dr["FaqCategoryDescription"]);
+			_faqHide = Null.SetNullBoolean(dr["FaqHide"]);
+			_publishDate = Null.SetNullDateTime(dr["PublishDate"]);
+			_expireDate = Null.SetNullDateTime(dr["ExpireDate"]);
 		}
 
 		public int KeyID
@@ -389,4 +445,3 @@ namespace DotNetNuke.Modules.FAQs
 	}
 	
 }
-

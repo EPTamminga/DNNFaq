@@ -35,8 +35,8 @@ using Telerik.Web.UI;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.00.00")]
-	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", true)]
+	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.01.00")]
+	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", false)]
 	public partial class FAQs : PortalModuleBase, IActionable, IClientAPICallbackEventHandler
 	{
 		
@@ -229,7 +229,7 @@ namespace DotNetNuke.Modules.FAQs
 				if (ViewState["FaqData"] == null)
 				{
 					FAQsController FAQsController = new FAQsController();
-					ArrayList fData = FAQsController.ListFAQ(ModuleId, UserSorting);
+					ArrayList fData = FAQsController.ListFAQ(ModuleId, UserSorting,IsEditable);
 					ViewState["FaqData"] = fData;
 					return fData;
 				}
@@ -243,7 +243,60 @@ namespace DotNetNuke.Modules.FAQs
 				ViewState["FaqData"] = value;
 			}
 		}
-		
+
+		public bool ShowEmptyCategories
+		{
+			get
+			{
+				bool retVal = false;
+				if (!Null.IsNull(Settings["ShowEmptyCategories"]))
+				{
+					try
+					{
+						retVal = Convert.ToBoolean(Settings["ShowEmptyCategories"]);
+					}
+					catch (Exception exc)
+					{
+						DotNetNuke.Services.Exceptions.Exceptions.ProcessModuleLoadException(this, exc);
+					}
+				}
+				return retVal;
+			}
+		}
+
+		public bool ShowCategories
+		{
+			get
+			{
+				bool retVal = false;
+				if (!Null.IsNull(Settings["ShowCategories"]))
+				{
+					try
+					{
+						// Show categories if enabled in settigs and no querystring parameter faqid
+						retVal = Convert.ToBoolean(Settings["ShowCategories"]) && RequestFaqId < 0;
+					}
+					catch (Exception exc)
+					{
+						DotNetNuke.Services.Exceptions.Exceptions.ProcessModuleLoadException(this, exc);
+					}
+				}
+				return retVal;
+			}
+		}
+
+		public int RequestFaqId
+		{
+			get 
+			{ 
+				int retVal = -1;
+				if (Request.QueryString["faqid"] != null)
+				{
+					Int32.TryParse(Request.QueryString["faqid"], out retVal);
+				}
+				return retVal;
+			}
+		}
 		#endregion
 		
 		#region Private Methods
@@ -257,7 +310,7 @@ namespace DotNetNuke.Modules.FAQs
 			//Get the complete array of FAQ items
 			ArrayList filterData = new ArrayList();
 
-			if (Convert.ToBoolean(Settings["ShowCategories"]))
+			if (ShowCategories)
 			{
 				//Filter
 				foreach (FAQsInfo item in FaqData)
@@ -268,13 +321,23 @@ namespace DotNetNuke.Modules.FAQs
 					}
 				}
 			}
+			else if (RequestFaqId > -1)
+			{
+				foreach (FAQsInfo item in FaqData)
+				{
+					if (item.ItemId == RequestFaqId)
+					{
+						filterData.Add(item);
+						break;
+					}
+				}
+			}
 			else
 			{
 				filterData = FaqData;
 			}
 
 			_isFiltered = (filterData.Count != FaqData.Count);
-			//Bind Data
 			lstFAQs.DataSource = filterData;
 			lstFAQs.DataBind();
 			
@@ -286,7 +349,7 @@ namespace DotNetNuke.Modules.FAQs
 		private void BindCategories()
 		{
 			//Show the categories ?
-			if (Convert.ToBoolean(Settings["ShowCategories"]))
+			if (ShowCategories)
 			{
 				// Do we have unassigned categories ?
 				bool noCat = false;
@@ -320,7 +383,7 @@ namespace DotNetNuke.Modules.FAQs
 					case 0:
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategories(ModuleId,true));
+						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
 						listCategories.DataSource = categories;
 						listCategories.DataBind();
 						mvShowCategoryType.SetActiveView(vShowCategoryTypeList);
@@ -331,7 +394,7 @@ namespace DotNetNuke.Modules.FAQs
 						categories.Add(allCategories);
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategories(ModuleId,true));
+						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
 						List<CategoryInfo> lst = new List<CategoryInfo>();
 						foreach (CategoryInfo cat in categories)
 						{
@@ -351,10 +414,10 @@ namespace DotNetNuke.Modules.FAQs
 						categories.Add(allCategories);
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategories(ModuleId, true));
+						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
 						foreach (CategoryInfo cat in categories)
 						{
-							drpCategories.Items.Add(new ListItem(cat.FaqCategoryName,cat.FaqCategoryId.ToString()));
+							drpCategories.Items.Add(new ListItem(new string('.',cat.Level * 3) + cat.FaqCategoryName,cat.FaqCategoryId.ToString()));
 						}
 						if (!IsPostBack)
 							drpCategories.SelectedIndex = 0;
@@ -424,9 +487,16 @@ namespace DotNetNuke.Modules.FAQs
 				case 2:
 					if (drpCategories.SelectedValue != null)
 					{
-						noneChecked = (drpCategories.SelectedItem.Text == Localization.GetString("AllCategory", LocalResourceFile));
-						if (drpCategories.SelectedItem.Text == fData.FaqCategoryName ||
-								(fData.CategoryId < 0 && drpCategories.SelectedItem.Text == Localization.GetString("EmptyCategory", LocalResourceFile)))
+						string selectedCat = drpCategories.SelectedItem.Text;
+						
+						// strip out possible level points
+						while (selectedCat.StartsWith("."))
+						{
+							selectedCat = selectedCat.Substring(1);
+						}
+						noneChecked = (selectedCat == Localization.GetString("AllCategory", LocalResourceFile));
+						if (selectedCat == fData.FaqCategoryName ||
+								(fData.CategoryId < 0 && selectedCat == Localization.GetString("EmptyCategory", LocalResourceFile)))
 						{
 							match = true;
 							break;
@@ -454,7 +524,6 @@ namespace DotNetNuke.Modules.FAQs
 			objFAQs.IncrementViewCount(FaqId);
 			
 		}
-		
 		#endregion	
 		
 		#region Public Methods
@@ -543,7 +612,7 @@ namespace DotNetNuke.Modules.FAQs
 					BindData();
 
 					//Is the user allowed to sort the questions ?
-					if (Settings["UserSort"] != null && Convert.ToBoolean(Settings["UserSort"]))
+					if (Settings["UserSort"] != null && Convert.ToBoolean(Settings["UserSort"]) && RequestFaqId < 0)
 					{
 						//Set default sort order
 						pnlSortbox.Visible = true;
@@ -573,50 +642,53 @@ namespace DotNetNuke.Modules.FAQs
 			
 			if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
 			{
-				if (SupportsClientAPI) //// AJAX Mode
+				FAQsInfo FaqItem = (FAQsInfo)e.Item.DataItem;
+				string question = HtmlDecode(new FAQsController().ProcessTokens(FaqItem, this.QuestionTemplate));
+				Label lblAnswer = (Label)(e.Item.FindControl("A2"));
+
+				try
 				{
-					try
+					if (SupportsClientAPI) // AJAX Mode
 					{
-						
-						HtmlAnchor linkQuestion = (HtmlAnchor) (e.Item.FindControl("Q2"));
-						Label lblAnswer = (Label) (e.Item.FindControl("A2"));
-						
-						FAQsInfo FaqItem = (FAQsInfo) e.Item.DataItem;
-						linkQuestion.InnerHtml = HtmlDecode(new FAQsController().ProcessTokens(FaqItem, this.QuestionTemplate));
-						
+
 						((LinkButton) (e.Item.FindControl("lnkQ2"))).Visible = false;
-						
-						//// Utilize the ClientAPI to create ajax request
-						string ClientCallBackRef = ClientAPI.GetCallbackEventReference(this, (string) (System.Web.UI.DataBinder.Eval(e.Item.DataItem, "ItemId").ToString()), "GetFaqAnswerSuccess", "\'" + lblAnswer.ClientID + "\'", "GetFaqAnswerError");
-						
-						string AjaxJavaScript = "javascript: var label = document.getElementById(\'" + lblAnswer.ClientID.ToString() + "\');" + "if (label.innerHTML == \'\') { label.innerHTML = \'" + HtmlDecode(this.LoadingTemplate) + "\'; " + ClientCallBackRef + " } " + "else { label.innerHTML = \'\'; }";
-						
+
+						HtmlAnchor linkQuestion = (HtmlAnchor) (e.Item.FindControl("Q2"));
+						linkQuestion.InnerHtml = question;
+
+						// Utilize the ClientAPI to create ajax request
+						string ClientCallBackRef = ClientAPI.GetCallbackEventReference(this, FaqItem.ItemId.ToString(),
+						                                                               "GetFaqAnswerSuccess",
+						                                                               "\'" + lblAnswer.ClientID + "\'",
+						                                                               "GetFaqAnswerError");
+						string AjaxJavaScript = "javascript: var label = document.getElementById(\'" + lblAnswer.ClientID +
+						                        "\');" + "if (label.innerHTML == \'\') { label.innerHTML = \'" +
+						                        HtmlDecode(this.LoadingTemplate) + "\'; " + ClientCallBackRef + " } " +
+						                        "else { label.innerHTML = \'\'; }";
 						linkQuestion.Attributes.Add("onClick", AjaxJavaScript);
-						
-						
+
 					}
-					catch (Exception exc) //Module failed to load
+					else // Postback Mode
 					{
-						DotNetNuke.Services.Exceptions.Exceptions.ProcessModuleLoadException(this, exc);
-					}
-				}
-				else //// Postback Mode
-				{
-					try
-					{
-						
-						FAQsInfo FaqItem = (FAQsInfo) e.Item.DataItem;
-						LinkButton linkQuestion = (LinkButton) (e.Item.FindControl("lnkQ2"));
-						linkQuestion.Text = HtmlDecode(new FAQsController().ProcessTokens(FaqItem, this.QuestionTemplate));
 						((HtmlAnchor) (e.Item.FindControl("Q2"))).Visible = false;
-						
+
+						LinkButton linkQuestion = (LinkButton) (e.Item.FindControl("lnkQ2"));
+						linkQuestion.Text = question;
+
 					}
-					catch (Exception exc) //Module failed to load
+					// If only one question (Requestparameter faqid) show answer immediately
+					if (RequestFaqId > -1)
 					{
-						DotNetNuke.Services.Exceptions.Exceptions.ProcessModuleLoadException(this, exc);
+						IncrementViewCount(FaqItem.ItemId);
+						lblAnswer.Text = HtmlDecode(new FAQsController().ProcessTokens(FaqItem, this.AnswerTemplate));
 					}
 				}
-				
+				catch (Exception exc) //Module failed to load
+				{
+					DotNetNuke.Services.Exceptions.Exceptions.ProcessModuleLoadException(this, exc);
+				}
+
+
 			}
 		}
 		

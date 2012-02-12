@@ -19,13 +19,18 @@
 //
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Security;
+using Telerik.Web.UI;
 
 namespace DotNetNuke.Modules.FAQs
 {
@@ -34,20 +39,6 @@ namespace DotNetNuke.Modules.FAQs
 	{
 		#region Event Handlers
 
-		///// <summary>
-		///// Raises the <see cref="E:System.Web.UI.Control.Init"/> event.
-		///// </summary>
-		///// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
-		//protected override void OnInit(EventArgs e)
-		//{
-		//    base.OnInit(e);
-		//    this.Load += this.Page_Load;
-		//    this.cmdAddNew.Click += this.cmdAddNew_Click;
-		//    this.cmdUpdate.Click += this.cmdUpdate_Click;
-		//    this.cmdGoBack.Click += this.cmdGoBack_Click;
-		//    this.cmdCancel.Click += this.cmdCancel_Click;
-		//}
-
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			try
@@ -55,7 +46,7 @@ namespace DotNetNuke.Modules.FAQs
 				if (Page.IsPostBack == false)
 				{
 					BindData();
-					rowFaqCategoryId.Visible = false;
+
 				}
 			}
 			catch (Exception exc) //Module failed to load
@@ -65,62 +56,28 @@ namespace DotNetNuke.Modules.FAQs
 		}
 
 		/// <summary>
-		/// Handles the ItemCreated event of the lstCategory control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.Web.UI.WebControls.DataListItemEventArgs" /> instance containing the event data.</param>
-		protected void lstCategory_ItemCreated(object sender, DataListItemEventArgs e)
-		{
-			if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-			{
-				((ImageButton)(e.Item.FindControl("btnDeleteCategory"))).Attributes.Add("onClick", "javascript:return confirm(\'" + Localization.GetString("DeleteItem") + "\');");
-			}
-		}
-
-		/// <summary>
-		/// Handles the ItemCommand event of the lstCategory control.
-		/// </summary>
-		/// <param name="source">The source of the event.</param>
-		/// <param name="e">The <see cref="System.Web.UI.WebControls.DataListCommandEventArgs" /> instance containing the event data.</param>
-		protected void lstCategory_ItemCommand(object source, DataListCommandEventArgs e)
-		{
-
-			int faqCategoryId = System.Convert.ToInt32(lstCategory.DataKeys[e.Item.ItemIndex]);
-			FAQsController faqsController = new FAQsController();
-
-			switch (e.CommandName.ToLower())
-			{
-
-				case "edit":
-					panelAddEdit.Visible = true;
-					rowFaqCategoryId.Visible = true;
-					PopulateCategoriesDropDown(faqCategoryId);
-					CategoryInfo categoryItem = faqsController.GetCategory(faqCategoryId, ModuleId);
-					int parentCategoryId = categoryItem.FaqCategoryParentId;
-					if (parentCategoryId == 0)
-						parentCategoryId = -1;
-					drpParentCategory.SelectedValue = parentCategoryId.ToString();
-					txtCategoryName.Text = categoryItem.FaqCategoryName;
-					txtCategoryDescription.Text = categoryItem.FaqCategoryDescription;
-					lblId.Text = categoryItem.FaqCategoryId.ToString();
-					break;
-
-				case "delete":
-					faqsController.DeleteCategory(faqCategoryId);
-					Response.Redirect(Request.RawUrl);
-					break;
-			}
-		}
-
-
-		/// <summary>
-		/// Handles the Click event of the cmdCancel control.
+		/// Handles the Click event of the cmdAddNew control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdCancel_Click(System.Object sender, System.EventArgs e)
+		protected void cmdAddNew_Click(Object sender, EventArgs e)
 		{
-			panelAddEdit.Visible = false;
+			panelAddEdit.Visible = true;
+			txtCategoryDescription.Text = "";
+			txtCategoryName.Text = "";
+			PopulateCategoriesDropDown(-1);
+			treeCategories.UnselectAllNodes();
+			cmdDelete.Visible = false;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the cmdGoBack control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+		protected void cmdGoBack_Click(Object sender, EventArgs e)
+		{
+			Response.Redirect(Globals.NavigateURL());
 		}
 
 		/// <summary>
@@ -147,16 +104,20 @@ namespace DotNetNuke.Modules.FAQs
 
 			try
 			{
-				if (!Null.IsNull(lblId.Text))
+				RadTreeNode node = treeCategories.SelectedNode;
+				if (node != null)
 				{
-					categoryItem.FaqCategoryId = int.Parse(lblId.Text);
+					categoryItem.FaqCategoryId = Convert.ToInt32(node.Value);
+					CategoryInfo originalCategoryItem = faqsController.GetCategory(categoryItem.FaqCategoryId, ModuleId);
+					categoryItem.ViewOrder = originalCategoryItem.ViewOrder;
 					faqsController.UpdateCategory(categoryItem);
 				}
 				else
 				{
+					categoryItem.ViewOrder = 999;
 					faqsController.AddCategory(categoryItem);
 				}
-
+				faqsController.ReorderCategory(categoryItem.FaqCategoryParentId, ModuleId);
 				Response.Redirect(Request.RawUrl);
 			}
 			catch (Exception exc) //Module failed to load
@@ -166,28 +127,112 @@ namespace DotNetNuke.Modules.FAQs
 		}
 
 		/// <summary>
-		/// Handles the Click event of the cmdAddNew control.
+		/// Handles the Click event of the cmdDelete control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdAddNew_Click(Object sender, EventArgs e)
+		protected void cmdDelete_Click(Object sender, EventArgs e)
 		{
-			panelAddEdit.Visible = true;
-			lblId.Text = "";
-			rowFaqCategoryId.Visible = false;
-			txtCategoryDescription.Text = "";
-			txtCategoryName.Text = "";
-			PopulateCategoriesDropDown(-1);
+			FAQsController faqsController = new FAQsController();
+			try
+			{
+				RadTreeNode node = treeCategories.SelectedNode;
+				if (node != null)
+				{
+					int faqCategoryId = Convert.ToInt32(node.Value);
+					faqsController.DeleteCategory(faqCategoryId);
+				}
+				Response.Redirect(Request.RawUrl);
+			}
+			catch (Exception exc) //Module failed to load
+			{
+				Exceptions.ProcessModuleLoadException(this, exc);
+			}
 		}
 
 		/// <summary>
-		/// Handles the Click event of the cmdGoBack control.
+		/// Handles the Click event of the cmdCancel control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdGoBack_Click(Object sender, EventArgs e)
+		protected void cmdCancel_Click(System.Object sender, System.EventArgs e)
 		{
-			Response.Redirect(Globals.NavigateURL());
+			panelAddEdit.Visible = false;
+		}
+
+		/// <summary>
+		/// Handles the NodeDataBound event of the treeCategories control (adds Tooltip)
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">instance containing the event data.</param>
+		protected void treeCategories_NodeDataBound(object sender, RadTreeNodeEventArgs e)
+		{
+			e.Node.ToolTip = (string)DataBinder.Eval(e.Node.DataItem, "FaqCategoryDescription");
+			e.Node.Value = DataBinder.Eval(e.Node.DataItem, "FaqCategoryId").ToString();
+			e.Node.ImageUrl = IconController.IconURL("folder");
+		}
+		
+		/// <summary>
+		/// Handles the NodeClick event of the treeCategories control
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">instance containing the event data.</param>
+		protected void treeCategories_NodeClick(object sender, RadTreeNodeEventArgs e)
+		{
+			int faqCategoryId = Convert.ToInt32(e.Node.Value);
+			EditCategory(faqCategoryId);
+			cmdDelete.Visible = true;
+		}
+
+
+		protected void treeCategories_HandleDrop(object sender, RadTreeNodeDragDropEventArgs e)
+		{
+			FAQsController FAQsController = new FAQsController();
+			RadTreeNode sourceNode = e.SourceDragNode;
+			RadTreeNode destNode = e.DestDragNode;
+			RadTreeViewDropPosition dropPosition = e.DropPosition;
+
+			if (destNode == null || sourceNode == destNode || sourceNode.IsAncestorOf(destNode))
+				return;
+			
+			int sourceFaqCategoryId = Convert.ToInt32(sourceNode.Value);
+			CategoryInfo sourceCategory = FAQsController.GetCategory(sourceFaqCategoryId, ModuleId);
+
+			int destFaqCategoryId = Convert.ToInt32(destNode.Value);
+			CategoryInfo destCategory = FAQsController.GetCategory(destFaqCategoryId, ModuleId);
+
+			switch (dropPosition)
+			{
+				case RadTreeViewDropPosition.Over: // child
+					// Change Treeview
+					sourceNode.Owner.Nodes.Remove(sourceNode);
+					destNode.Nodes.Add(sourceNode);
+						
+					// Change the ParentId of Source in database
+					sourceCategory.FaqCategoryParentId = destCategory.FaqCategoryId;
+					sourceCategory.ViewOrder = 999;
+					FAQsController.UpdateCategory(sourceCategory);
+					break;
+				
+				case RadTreeViewDropPosition.Above: // sibling - above
+					sourceNode.Owner.Nodes.Remove(sourceNode);
+					destNode.InsertBefore(sourceNode);
+					sourceCategory.FaqCategoryParentId = destCategory.FaqCategoryParentId;
+					sourceCategory.ViewOrder = destCategory.ViewOrder - 1;
+					FAQsController.UpdateCategory(sourceCategory);
+					
+					break;
+				
+				case RadTreeViewDropPosition.Below: // sibling - below
+					sourceNode.Owner.Nodes.Remove(sourceNode);
+					destNode.InsertAfter(sourceNode);
+					sourceCategory.FaqCategoryParentId = destCategory.FaqCategoryParentId;
+					sourceCategory.ViewOrder = destCategory.ViewOrder + 1;
+					FAQsController.UpdateCategory(sourceCategory);
+					break;
+			}
+			FAQsController.ReorderCategory(sourceCategory.FaqCategoryParentId, ModuleId);
+			panelAddEdit.Visible = false;
 		}
 
 		#endregion
@@ -197,8 +242,29 @@ namespace DotNetNuke.Modules.FAQs
 		private void BindData()
 		{
 			FAQsController FAQsController = new FAQsController();
-			lstCategory.DataSource = FAQsController.ListCategories(ModuleId,false);
-			lstCategory.DataBind();
+			ArrayList lst = FAQsController.ListCategoriesHierarchical(ModuleId, false);
+
+			treeCategories.Nodes.Clear();
+			treeCategories.DataTextField = "FaqCategoryName";
+			treeCategories.DataFieldID = "FaqCategoryId";
+			treeCategories.DataFieldParentID = "FaqCategoryParentId";
+			treeCategories.DataSource = lst;
+			treeCategories.DataBind();
+			if (!IsPostBack && treeCategories.Nodes.Count > 0)
+				treeCategories.Nodes[0].Selected = true;
+		}
+		private void EditCategory(int faqCategoryId)
+		{
+			FAQsController faqsController = new FAQsController();
+			panelAddEdit.Visible = true;
+			PopulateCategoriesDropDown(faqCategoryId);
+			CategoryInfo categoryItem = faqsController.GetCategory(faqCategoryId, ModuleId);
+			int parentCategoryId = categoryItem.FaqCategoryParentId;
+			if (parentCategoryId == 0)
+				parentCategoryId = -1;
+			drpParentCategory.SelectedValue = parentCategoryId.ToString();
+			txtCategoryName.Text = categoryItem.FaqCategoryName;
+			txtCategoryDescription.Text = categoryItem.FaqCategoryDescription;
 		}
 
 		/// <summary>
@@ -209,10 +275,10 @@ namespace DotNetNuke.Modules.FAQs
 			drpParentCategory.Items.Clear();
 			drpParentCategory.Items.Add(new ListItem(Localization.GetString("SelectParentCategory.Text",this.LocalResourceFile), "-1"));
 			FAQsController FAQsController = new FAQsController();
-			foreach (CategoryInfo category in FAQsController.ListCategories(ModuleId, false))
+			foreach (CategoryInfo category in FAQsController.ListCategoriesHierarchical(ModuleId, false))
 			{
 				if (faqCategoryId != category.FaqCategoryId)
-					drpParentCategory.Items.Add(new ListItem(category.FaqCategoryName, category.FaqCategoryId.ToString()));
+					drpParentCategory.Items.Add(new ListItem(new string('.',category.Level*3) + category.FaqCategoryName, category.FaqCategoryId.ToString()));
 			}
 		}
 		#endregion

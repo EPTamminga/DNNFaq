@@ -20,9 +20,14 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
@@ -56,9 +61,9 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="moduleID">The module ID.</param>
 		/// <param name="orderBy">The order by.</param>
 		/// <returns>Arrarylist of FAQs</returns>
-		public ArrayList ListFAQ(int moduleID, int orderBy)
+		public ArrayList ListFAQ(int moduleID, int orderBy, bool showHidden)
 		{
-			return SearchFAQList(moduleID, orderBy);
+			return SearchFAQList(moduleID, orderBy, showHidden);
 		}
 		
 		/// <summary>
@@ -68,7 +73,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns>Array list of FAQ unordered</returns>
 		public ArrayList ListFAQWithoutOrder(int moduleID)
 		{
-			return SearchFAQList(moduleID, 0);
+			return SearchFAQList(moduleID, 0,true);
 		}
 		
 		/// <summary>
@@ -78,7 +83,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns></returns>
 		public int AddFAQ(FAQsInfo obj)
 		{
-			return Convert.ToInt32(DataProvider.Instance().AddFAQ(obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.CreatedDate, obj.DateModified, 0, obj.ViewOrder));
+			return Convert.ToInt32(DataProvider.Instance().AddFAQ(obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.CreatedDate, obj.DateModified, 0, obj.ViewOrder, obj.FaqHide, obj.PublishDate, obj.ExpireDate));
 		}
 		
 		/// <summary>
@@ -87,7 +92,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="obj">FAQsinfo object</param>
 		public void UpdateFAQ(FAQsInfo obj)
 		{
-			DataProvider.Instance().UpdateFAQ(obj.ItemId, obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.DateModified,obj.ViewOrder);
+			DataProvider.Instance().UpdateFAQ(obj.ItemId, obj.ModuleId, obj.CategoryId, obj.Question, obj.Answer, obj.CreatedByUser, obj.DateModified, obj.ViewOrder, obj.FaqHide, obj.PublishDate, obj.ExpireDate);
 		}
 		
 		/// <summary>
@@ -122,9 +127,9 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="moduleId">The module id.</param>
 		/// <param name="orderBy">The order by.</param>
 		/// <returns>FAQList with relevant searched </returns>
-		public ArrayList SearchFAQList(int moduleId, int orderBy)
+		public ArrayList SearchFAQList(int moduleId, int orderBy, bool showHidden)
 		{
-			ArrayList FaqList = CBO.FillCollection(DataProvider.Instance().SearchFAQList(moduleId, orderBy), typeof(FAQsInfo));
+			ArrayList FaqList = CBO.FillCollection(DataProvider.Instance().SearchFAQList(moduleId, orderBy, showHidden), typeof(FAQsInfo));
 			
 			for (int i = 0; i <= FaqList.Count - 1; i++)
 			{
@@ -158,7 +163,18 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			return CBO.FillCollection(DataProvider.Instance().ListCategories(moduleId, onlyUsedCategories), typeof(CategoryInfo));
 		}
-		
+
+		/// <summary>
+		/// Lists the categories hierarchical (additional level info, sorted).
+		/// </summary>
+		/// <param name="moduleId">The module id.</param>
+		/// <param name="onlyUsedCategories">true if only categories are returned that are used in Faq's</param>
+		/// <returns></returns>
+		public ArrayList ListCategoriesHierarchical(int moduleId, bool onlyUsedCategories)
+		{
+			return CBO.FillCollection(DataProvider.Instance().ListCategoriesHierarchical(moduleId, onlyUsedCategories), typeof(CategoryInfo));
+		}
+
 		/// <summary>
 		/// Adds the category.
 		/// </summary>
@@ -166,7 +182,7 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns></returns>
 		public int AddCategory(CategoryInfo objCategory)
 		{
-			return System.Convert.ToInt32(DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.FaqCategoryParentId,objCategory.FaqCategoryName, objCategory.FaqCategoryDescription));
+			return System.Convert.ToInt32(DataProvider.Instance().AddCategory(objCategory.ModuleId, objCategory.FaqCategoryParentId,objCategory.FaqCategoryName, objCategory.FaqCategoryDescription, objCategory.ViewOrder));
 		}
 		
 		/// <summary>
@@ -175,12 +191,17 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="objCategory">The obj category.</param>
 		public void UpdateCategory(CategoryInfo objCategory)
 		{
-			DataProvider.Instance().UpdateCategory(objCategory.FaqCategoryId, objCategory.ModuleId, objCategory.FaqCategoryParentId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription);
+			DataProvider.Instance().UpdateCategory(objCategory.FaqCategoryId, objCategory.ModuleId, objCategory.FaqCategoryParentId, objCategory.FaqCategoryName, objCategory.FaqCategoryDescription, objCategory.ViewOrder);
 		}
 		
 		public void DeleteCategory(int faqCategoryId)
 		{
 			DataProvider.Instance().DeleteCategory(faqCategoryId);
+		}
+
+		public void ReorderCategory(int faqParentCategoryId, int moduleId)
+		{
+			DataProvider.Instance().ReorderCategory(faqParentCategoryId, moduleId);
 		}
 		#endregion
 		
@@ -199,13 +220,18 @@ namespace DotNetNuke.Modules.FAQs
 			foreach (object objFaq in FAQs)
 			{
 			    var faq = ((FAQsInfo) objFaq);
+				if (faq.FaqHide)
+					continue;
+
 				int UserId = Null.NullInteger;
 				int.TryParse(faq.CreatedByUser, out UserId);
 				
 				string strContent = System.Web.HttpUtility.HtmlDecode(faq.Question + " " + faq.Answer);
 				string strDescription = HtmlUtils.Shorten(HtmlUtils.Clean(System.Web.HttpUtility.HtmlDecode(faq.Question), false), 100, "...");
+				string guid = String.Format("faqid={0}", faq.ItemId);
 				
-				var searchItem = new SearchItemInfo(modInfo.ModuleTitle, strDescription, UserId, faq.CreatedDate, modInfo.ModuleID, faq.ItemId.ToString(), strContent);
+				var searchItem = new SearchItemInfo(modInfo.ModuleTitle, strDescription, UserId, 
+					faq.CreatedDate, modInfo.ModuleID, faq.ItemId.ToString(), strContent,guid);
 				searchItemCollection.Add(searchItem);
 			}
 			return searchItemCollection;
@@ -218,84 +244,36 @@ namespace DotNetNuke.Modules.FAQs
 		/// <returns>XML output</returns>
 		public string ExportModule(int moduleID)
 		{
-			string strXML = "";
+			ArrayList arrCats = ListCategoriesHierarchical(moduleID, false);
+			var categorys = new XElement("categories", from CategoryInfo cat in arrCats
+													   select new XElement("cat",
+														   new XElement("categoryid", cat.FaqCategoryId),
+														   new XElement("categoryparentid", cat.FaqCategoryParentId),
+														   new XElement("categoryname", new XCData(cat.FaqCategoryName)),
+														   new XElement("categorydescription", new XCData(cat.FaqCategoryDescription)),
+														   new XElement("vieworder", cat.ViewOrder)));
+	
 			ArrayList arrFAQs = ListFAQWithoutOrder(moduleID);
-			ArrayList arrCats = ListCategories(moduleID,false);
-			
-			strXML += "<faqs>";
-			if (arrCats.Count != 0)
-			{
-				foreach (CategoryInfo objCats in arrCats)
-				{
-					strXML += "<faq>";
-					strXML += "<question></question>";
-					strXML += "<answer></answer>";
-					strXML += "<catname>" + XmlUtils.XMLEncode(objCats.FaqCategoryName) + "</catname>";
-					strXML += "<catdescription>" + XmlUtils.XMLEncode(objCats.FaqCategoryDescription) + "</catdescription>";
-					strXML += "<creationdate></creationdate>";
-					strXML += "<datemodified></datemodified>";
-					strXML += "<vieworder></vieworder>";
-					strXML += "</faq>";
-				}
-			}
-			
-			if (arrFAQs.Count != 0)
-			{
-				
-				foreach (FAQsInfo objFAQs in arrFAQs)
-				{
-					strXML += "<faq>";
-					strXML += "<question>" + XmlUtils.XMLEncode(objFAQs.Question) + "</question>";
-					strXML += "<answer>" + XmlUtils.XMLEncode(objFAQs.Answer) + "</answer>";
-					strXML += "<catname>" + XmlUtils.XMLEncode(objFAQs.FaqCategoryName) + "</catname>";
-					strXML += "<catdescription>" + XmlUtils.XMLEncode(objFAQs.FaqCategoryDescription) + "</catdescription>";
-					strXML += "<creationdate>" + XmlUtils.XMLEncode(objFAQs.CreatedDate.ToString()) + "</creationdate>";
-					strXML += "<datemodified>" + XmlUtils.XMLEncode(objFAQs.DateModified.ToString()) + "</datemodified>";
-					strXML += "<vieworder>" + XmlUtils.XMLEncode(objFAQs.ViewOrder.ToString()) + "</vieworder>";
-					strXML += "</faq>";
-				}
-			}
-			strXML += "</faqs>";
-			strXML = FormatXml(strXML);
-			
-			return strXML;
+			var faqs = new XElement("faqs", from FAQsInfo faq in arrFAQs
+											select new XElement("faq",
+												new XElement("question", new XCData(faq.Question)),
+												new XElement("answer", new XCData(faq.Answer)),
+												new XElement("categoryid", faq.CategoryId),
+												new XElement("creationdate", faq.CreatedDate),
+												new XElement("datemodified", faq.DateModified),
+												new XElement("faqhide", faq.FaqHide),
+												new XElement("publishdate", faq.PublishDate),
+												new XElement("expiredate", faq.ExpireDate),
+												new XElement("vieworder", faq.ViewOrder)));
+
+
+
+			XElement root = new XElement("Root");
+			root.Add(faqs);
+			root.Add(categorys);
+			return root.ToString();
 		}
-		private string FormatXml(string sUnformattedXml)
-		{
-			//load unformatted xml into a dom
-			XmlDocument xd = new XmlDocument();
-			xd.LoadXml(sUnformattedXml);
-			
-			//will hold formatted xml
-			StringBuilder sb = new StringBuilder();
-			
-			//pumps the formatted xml into the StringBuilder above
-			StringWriter sw = new StringWriter(sb);
-			
-			//does the formatting
-			XmlTextWriter xtw = null;
-			
-			try
-			{
-				//point the xtw at the StringWriter
-				xtw = new XmlTextWriter(sw);
-				
-				//we want the output formatted
-				xtw.Formatting = Formatting.Indented;
-				
-				//get the dom to dump its contents into the xtw
-				xd.WriteTo(xtw);
-			}
-			finally
-			{
-				//clean up even if error
-				if (xtw != null)
-					xtw.Close();
-			}
-			
-			//return the formatted xml
-			return sb.ToString();
-		}
+
 		
 		/// <summary>
 		/// Imports the module.
@@ -306,82 +284,143 @@ namespace DotNetNuke.Modules.FAQs
 		/// <param name="userId">The user id.</param>
 		public void ImportModule(int moduleID, string content, string version, int userId)
 		{
-			ArrayList catNames = new ArrayList();
-			ArrayList Question = new ArrayList();
-			XmlNode xmlFaq;
-			XmlNode xmlFaqs = Globals.GetContent(content, "faqs");
-			
-			//' check if category exists. if not create category
-			foreach (XmlNode tempLoopVar_xmlFAQ in xmlFaqs)
+			Version vers = new Version(version);
+			if (vers > new Version("5.0.0"))
 			{
-				xmlFaq = tempLoopVar_xmlFAQ;
-				if ((xmlFaq["catname"].InnerText != Null.NullString) && (! catNames.Contains(xmlFaq["catname"].InnerText)))
+				XElement xRoot = XElement.Parse(content);
+				Dictionary<int, int> idTrans = new Dictionary<int, int>();
+
+				// First we import the categories
+				List<CategoryInfo> lstCategories = new List<CategoryInfo>();
+				XElement xCategories = xRoot.Element("categories");
+				foreach (var xCategory in xCategories.Elements())
 				{
-					catNames.Add(xmlFaq["catname"].InnerText);
+					// translate the parentid's to new values
+					int oldParentId = Int32.Parse(xCategory.Element("categoryparentid").Value, CultureInfo.InvariantCulture);
+					int newParentId = 0;
+					if (oldParentId > 0 && idTrans.ContainsKey(oldParentId))
+						newParentId = idTrans[oldParentId];
 					
-					CategoryInfo objCat = new CategoryInfo();
-					objCat.ModuleId = moduleID;
-					objCat.FaqCategoryName = xmlFaq["catname"].InnerText;
-					objCat.FaqCategoryDescription = xmlFaq["catdescription"].InnerText;
+					// Fill category properties
+					CategoryInfo category = new CategoryInfo();
+					category.ModuleId = moduleID;
+					category.FaqCategoryParentId = newParentId;
+					category.FaqCategoryName = xCategory.Element("categoryname").Value;
+					category.FaqCategoryDescription = xCategory.Element("categorydescription").Value;
+					category.ViewOrder = Int32.Parse(xCategory.Element("vieworder").Value, CultureInfo.InvariantCulture);
+
+					// add category and save old and new id to translation dictionary
+					int oldCategoryId = Int32.Parse(xCategory.Element("categoryid").Value, CultureInfo.InvariantCulture);
+					int newCategoryId = AddCategory(category);
+					idTrans.Add(oldCategoryId,newCategoryId);
+				}
+
+				// Next import the faqs
+				List<FAQsInfo> lstFaqs = new List<FAQsInfo>();
+				XElement xFaqs = xRoot.Element("faqs");
+				foreach (var xFaq in xFaqs.Elements())
+				{
+					// translate id with help of translation dictionary build before
+					int oldCategoryId = Int32.Parse(xFaq.Element("categoryid").Value, CultureInfo.InvariantCulture);
+					int newCategoryId = -1;
+					if (idTrans.ContainsKey(oldCategoryId))
+						newCategoryId = idTrans[oldCategoryId];
 					
-					AddCategory(objCat);
+					// Fill FAQs properties
+					FAQsInfo faq = new FAQsInfo();
+					faq.ModuleId = moduleID;
+					faq.Question = xFaq.Element("question").Value;
+					faq.Answer = xFaq.Element("answer").Value;
+					faq.CategoryId = newCategoryId;
+					faq.CreatedDate = DateTime.Parse(xFaq.Element("creationdate").Value);
+					faq.DateModified = DateTime.Now;
+					faq.FaqHide = Boolean.Parse(xFaq.Element("faqhide").Value);
+					faq.PublishDate = DateTime.Parse(xFaq.Element("publishdate").Value);
+					faq.ExpireDate = DateTime.Parse(xFaq.Element("expiredate").Value);
+					
+					// Add Faq to database
+					AddFAQ(faq);
 				}
 			}
-			// check is question is empty. if empty is category.
-			int loop = 0;
-			foreach (XmlNode tempLoopVar_xmlFAQ in xmlFaqs)
+			else
 			{
-				loop++;
-				xmlFaq = tempLoopVar_xmlFAQ;
-				
-				if (xmlFaq["question"].InnerText != Null.NullString && xmlFaq["question"].InnerText != string.Empty)
-				{
-					FAQsInfo objFAQs = new FAQsInfo();
-					objFAQs.ModuleId = moduleID;
-					objFAQs.Question = xmlFaq["question"].InnerText;
-					objFAQs.Answer = xmlFaq["answer"].InnerText;
-					objFAQs.FaqCategoryName = xmlFaq["catname"].InnerText;
-					objFAQs.FaqCategoryDescription = xmlFaq["catdescription"].InnerText;
-					
-					// Check if creationdate exists in export, if nothing set current date. else import
-					if (xmlFaq["creationdate"] == null)
-					{
-						objFAQs.CreatedDate = DateTime.Now;
-						objFAQs.DateModified = DateTime.Now;
-					}
-					else
-					{
-						objFAQs.CreatedDate = DateTime.Parse(xmlFaq["creationdate"].InnerText);
-						objFAQs.DateModified = DateTime.Parse(xmlFaq["datemodified"].InnerText);
-					}
+				ArrayList catNames = new ArrayList();
+				ArrayList Question = new ArrayList();
+				XmlNode xmlFaq;
+				XmlNode xmlFaqs = Globals.GetContent(content, "faqs");
 
-					if (xmlFaq["vieworder"] != null)
+				//' check if category exists. if not create category
+				foreach (XmlNode tempLoopVar_xmlFAQ in xmlFaqs)
+				{
+					xmlFaq = tempLoopVar_xmlFAQ;
+					if ((xmlFaq["catname"].InnerText != Null.NullString) && (!catNames.Contains(xmlFaq["catname"].InnerText)))
 					{
-						objFAQs.ViewOrder = int.Parse(xmlFaq["vieworder"].InnerText);
+						catNames.Add(xmlFaq["catname"].InnerText);
+
+						CategoryInfo objCat = new CategoryInfo();
+						objCat.ModuleId = moduleID;
+						objCat.FaqCategoryName = xmlFaq["catname"].InnerText;
+						objCat.FaqCategoryDescription = xmlFaq["catdescription"].InnerText;
+
+						AddCategory(objCat);
 					}
-					else
+				}
+				// check is question is empty. if empty is category.
+				int loop = 0;
+				foreach (XmlNode tempLoopVar_xmlFAQ in xmlFaqs)
+				{
+					loop++;
+					xmlFaq = tempLoopVar_xmlFAQ;
+
+					if (xmlFaq["question"].InnerText != Null.NullString && xmlFaq["question"].InnerText != string.Empty)
 					{
-						objFAQs.ViewOrder = loop;
-					}
-					objFAQs.CreatedByUser = userId.ToString();
-					
-					bool foundCat = false;
-					foreach (CategoryInfo objCat in ListCategories(moduleID,false))
-					{
-						if (objFAQs.FaqCategoryName == objCat.FaqCategoryName)
+						FAQsInfo objFAQs = new FAQsInfo();
+						objFAQs.ModuleId = moduleID;
+						objFAQs.Question = xmlFaq["question"].InnerText;
+						objFAQs.Answer = xmlFaq["answer"].InnerText;
+						objFAQs.FaqCategoryName = xmlFaq["catname"].InnerText;
+						objFAQs.FaqCategoryDescription = xmlFaq["catdescription"].InnerText;
+
+						// Check if creationdate exists in export, if nothing set current date. else import
+						if (xmlFaq["creationdate"] == null)
 						{
-							objFAQs.CategoryId = objCat.FaqCategoryId;
-							foundCat = true;
-							break;
+							objFAQs.CreatedDate = DateTime.Now;
+							objFAQs.DateModified = DateTime.Now;
 						}
+						else
+						{
+							objFAQs.CreatedDate = DateTime.Parse(xmlFaq["creationdate"].InnerText);
+							objFAQs.DateModified = DateTime.Parse(xmlFaq["datemodified"].InnerText);
+						}
+
+						if (xmlFaq["vieworder"] != null)
+						{
+							objFAQs.ViewOrder = int.Parse(xmlFaq["vieworder"].InnerText);
+						}
+						else
+						{
+							objFAQs.ViewOrder = loop;
+						}
+						objFAQs.CreatedByUser = userId.ToString();
+
+						bool foundCat = false;
+						foreach (CategoryInfo objCat in ListCategories(moduleID, false))
+						{
+							if (objFAQs.FaqCategoryName == objCat.FaqCategoryName)
+							{
+								objFAQs.CategoryId = objCat.FaqCategoryId;
+								foundCat = true;
+								break;
+							}
+						}
+
+						if (!foundCat)
+						{
+							objFAQs.CategoryId = Null.NullInteger;
+						}
+
+						AddFAQ(objFAQs);
 					}
-					
-					if (!foundCat)
-					{
-						objFAQs.CategoryId = Null.NullInteger;
-					}
-					
-					AddFAQ(objFAQs);
 				}
 			}
 			

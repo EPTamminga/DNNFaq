@@ -39,6 +39,8 @@ namespace DotNetNuke.Modules.FAQs
 		private int _moduleId;
 		private string _faqCategoryName;
 		private string _faqCategoryDescription;
+		private int _level;
+		private int _viewOrder;
 		
 		#endregion
 		
@@ -63,6 +65,8 @@ namespace DotNetNuke.Modules.FAQs
 			this.FaqCategoryParentId = faqCategoryParentId;
 			this.FaqCategoryName = faqCategoryName;
 			this.FaqCategoryDescription = faqCategoryDescription;
+			this.Level = 0;
+			this.ViewOrder = 999;
 		}
 		#endregion
 		
@@ -147,6 +151,39 @@ namespace DotNetNuke.Modules.FAQs
 				_faqCategoryDescription = value;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets the module hierarchical level.
+		/// </summary>
+		/// <value>The module hierarchical level.</value>
+		public int Level
+		{
+			get
+			{
+				return _level;
+			}
+			set
+			{
+				_level = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets the view order between childs of one node.
+		/// </summary>
+		/// <value>The view order.</value>
+		public int ViewOrder
+		{
+			get
+			{
+				return _viewOrder;
+			}
+			set
+			{
+				_viewOrder = value;
+			}
+		}
+
 		#endregion
 
 		#region Implementation of IHydratable
@@ -158,6 +195,8 @@ namespace DotNetNuke.Modules.FAQs
 			_moduleId = Null.SetNullInteger(dr["ModuleId"]);
 			_faqCategoryName = Null.SetNullString(dr["FaqCategoryName"]);
 			_faqCategoryDescription = Null.SetNullString(dr["FaqCategoryDescription"]);
+			_level = Null.SetNullInteger(dr["Level"]);
+			_viewOrder = Null.SetNullInteger(dr["ViewOrder"]);
 		}
 
 		public int KeyID

@@ -61,6 +61,15 @@ namespace DotNetNuke.Modules.FAQs
 					pnlShowCategoryType.Visible = false;
 				}
 
+				if (!Null.IsNull(Settings["ShowEmptyCategories"]))
+				{
+					chkShowEmptyCategories.Checked = Convert.ToBoolean(Settings["ShowEmptyCategories"]);
+				}
+				else
+				{
+					chkShowEmptyCategories.Checked = false;
+				}
+
 				if (!Null.IsNull(Settings["ShowToolTips"]))
 				{
 					chkShowToolTips.Checked = Convert.ToBoolean(Settings["ShowToolTips"]);
@@ -140,6 +149,7 @@ namespace DotNetNuke.Modules.FAQs
 				ModuleController modController = new ModuleController();
 				
 				modController.UpdateModuleSetting(ModuleId, "ShowCategories", chkShowCatagories.Checked.ToString());
+				modController.UpdateModuleSetting(ModuleId, "ShowEmptyCategories", chkShowEmptyCategories.Checked.ToString());
 				modController.UpdateModuleSetting(ModuleId, "ShowToolTips", chkShowToolTips.Checked.ToString());
 				modController.UpdateModuleSetting(ModuleId, "ShowCategoryType", rblShowCategoryType.SelectedValue);
 				modController.UpdateModuleSetting(ModuleId, "UserSort", chkUserSort.Checked.ToString());

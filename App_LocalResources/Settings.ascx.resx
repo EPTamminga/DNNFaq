@@ -156,7 +156,7 @@
   <data name="DefaultQuestionTemplate.Text" xml:space="preserve">
     <value>&lt;div class="Normal" style="width: 100%;"&gt;
    &lt;div style="font-weight: bold;background-color:#E0E0E0;padding-top:2px;padding-bottom:2px;"&gt;
-      &lt;img src="images/action.gif" /&gt;[FAQ:QUESTION]
+      &lt;img src="[Portal:HomeDirectory]../../images/action.gif" /&gt;[FAQ:QUESTION]
    &lt;/div&gt;
 &lt;/div&gt;</value>
   </data>
@@ -185,10 +185,10 @@
     <value>Creation Date (newest first)</value>
   </data>
   <data name="lblShowCatagories.Help" xml:space="preserve">
-    <value>When selected, a listbox of categories is shown on the lefthand side. A user can filter by category by checking the corresponding checkboxes</value>
+    <value>Check if you want the Category selection element to be shown</value>
   </data>
   <data name="lblShowCatagories.Text" xml:space="preserve">
-    <value>Show question categories</value>
+    <value>Show Question Categories</value>
   </data>
   <data name="ShowCategoryTypeList.Text" xml:space="preserve">
     <value>List with checkboxes</value>
@@ -225,5 +225,11 @@
   </data>
   <data name="lblUserSort.Text" xml:space="preserve">
     <value>User can sort</value>
+  </data>
+  <data name="lblShowEmptyCategories.Help" xml:space="preserve">
+    <value>Check if you want to show all categories, even if they have no corresponding FAQ.</value>
+  </data>
+  <data name="lblShowEmptyCategories.Text" xml:space="preserve">
+    <value>Show Empty Categories</value>
   </data>
 </root>

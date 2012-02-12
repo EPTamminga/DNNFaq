@@ -120,14 +120,19 @@ namespace DotNetNuke.Modules.FAQs
 			return ((IDataReader) (SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQGet", faqId, moduleId)));
 		}
 		
-		public override int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount, int viewOrder)
+		public override int AddFAQ(int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateAdded, DateTime dateModified, int viewCount, int viewOrder, bool faqHide, DateTime publishDate, DateTime expireDate)
 		{
-			return System.Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQAdd", moduleId, categoryId, question, answer, createdByUser, dateAdded, dateModified, viewCount, viewOrder));
+			return
+				System.Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQAdd",
+				                                               moduleId, categoryId, question, answer, createdByUser, dateAdded,
+				                                               dateModified, viewCount, viewOrder, faqHide, Null.GetNull(publishDate,DBNull.Value), Null.GetNull(expireDate,DBNull.Value)));
 		}
-		
-		public override void UpdateFAQ(int faqId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateModified, int viewOrder)
+
+		public override void UpdateFAQ(int faqId, int moduleId, int categoryId, string question, string answer, string createdByUser, DateTime dateModified, int viewOrder, bool faqHide, DateTime publishDate, DateTime expireDate)
 		{
-			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQUpdate", faqId, moduleId, categoryId, question, answer, createdByUser, dateModified, viewOrder);
+			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQUpdate", faqId, moduleId,
+			                          categoryId, question, answer, createdByUser, dateModified, viewOrder, faqHide, Null.GetNull(publishDate,DBNull.Value),
+			                          Null.GetNull(expireDate,DBNull.Value));
 		}
 		
 		public override void DeleteFAQ(int faqId, int moduleId)
@@ -137,12 +142,12 @@ namespace DotNetNuke.Modules.FAQs
 
 		public override void ReorderFAQ(int faqId1, int faqId2, int moduleId)
 		{
-			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQReorder",faqId1,faqId2,moduleId);
+			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQReorder", faqId1, faqId2, moduleId);
 		}
 
-		public override IDataReader SearchFAQList(int moduleId, int orderBy)
+		public override IDataReader SearchFAQList(int moduleId, int orderBy, bool showHidden)
 		{
-			return ((IDataReader) (SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQSearch", moduleId, orderBy)));
+			return ((IDataReader) (SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQSearch", moduleId, orderBy, showHidden)));
 		}
 		
 		#endregion
@@ -158,20 +163,32 @@ namespace DotNetNuke.Modules.FAQs
 		{
 			return ((IDataReader)(SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryList", moduleId, onlyUsedCategories)));
 		}
-		
-		public override int AddCategory(int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription)
+
+		public override IDataReader ListCategoriesHierarchical(int moduleId, bool onlyUsedCategories)
 		{
-			return System.Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryAdd", moduleId, faqCategoryParentId, faqCategoryName, faqCategoryDescription));
+			return ((IDataReader)(SqlHelper.ExecuteReader(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryListHierarchical", moduleId, onlyUsedCategories)));
 		}
-		
-		public override void UpdateCategory(int faqCategoryId, int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription)
+
+		public override int AddCategory(int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription, int ViewOrder)
 		{
-			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryUpdate", faqCategoryId, moduleId, faqCategoryParentId, faqCategoryName, faqCategoryDescription);
+			return System.Convert.ToInt32(SqlHelper.ExecuteScalar(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryAdd", moduleId, faqCategoryParentId, faqCategoryName, faqCategoryDescription, ViewOrder));
+		}
+
+		public override void UpdateCategory(int faqCategoryId, int moduleId, int faqCategoryParentId, string faqCategoryName, string faqCategoryDescription, int ViewOrder)
+		{
+			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryUpdate", faqCategoryId, moduleId, faqCategoryParentId, faqCategoryName, faqCategoryDescription, ViewOrder);
 		}
 		
 		public override void DeleteCategory(int faqCategoryId)
 		{
 			SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryDelete", faqCategoryId);
+		}
+		public override void ReorderCategory(int faqParentCategoryId, int moduleId)
+		{
+			if (faqParentCategoryId == 0)
+				SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryReorderRoot", moduleId);
+			else
+				SqlHelper.ExecuteNonQuery(ConnectionString, DatabaseOwner + ObjectQualifier + "FAQCategoryReorder", faqParentCategoryId, moduleId);
 		}
 		
 		public override void IncrementViewCount(int faqId)

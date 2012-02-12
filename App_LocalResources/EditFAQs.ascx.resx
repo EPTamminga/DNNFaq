@@ -159,4 +159,31 @@
   <data name="cmdUpdate" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="plExpireDate.Help" xml:space="preserve">
+    <value>Enter an expiration date on which the FAQ should be shown for the last time</value>
+  </data>
+  <data name="plExpireDate.Text" xml:space="preserve">
+    <value>Expire on Date</value>
+  </data>
+  <data name="plFaqHide.Help" xml:space="preserve">
+    <value>Check if you want this FAQ to be hidden from display</value>
+  </data>
+  <data name="plFaqHide.Text" xml:space="preserve">
+    <value>Hide FAQ</value>
+  </data>
+  <data name="plPublishDate.Help" xml:space="preserve">
+    <value>Enter a start date from which on the FAQ should be displayed (optional)</value>
+  </data>
+  <data name="plPublishDate.Text" xml:space="preserve">
+    <value>Publish from Date</value>
+  </data>
+  <data name="val2ExpireDate.ErrorMessage" xml:space="preserve">
+    <value>Expire date should be greater than publish date</value>
+  </data>
+  <data name="valExpireDate.ErrorMessage" xml:space="preserve">
+    <value>Please enter a valid date</value>
+  </data>
+  <data name="valPublishDate.ErrorMessage" xml:space="preserve">
+    <value>Please enter a valid date</value>
+  </data>
 </root>

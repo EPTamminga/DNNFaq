@@ -31,6 +31,24 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::System.Web.UI.WebControls.CheckBox chkShowCatagories;
         
         /// <summary>
+        /// lblShowEmptyCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl lblShowEmptyCategories;
+        
+        /// <summary>
+        /// chkShowEmptyCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkShowEmptyCategories;
+        
+        /// <summary>
         /// pnlShowCategoryType control.
         /// </summary>
         /// <remarks>

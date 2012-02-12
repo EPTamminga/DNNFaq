@@ -1,113 +1,47 @@
 <%@ Control Language="C#" Inherits="DotNetNuke.Modules.FAQs.FAQsCategories" AutoEventWireup="true" CodeBehind="FAQsCategories.ascx.cs" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
-<%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
-<asp:DataList ID="lstCategory" runat="server" 
-	DataKeyField="FaqCategoryId" 
-	onitemcreated="lstCategory_ItemCreated" 
-	onitemcommand="lstCategory_ItemCommand">
-    <HeaderTemplate>
-        <table border="0" cellpadding="2" cellspacing="2" class="Normal">
-            <tr>
-                <td align="center">
-                    <dnn:Label ID="plEdit" ControlName="CategoryEdit" runat="server"></dnn:Label>
-                </td>
-                <td>
-                    <dnn:Label ID="plName" ControlName="CategoryName" runat="server"></dnn:Label>
-                </td>
-                <td>
-                    <dnn:Label ID="plDescription" ControlName="CategoryDescription" runat="server"></dnn:Label>
-                </td>
-                <td align="center">
-                    <dnn:Label ID="plDelete" ControlName="CategoryDelete" runat="server"></dnn:Label>
-                </td>
-            </tr>
-    </HeaderTemplate>
-    <FooterTemplate>
-        </table>
-    </FooterTemplate>
-    <ItemTemplate>
-        <tr>
-            <td align="center">
-                <asp:ImageButton ID="btnEditCategory" runat="server" CommandName="Edit" ImageUrl="~/images/edit.gif"></asp:ImageButton>
-            </td>
-            <td>
-                <asp:Label ID="lblFaqCategoryName" runat="server">
-						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryName") %>
-                </asp:Label>
-            </td>
-            <td>
-                <asp:Label ID="lblFaqCategoryDescription" runat="server">
-						<%# DataBinder.Eval(Container.DataItem,"FaqCategoryDescription") %>
-                </asp:Label>
-            </td>
-            <td align="center">
-                <asp:ImageButton ID="btnDeleteCategory" CommandName="Delete" runat="server" ImageUrl="~/images/delete.gif"></asp:ImageButton>
-            </td>
-        </tr>
-    </ItemTemplate>
-</asp:DataList>
-<dnn:CommandButton ID="cmdAddNew" ResourceKey="cmdAddNew" runat="server" ImageUrl="~/images/add.gif" CssClass="CommandButton"  CausesValidation="False" Text="Add New"  OnCommand="cmdAddNew_Click"/>
-&nbsp;&nbsp;
-<dnn:CommandButton ID="cmdGoBack" ResourceKey="cmdGoBack" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel"  OnCommand="cmdGoBack_Click"/>
-<asp:Panel ID="panelAddEdit" runat="server" Visible="False">
-    <table class="Normal" id="tblManageCategories" cellspacing="3" cellpadding="3" border="0" width="100%">
-        <tr>
-            <td style="width: 150px">
-            </td>
-            <td colspan="2">
-                &nbsp;
-            </td>
-        </tr>
-        <tr id="rowFaqCategoryId" runat="server">
-            <td valign="top" class="SubHead" style="width: 150px">
-                <dnn:Label ID="plCategoryId" runat="server" ControlName="CategoryEdit"></dnn:Label>
-            </td>
-            <td>
-                <asp:Label ID="lblId" runat="server"></asp:Label>
-            </td>
-            <td>
-            </td>
-        </tr>
-		<tr id="rowFaqCategoryParentId" runat="server">
-			<td valign="top" class="SubHead" width="128">
-				<dnn:Label id="plParentCategoryField" runat="server" controlname="drpParentCategory"></dnn:Label>
-			</td>
-			<td>
-				<asp:DropDownList ID="drpParentCategory" runat="server" CssClass="Normal" />
-			</td>
-		</tr>
-        <tr>
-            <td valign="top" class="SubHead" style="width: 150px">
-                <dnn:Label ID="plCategoryName" runat="server" ControlName="CategoryEdit"></dnn:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtCategoryName" runat="server" Width="304px" CssClass="NormalTextBox" MaxLength="100"></asp:TextBox>
-            </td>
-            <td>
-                <asp:RequiredFieldValidator ID="rqdCategoryName" runat="server" CssClass="NormalRed" ErrorMessage="<b>Name is required </b>" ControlToValidate="txtCategoryName" resourcekey="rqdCategoryName"></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td valign="top" class="SubHead">
-                <dnn:Label ID="plCategoryDescription" runat="server" ControlName="CategoryEdit"></dnn:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtCategoryDescription" runat="server" Width="304px" CssClass="NormalTextBox" TextMode="MultiLine" Height="93px" MaxLength="250"></asp:TextBox>
-            </td>
-            <td valign="top">
-                <asp:RequiredFieldValidator ID="rqdCategoryDescription" runat="server" CssClass="NormalRed" ErrorMessage="<b> Description is Required </b>" ControlToValidate="txtCategoryDescription" resourcekey="rqdCategoryDescription"></asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                &nbsp;
-            </td>
-            <td colspan="2">
-                <dnn:CommandButton CssClass="CommandButton" ID="cmdUpdate" ResourceKey="cmdUpdate" ImageUrl="~/images/save.gif" runat="server" Text="Update"  OnCommand="cmdUpdate_Click"/>
-                &nbsp;&nbsp;
-                <dnn:CommandButton ID="cmdCancel" ResourceKey="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel"  OnCommand="cmdCancel_Click"/>
-            </td>
-        </tr>
-    </table>
-</asp:Panel>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
+<%@ Register TagPrefix="telerik" Namespace="Telerik.Web.UI" Assembly="Telerik.Web.UI" %>
 
+<div class="dnnForm dnnFAQsCategories dnnClear">
+	<div class="dnnLeft">
+		<dnn:DNNTreeView ID="treeCategories" runat="server" 
+			ShowLineImages="True" 
+			EnableDragAndDrop="True"
+			EnableDragAndDropBetweenNodes="True"
+			OnNodeClick="treeCategories_NodeClick" 
+			OnNodeDataBound="treeCategories_NodeDataBound"
+			OnNodeDrop="treeCategories_HandleDrop">
+			<DataBindings>
+				<telerik:RadTreeNodeBinding Expanded="true" />
+			</DataBindings>
+		</dnn:DNNTreeView>
+		<ul class="dnnActions dnnClear">
+			<li><asp:LinkButton ID="cmdAddNew" resourcekey="cmdAddNew" runat="server" CssClass="dnnPrimaryAction" CausesValidation="False" OnCommand="cmdAddNew_Click"/></li>
+			<li><asp:LinkButton ID="cmdGoBack" resourcekey="cmdGoBack" runat="server" CssClass="dnnSecondaryAction" CausesValidation="False" OnCommand="cmdGoBack_Click"/></li>
+		</ul>
+	</div>
+	<div class="dnnRight">
+		<asp:Panel ID="panelAddEdit" runat="server" Visible="False">
+			<div class="dnnFormItem" id="rowFaqCategoryParentId" runat="server">
+				<dnn:Label id="plParentCategoryField" runat="server" controlname="drpParentCategory"></dnn:Label>
+				<asp:DropDownList ID="drpParentCategory" runat="server" />
+			</div>
+			<div class="dnnFormItem">
+				<dnn:Label ID="plCategoryName" runat="server" ControlName="CategoryEdit"></dnn:Label>
+				<asp:TextBox ID="txtCategoryName" runat="server" MaxLength="100"></asp:TextBox>
+				<asp:RequiredFieldValidator ID="rqdCategoryName" runat="server" ErrorMessage="<b>Name is required </b>" ControlToValidate="txtCategoryName" resourcekey="rqdCategoryName"></asp:RequiredFieldValidator>
+			</div>
+			<div class="dnnFormItem">
+				<dnn:Label ID="plCategoryDescription" runat="server" ControlName="CategoryEdit"></dnn:Label>
+				<asp:TextBox ID="txtCategoryDescription" runat="server"  TextMode="MultiLine" MaxLength="250"></asp:TextBox>
+				<asp:RequiredFieldValidator ID="rqdCategoryDescription" runat="server"  ErrorMessage="<b> Description is Required </b>" ControlToValidate="txtCategoryDescription" resourcekey="rqdCategoryDescription"></asp:RequiredFieldValidator>
+			</div>
+			<ul class="dnnActions dnnClear">
+				<li><asp:LinkButton ID="cmdUpdate" resourcekey="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" OnCommand="cmdUpdate_Click"/></li>
+				<li><asp:LinkButton ID="cmdCancel" resourcekey="cmdCancel" runat="server" CssClass="dnnSecondaryAction" OnCommand="cmdCancel_Click" CausesValidation="False"/></li>
+				<li><asp:LinkButton ID="cmdDelete" resourcekey="cmdDelete" runat="server" CssClass="dnnSecondaryAction" OnCommand="cmdDelete_Click" /></li>
+			</ul>
+		</asp:Panel>
+	</div>
+</div>

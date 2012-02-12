@@ -2,42 +2,42 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <%@ Register TagPrefix="Portal" TagName="Audit" Src="~/controls/ModuleAuditControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="TextEditor" Src="~/controls/TextEditor.ascx" %>
-<%@ Register Assembly="DotNetNuke" Namespace="DotNetNuke.UI.WebControls" TagPrefix="dnn" %>
-<table class="Normal" id="tblAddFaq" cellspacing="3" cellpadding="3" border="0" width="100%">
-    <tr>
-        <td valign="top" class="SubHead" width="128">
-            <dnn:Label id="plCategoryField" runat="server" controlname="Category"></dnn:Label>
-        </td>
-        <td>
-            <asp:DropDownList ID="drpCategory" runat="server" CssClass="Normal">
-                <asp:ListItem Value="-1" resourcekey="SelectCategory">Select Category</asp:ListItem>
-            </asp:DropDownList>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td valign="top" class="SubHead">
-            <dnn:Label id="plQuestionField" runat="server" controlname="QuestionField"></dnn:Label>
-        </td>
-        <td>
-            <asp:TextBox ID="txtQuestionField" CssClass="NormalTextBox" runat="server" MaxLength="400" Width="400px" TextMode="SingleLine"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="valRequiredTitle" runat="server" CssClass="NormalRed" resourcekey="valRequiredTitle" ControlToValidate="txtQuestionField" ErrorMessage="Question is required"></asp:RequiredFieldValidator>
-        </td>
-    </tr>
-    <tr>
-        <td valign="top" class="SubHead">
-            <dnn:Label id="plAnswerField" runat="server" controlname="AnswerField"></dnn:Label>
-        </td>
-        <td>
-            <dnn:Texteditor id="teAnswerField" runat="server" controlid="teAnswerField" height="300" width="600" choosemode="False"></dnn:Texteditor>
-        </td>
-    </tr>
-</table>
-<p>
-    <dnn:CommandButton ID="cmdUpdate" ResourceKey="cmdUpdate" runat="server" ImageUrl="~/images/save.gif" CssClass="CommandButton" text="Update" OnCommand="cmdUpdate_Click"/>
-    &nbsp;
-    <dnn:CommandButton ID="cmdCancel" ResourceKey="cmdCancel" runat="server" ImageUrl="~/images/cancel.gif" CssClass="CommandButton" CausesValidation="False" Text="Cancel" OnCommand="cmdCancel_Click" />
-    &nbsp;
-    <dnn:CommandButton ID="cmdDelete" ResourceKey="cmdDelete" runat="server" ImageUrl="~/images/delete.gif" CssClass="CommandButton" CausesValidation="False" Text="Delete" OnCommand="cmdDelete_Click"/>
-</p>
-<Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>
-
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
+<div class="dnnForm dnnEditFAQs dnnClear">
+	<div class="dnnFormItem">
+        <dnn:Label id="plCategoryField" runat="server" controlname="drpCategory"></dnn:Label>
+        <asp:DropDownList ID="drpCategory" runat="server">
+            <asp:ListItem Value="-1" resourcekey="SelectCategory">Select Category</asp:ListItem>
+        </asp:DropDownList>
+	</div>
+	<div class="dnnFormItem">
+        <dnn:Label id="plFaqHide" runat="server" controlname="chkFaqHide"></dnn:Label>
+		<asp:CheckBox ID="chkFaqHide" runat="server"/>
+	</div>
+	<div class="dnnFormItem">
+		<dnn:Label ID="plPublishDate" runat="server" ControlName="datepickerPublishDate" />
+		<dnn:DnnDatePicker ID="datepickerPublishDate" runat="server"/>&nbsp;
+		<asp:CompareValidator ID="valPublishDate" resourcekey="valPublishDate.ErrorMessage" Operator="DataTypeCheck" Type="Date" runat="server" Display="Dynamic" ControlToValidate="datepickerPublishDate" CssClass="dnnFormMessage dnnFormError" />
+	</div>        
+	<div class="dnnFormItem">
+		<dnn:Label ID="plExpireDate" runat="server" ControlName="datepickerExpireDate" />
+		<dnn:DnnDatePicker ID="datepickerExpireDate" runat="server"/>&nbsp;
+		<asp:CompareValidator ID="valExpireDate" resourcekey="valExpireDate.ErrorMessage" Operator="DataTypeCheck" Type="Date" runat="server" Display="Dynamic" ControlToValidate="datepickerExpireDate" CssClass="dnnFormMessage dnnFormError" />
+		<asp:CompareValidator ID="val2ExpireDate" resourcekey="val2ExpireDate.ErrorMessage" Operator="GreaterThanEqual" Type="Date" Runat="server" Display="Dynamic" ControlToValidate="datepickerExpireDate" ControlToCompare="datepickerPublishDate" CssClass="dnnFormMessage dnnFormError"/>
+	</div>        
+	<div class="dnnFormItem">
+		<dnn:Label id="plQuestionField" runat="server" controlname="txtQuestionField"></dnn:Label>
+        <asp:TextBox ID="txtQuestionField" runat="server" MaxLength="400" Width="400px" TextMode="SingleLine"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="valRequiredTitle" runat="server" resourcekey="valRequiredTitle" ControlToValidate="txtQuestionField" ErrorMessage="Question is required" CssClass="dnnFormMessage dnnFormError"></asp:RequiredFieldValidator>
+	</div>
+	<div class="dnnFormItem">
+		<dnn:Label id="plAnswerField" runat="server" controlname="teAnswerField"></dnn:Label>
+		<div class="dnnLeft"><dnn:Texteditor id="teAnswerField" runat="server" controlid="teAnswerField" choosemode="False"></dnn:Texteditor></div>
+	</div>
+	<ul class="dnnActions dnnClear">
+		<li><asp:LinkButton ID="cmdUpdate" resourcekey="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" OnCommand="cmdUpdate_Click"/></li>
+		<li><asp:LinkButton ID="cmdCancel" resourcekey="cmdCancel" runat="server" CssClass="dnnSecondaryAction" OnCommand="cmdCancel_Click" CausesValidation="False"/></li>
+		<li><asp:LinkButton ID="cmdDelete" resourcekey="cmdDelete" runat="server" CssClass="dnnSecondaryAction" OnCommand="cmdDelete_Click" CausesValidation="False"/></li>
+	</ul>
+	<Portal:Audit ID="ctlAudit" runat="server"></Portal:Audit>
+</div>
