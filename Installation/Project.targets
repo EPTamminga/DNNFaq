@@ -62,7 +62,7 @@
 	<!--Do not change these settings -->
 	<PropertyGroup>
 		<InstallDir>$(MSBuildProjectDirectory)\Installation</InstallDir>
-		<dnnFile>$(InstallDir)\$(ModuleName).dnn5</dnnFile>
+		<dnnFile>$(InstallDir)\$(ModuleName).dnn6</dnnFile>
 	</PropertyGroup>
 	<!--For start Versioning: Do not modify EVER!!! -->
 	<PropertyGroup>
