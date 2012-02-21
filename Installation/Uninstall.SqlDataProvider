@@ -62,9 +62,17 @@ if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{o
 drop procedure {databaseOwner}[{objectQualifier}FAQReorder]
 GO
 
-/** if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[PK_{objectQualifier}FAQs]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
-ALTER TABLE {databaseOwner}[{objectQualifier}FAQs] DROP CONSTRAINT [PK_{objectQualifier}FAQs]
-GO **/
+IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryListHierarchical') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryListHierarchical]
+GO
+
+IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryReorder') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryReorder]
+GO
+
+IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}FAQCategoryReorderRoot') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}FAQCategoryReorderRoot]
+GO
 
 /** Drop FAQs Tables **/
 
