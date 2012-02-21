@@ -10,16 +10,16 @@ namespace DNNtc
 	/// </summary>
 	public class ModuleControlProperties : Attribute
 	{
-		
-		/// <summary>
-		/// Creates a attribute with the right properties to create a control.
-		/// </summary>
-		/// <param name="Key">Key for thsi control</param>
-		/// <param name="Title">Title of this control</param>
-		/// <param name="UserControlType"></param>
-		/// <param name="HelpUrl">Fully qualified URL for Help on this module</param>
-		/// <param name="SupportsPartialRendering">True if this module supports Partial Rendering, False otherwise</param>
-		public ModuleControlProperties(string Key, string Title, ControlType UserControlType, string HelpUrl, bool SupportsPartialRendering)
+	    /// <summary>
+	    /// Creates a attribute with the right properties to create a control.
+	    /// </summary>
+	    /// <param name="Key">Key for thsi control</param>
+	    /// <param name="Title">Title of this control</param>
+	    /// <param name="UserControlType"></param>
+	    /// <param name="HelpUrl">Fully qualified URL for Help on this module</param>
+	    /// <param name="supportsPartialRendering"> </param>
+	    /// <param name="SupportsPartialRendering">True if this module supports Partial Rendering, False otherwise</param>
+	    public ModuleControlProperties(string Key, string Title, ControlType UserControlType, string HelpUrl, bool supportsPartialRendering, bool SupportsPartialRendering)
 		{
 			//Intentially left empty
 		}

@@ -36,7 +36,7 @@ using Telerik.Web.UI;
 namespace DotNetNuke.Modules.FAQs
 {
 	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.01.00")]
-	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", false)]
+	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", true, false)]
 	public partial class FAQs : PortalModuleBase, IActionable, IClientAPICallbackEventHandler
 	{
 		
