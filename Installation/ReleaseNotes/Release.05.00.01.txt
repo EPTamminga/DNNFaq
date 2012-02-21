@@ -10,6 +10,7 @@ Full details on the changes can be found in great detail at
 <ul>
     <li>Complete overhaul of editing categories. Now editing with treeview: drag-and-drop nodes to reorder categories, click to edit selected category</li>
     <li>New setting for showing all categories, even if they have no correspondig FAQ</li>
+    <li>Modified the SQL provider scripts to make them SQL Azure compliant</li>
 </ul>
 <h3>NEW FEATURES</h3>
 <ul>
@@ -22,5 +23,5 @@ Full details on the changes can be found in great detail at
 <ul>
     <li>Implemented DNN6 Form Pattern</li>
     <li>Export + Import complete rewritten to better handle the hierarchical categories</li>
-	<li>FaqCategoryParentId in FAQCategory is now NULL for root categories</li>
+    <li>FaqCategoryParentId in FAQCategory is now NULL for root categories</li>
 </ul>
