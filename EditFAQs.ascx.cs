@@ -31,7 +31,7 @@ using DotNetNuke.Security;
 namespace DotNetNuke.Modules.FAQs
 {
 	
-	[DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", false, true)]
+	[DNNtc.ModuleControlProperties(key: "Edit", title: "Edit FAQs", userControlType: DNNtc.ControlType.Edit, helpUrl: "http://www.dotnetnuke.com/default.aspx?tabid=892", supportsPartialRendering: false, supportsPopUps: true)]
 	public partial class EditFAQs : PortalModuleBase
 	{
 			
@@ -44,7 +44,10 @@ namespace DotNetNuke.Modules.FAQs
 		#endregion
 		
 		#region Properties
-		
+
+        /// <summary>
+        /// Gets the FAQ id.
+        /// </summary>
 		public int FaqId
 		{
 			get
