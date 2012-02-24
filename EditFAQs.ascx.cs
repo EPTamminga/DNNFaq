@@ -30,227 +30,227 @@ using DotNetNuke.Security;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	
-	[DNNtc.ModuleControlProperties(key: "Edit", title: "Edit FAQs", userControlType: DNNtc.ControlType.Edit, helpUrl: "http://www.dotnetnuke.com/default.aspx?tabid=892", supportsPartialRendering: false, supportsPopUps: true)]
-	public partial class EditFAQs : PortalModuleBase
-	{
-			
-		#region Members
-		
-		protected TextBox txtQuestionField;
-		protected TextEditor teAnswerField;
-		protected ModuleAuditControl ctlAudit;
-		
-		#endregion
-		
-		#region Properties
+
+    [DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", false, true)]
+    public partial class EditFAQs : PortalModuleBase
+    {
+
+        #region Members
+
+        protected TextBox txtQuestionField;
+        protected TextEditor teAnswerField;
+        protected ModuleAuditControl ctlAudit;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the FAQ id.
         /// </summary>
-		public int FaqId
-		{
-			get
-			{
-				if (! Null.IsNull(Request.QueryString["ItemId"]))
-				{
-					try
-					{
-						return System.Convert.ToInt32(Request.QueryString["ItemId"]);
-					}
-					catch (Exception exc) //Module failed to load
-					{
-						Exceptions.ProcessModuleLoadException(this, exc);
-					}
-				}
-				else
-				{
-					return Null.NullInteger;
-				}
-				
-				return 0;
-			}
-		}
-		
-		#endregion
-		
-		#region Private Methods
-		
-		/// <summary>
-		/// Populates the categories drop down.
-		/// </summary>
-		private void PopulateCategoriesDropDown()
-		{
-			FAQsController FAQsController = new FAQsController();
-			
-			foreach (CategoryInfo category in FAQsController.ListCategoriesHierarchical(ModuleId,false))
-			{
-				drpCategory.Items.Add(new ListItem(new string('.',category.Level * 3) + category.FaqCategoryName, category.FaqCategoryId.ToString()));
-			}
-		}
-		
-		#endregion
-		
-		#region Event Handlers
-		
-		/// <summary>
-		/// Handles the Load event of the Page control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void Page_Load(System.Object sender, System.EventArgs e)
-		{
-			
-			if (Page.IsPostBack == false)
-			{
-				
-				cmdDelete.Attributes.Add("onClick", "javascript:return confirm(\'" + Localization.GetString("DeleteItem") + "\');");
-				
-				FAQsController FAQsController = new FAQsController();
-				
-				PopulateCategoriesDropDown();
-				
-				if (! Null.IsNull(FaqId))
-				{
-					
-					FAQsInfo FaqItem = FAQsController.GetFAQ(FaqId, ModuleId);
-					
-					if (FaqItem != null)
-					{
-						
-						if (! Null.IsNull(FaqItem.CategoryId))
-						{
-							drpCategory.SelectedValue = FaqItem.CategoryId.ToString();
-						}
+        public int FaqId
+        {
+            get
+            {
+                if (!Null.IsNull(Request.QueryString["ItemId"]))
+                {
+                    try
+                    {
+                        return System.Convert.ToInt32(Request.QueryString["ItemId"]);
+                    }
+                    catch (Exception exc) //Module failed to load
+                    {
+                        Exceptions.ProcessModuleLoadException(this, exc);
+                    }
+                }
+                else
+                {
+                    return Null.NullInteger;
+                }
 
-						chkFaqHide.Checked = FaqItem.FaqHide;
-						datepickerPublishDate.SelectedDate = null;
-						if (FaqItem.PublishDate > DateTime.MinValue)
-							datepickerPublishDate.SelectedDate = FaqItem.PublishDate;
+                return 0;
+            }
+        }
 
-						datepickerExpireDate.SelectedDate = null;
-						if (FaqItem.ExpireDate > DateTime.MinValue)
-							datepickerExpireDate.SelectedDate = FaqItem.ExpireDate;
+        #endregion
 
-						teAnswerField.Text = FaqItem.Answer;
-						txtQuestionField.Text = FaqItem.Question;
-						
-						ctlAudit.CreatedByUser = FaqItem.CreatedByUserName;
-						if (FaqItem.DateModified == Null.NullDate)
-						{
-							ctlAudit.CreatedDate = FaqItem.CreatedDate.ToString();
-						}
-						else
-						{
-							ctlAudit.CreatedDate = FaqItem.DateModified.ToString();
-						}
-					}
-					else
-					{
-						Response.Redirect(Globals.NavigateURL(), true);
-					}
-					
-				}
-				else
-				{
-					cmdDelete.Visible = false;
-					ctlAudit.Visible = false;
-				}
-				
-			}
-			
-		}
-		
-		/// <summary>
-		/// Handles the Click event of the cmdUpdate control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdUpdate_Click(System.Object sender, System.EventArgs e)
-		{
-			
-			try
-			{
-				FAQsController FAQsController = new FAQsController();
-				PortalSecurity objSecurity = new PortalSecurity();
-				
-				FAQsInfo FAQsInfo = new FAQsInfo();
-				
-				FAQsInfo.ItemId = FaqId;
-				FAQsInfo.CategoryId = int.Parse(drpCategory.SelectedValue.ToString());
+        #region Private Methods
 
-				FAQsInfo.FaqHide = chkFaqHide.Checked;
-				FAQsInfo.PublishDate = datepickerPublishDate.SelectedDate ?? DateTime.MinValue;
-				FAQsInfo.ExpireDate = datepickerExpireDate.SelectedDate ?? DateTime.MinValue;
+        /// <summary>
+        /// Populates the categories drop down.
+        /// </summary>
+        private void PopulateCategoriesDropDown()
+        {
+            FAQsController FAQsController = new FAQsController();
 
-				// We do not allow for script or markup in the question
-				FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
-				FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting);
-				
-				FAQsInfo.CreatedByUser = UserId.ToString();
-				FAQsInfo.ViewCount = 0;
-				FAQsInfo.CreatedDate = DateTime.Now;
-				FAQsInfo.DateModified = DateTime.Now;
-				FAQsInfo.ModuleId = ModuleId;
-				
-				// Do we add of update? The Id will tell us
-				if (FaqId != -1)
-				{
-					FAQsController.UpdateFAQ(FAQsInfo);
-				}
-				else
-				{
-					FAQsController.AddFAQ(FAQsInfo);
-				}
-				
-				Response.Redirect(Globals.NavigateURL(), true);
-				
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-			
-		}
-		
-		/// <summary>
-		/// Handles the Click event of the cmdCancel control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdCancel_Click(System.Object sender, System.EventArgs e)
-		{
-			try
-			{
-				Response.Redirect(Globals.NavigateURL(), true);
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
-		
-		/// <summary>
-		/// Handles the Click event of the cmdDelete control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
-		protected void cmdDelete_Click(System.Object sender, System.EventArgs e)
-		{
-			try
-			{
-				FAQsController FAQsController = new FAQsController();
-				FAQsController.DeleteFAQ(FaqId, ModuleId);
-				Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
-			}
-			catch (Exception exc) //Module failed to load
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
-		
-		#endregion
-		
-	}
-	
+            foreach (CategoryInfo category in FAQsController.ListCategoriesHierarchical(ModuleId, false))
+            {
+                drpCategory.Items.Add(new ListItem(new string('.', category.Level * 3) + category.FaqCategoryName, category.FaqCategoryId.ToString()));
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        /// <summary>
+        /// Handles the Load event of the Page control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+        protected void Page_Load(System.Object sender, System.EventArgs e)
+        {
+
+            if (Page.IsPostBack == false)
+            {
+
+                cmdDelete.Attributes.Add("onClick", "javascript:return confirm(\'" + Localization.GetString("DeleteItem") + "\');");
+
+                FAQsController FAQsController = new FAQsController();
+
+                PopulateCategoriesDropDown();
+
+                if (!Null.IsNull(FaqId))
+                {
+
+                    FAQsInfo FaqItem = FAQsController.GetFAQ(FaqId, ModuleId);
+
+                    if (FaqItem != null)
+                    {
+
+                        if (!Null.IsNull(FaqItem.CategoryId))
+                        {
+                            drpCategory.SelectedValue = FaqItem.CategoryId.ToString();
+                        }
+
+                        chkFaqHide.Checked = FaqItem.FaqHide;
+                        datepickerPublishDate.SelectedDate = null;
+                        if (FaqItem.PublishDate > DateTime.MinValue)
+                            datepickerPublishDate.SelectedDate = FaqItem.PublishDate;
+
+                        datepickerExpireDate.SelectedDate = null;
+                        if (FaqItem.ExpireDate > DateTime.MinValue)
+                            datepickerExpireDate.SelectedDate = FaqItem.ExpireDate;
+
+                        teAnswerField.Text = FaqItem.Answer;
+                        txtQuestionField.Text = FaqItem.Question;
+
+                        ctlAudit.CreatedByUser = FaqItem.CreatedByUserName;
+                        if (FaqItem.DateModified == Null.NullDate)
+                        {
+                            ctlAudit.CreatedDate = FaqItem.CreatedDate.ToString();
+                        }
+                        else
+                        {
+                            ctlAudit.CreatedDate = FaqItem.DateModified.ToString();
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect(Globals.NavigateURL(), true);
+                    }
+
+                }
+                else
+                {
+                    cmdDelete.Visible = false;
+                    ctlAudit.Visible = false;
+                }
+
+            }
+
+        }
+
+        /// <summary>
+        /// Handles the Click event of the cmdUpdate control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+        protected void cmdUpdate_Click(System.Object sender, System.EventArgs e)
+        {
+
+            try
+            {
+                FAQsController FAQsController = new FAQsController();
+                PortalSecurity objSecurity = new PortalSecurity();
+
+                FAQsInfo FAQsInfo = new FAQsInfo();
+
+                FAQsInfo.ItemId = FaqId;
+                FAQsInfo.CategoryId = int.Parse(drpCategory.SelectedValue.ToString());
+
+                FAQsInfo.FaqHide = chkFaqHide.Checked;
+                FAQsInfo.PublishDate = datepickerPublishDate.SelectedDate ?? DateTime.MinValue;
+                FAQsInfo.ExpireDate = datepickerExpireDate.SelectedDate ?? DateTime.MinValue;
+
+                // We do not allow for script or markup in the question
+                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
+                FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting);
+
+                FAQsInfo.CreatedByUser = UserId.ToString();
+                FAQsInfo.ViewCount = 0;
+                FAQsInfo.CreatedDate = DateTime.Now;
+                FAQsInfo.DateModified = DateTime.Now;
+                FAQsInfo.ModuleId = ModuleId;
+
+                // Do we add of update? The Id will tell us
+                if (FaqId != -1)
+                {
+                    FAQsController.UpdateFAQ(FAQsInfo);
+                }
+                else
+                {
+                    FAQsController.AddFAQ(FAQsInfo);
+                }
+
+                Response.Redirect(Globals.NavigateURL(), true);
+
+            }
+            catch (Exception exc) //Module failed to load
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+
+        }
+
+        /// <summary>
+        /// Handles the Click event of the cmdCancel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+        protected void cmdCancel_Click(System.Object sender, System.EventArgs e)
+        {
+            try
+            {
+                Response.Redirect(Globals.NavigateURL(), true);
+            }
+            catch (Exception exc) //Module failed to load
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the cmdDelete control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs" /> instance containing the event data.</param>
+        protected void cmdDelete_Click(System.Object sender, System.EventArgs e)
+        {
+            try
+            {
+                FAQsController FAQsController = new FAQsController();
+                FAQsController.DeleteFAQ(FaqId, ModuleId);
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+            }
+            catch (Exception exc) //Module failed to load
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
+
+        #endregion
+
+    }
+
 }

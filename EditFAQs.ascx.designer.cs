@@ -13,6 +13,33 @@ namespace DotNetNuke.Modules.FAQs {
     public partial class EditFAQs {
         
         /// <summary>
+        /// plQuestionField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl plQuestionField;
+        
+        /// <summary>
+        /// valRequiredTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valRequiredTitle;
+        
+        /// <summary>
+        /// plAnswerField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl plAnswerField;
+        
+        /// <summary>
         /// plCategoryField control.
         /// </summary>
         /// <remarks>
@@ -110,33 +137,6 @@ namespace DotNetNuke.Modules.FAQs {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator val2ExpireDate;
-        
-        /// <summary>
-        /// plQuestionField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl plQuestionField;
-        
-        /// <summary>
-        /// valRequiredTitle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator valRequiredTitle;
-        
-        /// <summary>
-        /// plAnswerField control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl plAnswerField;
         
         /// <summary>
         /// cmdUpdate control.

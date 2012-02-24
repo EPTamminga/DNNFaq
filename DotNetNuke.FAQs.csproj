@@ -29,6 +29,7 @@
     <DocumentationFile>..\..\bin\DotNetNuke.Modules.FAQs.XML</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,11 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Telerik.Web.UI.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="WebFormsMvp">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\WebFormsMvp.dll</HintPath>
-      <Private>false</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
