@@ -19,7 +19,7 @@ namespace DNNtc
 		/// <param name="helpUrl">The help URL.</param>
 		/// <param name="supportsPartialRendering">if set to <c>true</c> [supports partial rendering].</param>
 		/// <param name="supportsPopUps">if set to <c>true</c> [supports pop ups].</param>
-		public ModuleControlProperties(string key, string title, ControlType userControlType, string helpUrl, bool supportsPartialRendering = false, bool supportsPopUps = false)
+		public ModuleControlProperties(string key, string title, ControlType userControlType, string helpUrl, bool supportsPartialRendering, bool supportsPopUps)
 		{
 			//Intentially left empty
 		}
