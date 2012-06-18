@@ -1,0 +1,20 @@
+﻿<h2>Release notes DNN FAQs 05.00.01</h2>
+<p>FAQs 05.00.01 will work for any DNN version 6.1.0 and up.
+Full details on the changes can be found in great detail at 
+<a href="http://dnnfaq.codeplex.com/workitem/list/basic">dnnfaq.codeplex.com</a>.</p>
+<h3>BUG FIXES</h3>
+<ul>
+    <li>First category created could not have child categories</li>
+</ul>
+<h3>ENHANCEMENTS</h3>
+<ul>
+    <li>.</li>
+</ul>
+<h3>NEW FEATURES</h3>
+<ul>
+    <li>.</li>
+</ul>
+<h3>CHANGES</h3>
+<ul>
+    <li>.</li>
+</ul>
