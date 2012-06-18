@@ -14,7 +14,7 @@ if not exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwne
     BEGIN
         CREATE TABLE {databaseOwner}[{objectQualifier}FAQs]
         (
-            [ItemID] [int] NOT NULL IDENTITY(0, 1),
+            [ItemID] [int] NOT NULL IDENTITY,
             [ModuleID] [int] NOT NULL,
             [CreatedByUser] [nvarchar] (100) NULL,
             [CreatedDate] [datetime] NULL,
