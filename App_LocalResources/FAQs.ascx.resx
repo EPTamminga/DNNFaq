@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,92 +59,92 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="AddContent.Action" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddContent.Action" xml:space="preserve">
     <value>Add New FAQ</value>
   </data>
-	<data name="SelectCategory.Text" xml:space="preserve">
+  <data name="SelectCategory.Text" xml:space="preserve">
     <value>&lt;Select Category&gt;</value>
   </data>
-	<data name="OrderByDateNew.Text" xml:space="preserve">
+  <data name="OrderByDateNew.Text" xml:space="preserve">
     <value>Date (newest first)</value>
   </data>
-	<data name="OrderByDateOld.Text" xml:space="preserve">
+  <data name="OrderByDateOld.Text" xml:space="preserve">
     <value>Date (oldest first)</value>
   </data>
-	<data name="OrderByPopularityLow.Text" xml:space="preserve">
+  <data name="OrderByPopularityLow.Text" xml:space="preserve">
     <value>Popularity (lowest first)</value>
   </data>
-	<data name="OrderByPopularityHigh.Text" xml:space="preserve">
+  <data name="OrderByPopularityHigh.Text" xml:space="preserve">
     <value>Popularity (highest first)</value>
   </data>
-	<data name="OrderBy.Text" xml:space="preserve">
+  <data name="OrderBy.Text" xml:space="preserve">
     <value>&lt;Order By&gt;</value>
   </data>
-	<data name="SearchFieldTitle.Text" xml:space="preserve">
+  <data name="SearchFieldTitle.Text" xml:space="preserve">
     <value>Search</value>
   </data>
-	<data name="ManageCategories.Text" xml:space="preserve">
+  <data name="ManageCategories.Text" xml:space="preserve">
     <value>Manage Categories</value>
   </data>
-	<data name="ModuleHelp.Text" xml:space="preserve">
+  <data name="ModuleHelp.Text" xml:space="preserve">
     <value>&lt;h1&gt;About The FAQs Module&lt;/h1&gt;
 
 &lt;p&gt;The FAQs Module allows Authorized Users to manage a list of Frequently Asked Questions and their corresponding answers. The question is displayed as a link, requiring the user to click on a question to view the corresponding answer.&lt;/p&gt; 
@@ -171,25 +171,31 @@ the user clicks on a question. The old functionality of using Post back is still
 &lt;li&gt;At &lt;b&gt;Answer&lt;/b&gt;, enter an answer to the question.&lt;/li&gt;
 &lt;li&gt;Click &lt;b&gt;Update&lt;/b&gt;.&lt;/li&gt;&lt;/ol&gt;</value>
   </data>
-	<data name="EmptyCategory.Text" xml:space="preserve">
+  <data name="EmptyCategory.Text" xml:space="preserve">
     <value>Unassigned questions</value>
   </data>
-	<data name="AllCategory.Text" xml:space="preserve">
+  <data name="AllCategory.Text" xml:space="preserve">
     <value>All questions</value>
   </data>
-	<data name="lblSelectCategory.Text" xml:space="preserve">
+  <data name="lblSelectCategory.Text" xml:space="preserve">
     <value>Select Category</value>
   </data>
-	<data name="lblSort.Text" xml:space="preserve">
+  <data name="lblSort.Text" xml:space="preserve">
     <value>Select Sort Order</value>
   </data>
-	<data name="OrderByDateCreatedOriginal.Text" xml:space="preserve">
+  <data name="OrderByDateCreatedOriginal.Text" xml:space="preserve">
     <value>Creation Date (oldest first)</value>
   </data>
-	<data name="OrderByDateCreatedReverse.Text" xml:space="preserve">
+  <data name="OrderByDateCreatedReverse.Text" xml:space="preserve">
     <value>Creation Date (newest first)</value>
   </data>
-	<data name="OrderByViewOrder.Text" xml:space="preserve">
+  <data name="OrderByViewOrder.Text" xml:space="preserve">
     <value>Predefined Order</value>
+  </data>
+  <data name="lblSelectCategory.Help" xml:space="preserve">
+    <value>Select the category for display</value>
+  </data>
+  <data name="lblSort.Text.Help" xml:space="preserve">
+    <value>Select sort order for display</value>
   </data>
 </root>
