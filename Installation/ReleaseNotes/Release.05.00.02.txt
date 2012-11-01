@@ -6,15 +6,3 @@ Full details on the changes can be found in great detail at
 <ul>
     <li>Fixed some SQL dataprovider scripts to make them compiant with latest version of SQL Azure</li>
 </ul>
-<h3>ENHANCEMENTS</h3>
-<ul>
-    <li>.</li>
-</ul>
-<h3>NEW FEATURES</h3>
-<ul>
-    <li>.</li>
-</ul>
-<h3>CHANGES</h3>
-<ul>
-    <li>.</li>
-</ul>
