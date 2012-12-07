@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DNN_FAQs" type="Module" version="5.0.1">
+    <package name="DNN_FAQs" type="Module" version="5.0.2">
       <friendlyName>FAQs</friendlyName>
       <description>FAQs allow you to manage a list of Frequently Asked Questions and their corresponding Answers.</description>
       <iconFile>DesktopModules\FAQs\DNN_FAQs.png</iconFile>
@@ -11,7 +11,7 @@
         <email>support@dotnetnuke.com</email>
       </owner>
       <license src="License.txt"></license>
-      <releaseNotes src="Release.05.00.01.txt"></releaseNotes>
+      <releaseNotes src="Release.05.00.02.txt"></releaseNotes>
       <dependencies>
         <dependency type="CoreVersion">06.01.00</dependency>
       </dependencies>
@@ -132,6 +132,7 @@
         <component type="Cleanup" version="04.05.01" fileName="Installation\CleanUp\Cleanup.04.05.01.txt" />
         <component type="Cleanup" version="05.00.00" fileName="Installation\CleanUp\Cleanup.05.00.00.txt" />
         <component type="Cleanup" version="05.00.01" fileName="Installation\CleanUp\Cleanup.05.00.01.txt" />
+        <component type="Cleanup" version="05.00.02" fileName="Installation\CleanUp\Cleanup.05.00.02.txt" />
       </components>
     </package>
   </packages>

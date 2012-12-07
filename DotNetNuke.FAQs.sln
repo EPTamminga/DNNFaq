@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetNuke.FAQs", "DotNetNuke.FAQs.csproj", "{334B7F1B-8CB0-42FD-82C8-50D1545440E7}"
 EndProject
 Global
