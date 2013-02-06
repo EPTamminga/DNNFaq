@@ -1,6 +1,6 @@
 //
 // DotNetNuke® - http://www.dotnetnuke.com
-// Copyright (c) 2002-2011
+// Copyright (c) 2002-2013
 // by DotNetNuke Corporation
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -18,13 +18,13 @@
 // DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-using System.Data;
-using System.Globalization;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Modules;
+using DotNetNuke.ComponentModel.DataAnnotations;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Tokens;
+using System;
+using System.Globalization;
+using System.Web.Caching;
 
 namespace DotNetNuke.Modules.FAQs
 {
@@ -32,374 +32,100 @@ namespace DotNetNuke.Modules.FAQs
 	/// <summary>
 	/// Info class for FAQs
 	/// </summary>
-	[Serializable()]
-	public class FAQsInfo:IHydratable,IPropertyAccess
-	{
-		#region Private Members
+    [Serializable]
+    [TableName("FAQs")]
+    [PrimaryKey("ItemID", AutoIncrement = true)]
+    [Scope("ModuleID")]
+    [Cacheable("FAQs", CacheItemPriority.Normal, 20)]
 
-		private int _itemId;
-		private int _moduleId;
-		private int _categoryId;
-		private string _question;
-		private string _answer;
-		private string _createdByUser;
-		private string _createdByUserName;
-		private DateTime _createdDate;
-		private DateTime _dateModified;
-		private int _viewCount;
-		private int _viewOrder;
-		private string _faqCategoryName;
-		private string _faqCategoryDescription;
-		private int _index;
-		private bool _faqHide;
-		private DateTime _expireDate;
-		private DateTime _publishDate;
-		
-		#endregion
-		
-		#region Constructors
-		
-		public FAQsInfo()
-		{
-		}
-		
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FAQsInfo" /> class.
-		/// </summary>
-		/// <param name="itemId">The item id.</param>
-		/// <param name="moduleId">The module id.</param>
-		/// <param name="categoryId">The category id.</param>
-		/// <param name="question">The question.</param>
-		/// <param name="answer">The answer.</param>
-		/// <param name="createdByUser">The created by user.</param>
-		/// <param name="createdDate">The created date.</param>
-		/// <param name="dateModified">The date modified.</param>
-		/// <param name="viewCount">The view count.</param>
-		/// <param name="viewOrder">The view order.</param>
-		/// <param name="faqHide">Hide this Faq (disable)</param>
-		/// <param name="publishDate">Date on which this Faq is shown first</param>
-		/// <param name="expireDate">Date on which this Faq is shown last</param>
-		public FAQsInfo(int itemId, int moduleId, int categoryId, string question, string answer, 
-			string createdByUser, DateTime createdDate, DateTime dateModified, int viewCount, int viewOrder,
-			bool faqHide, DateTime publishDate, DateTime expireDate)
-		{
-			_itemId = itemId;
-			_moduleId = moduleId;
-			_categoryId = categoryId;
-			_question = question;
-			_answer = answer;
-			_createdByUser = createdByUser;
-			_createdDate = createdDate;
-			_dateModified = dateModified;
-			_viewCount = viewCount;
-			_viewOrder = viewOrder;
-			_createdByUserName = "";
-			_faqCategoryDescription = "";
-			_faqCategoryName = "";
-			_index = 0;
-			_faqHide = faqHide;
-			_publishDate = publishDate;
-			_expireDate = expireDate;
-		}
-		#endregion
-		
-		#region Public Properties
-		
-		/// <summary>
-		/// Gets or sets the item id.
-		/// </summary>
-		/// <value>The item id.</value>
-		public int ItemId
-		{
-			get
-			{
-				return _itemId;
-			}
-			set
-			{
-				_itemId = value;
-			}
-		}
-		
-		/// <summary>
-		/// Gets or sets the name of the FAQ category.
-		/// </summary>
-		/// <value>The name of the FAQ category.</value>
-		public string FaqCategoryName
-		{
-			get
-			{
-				return _faqCategoryName;
-			}
-			set
-			{
-				_faqCategoryName = value;
-			}
-		}
-		
-		/// <summary>
-		/// Gets or sets the FAQ category description.
-		/// </summary>
-		/// <value>The FAQ category description.</value>
-		public string FaqCategoryDescription
-		{
-			get
-			{
-				return _faqCategoryDescription;
-			}
-			set
-			{
-				_faqCategoryDescription = value;
-			}
-		}
+	public class FAQsInfo:IPropertyAccess
+    {
+        #region Properties
+        /// <summary>
+	    /// Gets or sets the item id.
+	    /// </summary>
+	    /// <value>The item id.</value>
+	    public int ItemID { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the module id.
 		/// </summary>
 		/// <value>The module id.</value>
-		public int ModuleId
-		{
-			get
-			{
-				return _moduleId;
-			}
-			set
-			{
-				_moduleId = value;
-			}
-		}
+		public int ModuleID { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the category id.
 		/// </summary>
 		/// <value>The category id.</value>
-		public int CategoryId
-		{
-			get
-			{
-				return _categoryId;
-			}
-			set
-			{
-				_categoryId = value;
-			}
-		}
+        public int? CategoryId { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the question.
 		/// </summary>
 		/// <value>The question.</value>
-		public string Question
-		{
-			get
-			{
-				return _question;
-			}
-			set
-			{
-				_question = value;
-			}
-		}
+        public string Question { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the answer.
 		/// </summary>
 		/// <value>The answer.</value>
-		public string Answer
-		{
-			get
-			{
-				return _answer;
-			}
-			set
-			{
-				_answer = value;
-			}
-		}
+        public string Answer { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the created by user.
 		/// </summary>
 		/// <value>The created by user.</value>
-		public string CreatedByUser
-		{
-			get
-			{
-				return _createdByUser;
-			}
-			set
-			{
-				_createdByUser = value;
-			}
-		}
-		
-		/// <summary>
-		/// Gets or sets the name of the created by user.
-		/// </summary>
-		/// <value>The name of the created by user.</value>
-		public string CreatedByUserName
-		{
-			get
-			{
-				return _createdByUserName;
-			}
-			set
-			{
-				_createdByUserName = value;
-			}
-		}
+        public string CreatedByUser { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the created date.
 		/// </summary>
 		/// <value>The created date.</value>
-		public DateTime CreatedDate
-		{
-			get
-			{
-				return _createdDate;
-			}
-			set
-			{
-				_createdDate = value;
-			}
-		}
+        public DateTime CreatedDate { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the date modified.
 		/// </summary>
 		/// <value>The date modified.</value>
-		public DateTime DateModified
-		{
-			get
-			{
-				return _dateModified;
-			}
-			set
-			{
-				_dateModified = value;
-			}
-		}
+        public DateTime DateModified { get; set; }
 		
 		/// <summary>
 		/// Gets or sets the view count.
 		/// </summary>
 		/// <value>The view count.</value>
-		public int ViewCount
-		{
-			get
-			{
-				return _viewCount;
-			}
-			set
-			{
-				_viewCount = value;
-			}
-		}
-
+        public int ViewCount { get; set; }
+		
 		/// <summary>
 		/// Gets or sets the view order.
 		/// </summary>
 		/// <value>The view order.</value>
-		public int ViewOrder
-		{
-			get
-			{
-				return _viewOrder;
-			}
-			set
-			{
-				_viewOrder = value;
-			}
-		}
-		
-		/// <summary>
-		/// Gets or sets the index.
-		/// </summary>
-		/// <value>The index.</value>
-		public int Index
-		{
-			get
-			{
-				return _index;
-			}
-			set
-			{
-				_index = value;
-			}
-		}
+        public int ViewOrder { get; set; }
 
+        /// <summary>
+        /// Gets or sets the order number.
+        /// </summary>
+        /// <value>The order number.</value>
+        [IgnoreColumn]
+        public int Index { get; set; }
+		
 		/// <summary>
 		/// Gets or sets the visibility of the Faq-Item
 		/// </summary>
 		/// <value>the Hide flag. </value>
-		public Boolean FaqHide
-		{
-			get { return _faqHide; }
-			set { _faqHide = value; }
-		}
-
+        public Boolean FaqHide { get; set; }
+		
 		/// <summary>
 		/// Gets or sets the publish date.
 		/// </summary>
 		/// <value>The publish date.</value>
-		public DateTime PublishDate
-		{
-			get
-			{
-				return _publishDate;
-			}
-			set
-			{
-				_publishDate = value;
-			}
-		}
-
+        public DateTime? PublishDate { get; set; }
+		
 		/// <summary>
 		/// Gets or sets the expiration date.
 		/// </summary>
 		/// <value>The expiration date.</value>
-		public DateTime ExpireDate
-		{
-			get
-			{
-				return _expireDate;
-			}
-			set
-			{
-				_expireDate = value;
-			}
-		}
+        public DateTime? ExpireDate { get; set; }
 		
-		#endregion
-
-		#region Implementation of IHydratable
-
-		public void Fill(IDataReader dr)
-		{
-			_itemId = Null.SetNullInteger(dr["ItemId"]);
-			_moduleId = Null.SetNullInteger(dr["ModuleId"]);
-			_categoryId = Null.SetNullInteger(dr["CategoryId"]);
-			_question = Null.SetNullString(dr["Question"]);
-			_answer = Null.SetNullString(dr["Answer"]);
-			_createdByUserName = Null.SetNullString(dr["CreatedByUserName"]);
-			_createdDate = Null.SetNullDateTime(dr["CreatedDate"]);
-			_dateModified = Null.SetNullDateTime(dr["DateModified"]);
-			_viewCount = Null.SetNullInteger(dr["ViewCount"]);
-			_viewOrder = Null.SetNullInteger(dr["ViewOrder"]);
-			_faqCategoryName = Null.SetNullString(dr["FaqCategoryName"]);
-			_faqCategoryDescription = Null.SetNullString(dr["FaqCategoryDescription"]);
-			_faqHide = Null.SetNullBoolean(dr["FaqHide"]);
-			_publishDate = Null.SetNullDateTime(dr["PublishDate"]);
-			_expireDate = Null.SetNullDateTime(dr["ExpireDate"]);
-		}
-
-		public int KeyID
-		{
-			get { return _itemId; }
-			set { _itemId = value; }
-		}
-
 		#endregion
 
 		#region Implementation of IPropertyAccess
@@ -408,35 +134,40 @@ namespace DotNetNuke.Modules.FAQs
 		{
 
 			PropertyNotFound = false;
+		    FAQsController faqController;
 			switch (strPropertyName.ToLower())
 			{
 				case "question":
-					return PropertyAccess.FormatString(_question, strFormat);
+					return PropertyAccess.FormatString(Question, strFormat);
 				case "answer":
-					return PropertyAccess.FormatString(_answer, strFormat);
+					return PropertyAccess.FormatString(Answer, strFormat);
 				case "user":
-					return PropertyAccess.FormatString(_createdByUserName, strFormat);
+			        UserInfo user = UserController.GetUserById(PortalSettings.Current.PortalId, Convert.ToInt32(CreatedByUser));
+					return PropertyAccess.FormatString(user.DisplayName, strFormat);
 				case "viewcount":
-					return _viewCount.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+					return ViewCount.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
 				case "vieworder":
-					return _viewOrder.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+					return ViewOrder.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
 				case "categoryname":
-					return PropertyAccess.FormatString(_faqCategoryName, strFormat);
+                    faqController = new FAQsController();
+                    return PropertyAccess.FormatString(faqController.GetCategory(CategoryId).FaqCategoryName, strFormat);
 				case "categorydesc":
-					return PropertyAccess.FormatString(_faqCategoryDescription, strFormat);
+                    faqController = new FAQsController();
+                    return PropertyAccess.FormatString(faqController.GetCategory(CategoryId).FaqCategoryDescription, strFormat);
 				case "datecreated":
-					return _createdDate.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
+					return CreatedDate.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
 				case "datemodified":
-					return _dateModified.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
+					return DateModified.ToString(String.IsNullOrEmpty(strFormat) ? "d" : strFormat, formatProvider);
 				case "index":
-					return _index.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
+					return Index.ToString(String.IsNullOrEmpty(strFormat) ? "g" : strFormat, formatProvider);
 				default:
 					PropertyNotFound = true;
 					return String.Empty;
 			}
 		}
 
-		public CacheLevel Cacheability
+		[IgnoreColumn]
+        public CacheLevel Cacheability
 		{
 			get { return CacheLevel.fullyCacheable; }
 		}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
@@ -35,7 +36,7 @@ using Telerik.Web.UI;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "06.01.00")]
+	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "07.00.01")]
 	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://www.dotnetnuke.com/default.aspx?tabid=892", true, false)]
 	public partial class FAQs : PortalModuleBase, IActionable, IClientAPICallbackEventHandler
 	{
@@ -221,21 +222,26 @@ namespace DotNetNuke.Modules.FAQs
 				
 			}
 		}
-		
-		private ArrayList FaqData
+
+        private ArrayList FaqData
 		{
 			get
 			{
 				if (ViewState["FaqData"] == null)
 				{
 					FAQsController FAQsController = new FAQsController();
-					ArrayList fData = FAQsController.ListFAQ(ModuleId, UserSorting,IsEditable);
+					IEnumerable<FAQsInfo> faqs = FAQsController.ListFAQ(ModuleId, UserSorting,IsEditable);
+                    ArrayList fData = new ArrayList();
+				    foreach (FAQsInfo faq in faqs)
+				    {
+                        fData.Add(faq);
+				    }
 					ViewState["FaqData"] = fData;
 					return fData;
 				}
 				else
 				{
-					return ((ArrayList) (ViewState["FaqData"]));
+                    return (ArrayList)(ViewState["FaqData"]);
 				}
 			}
 			set
@@ -309,6 +315,7 @@ namespace DotNetNuke.Modules.FAQs
 			
 			//Get the complete array of FAQ items
 			ArrayList filterData = new ArrayList();
+		    int index = 1;
 
 			if (ShowCategories)
 			{
@@ -317,7 +324,9 @@ namespace DotNetNuke.Modules.FAQs
 				{
 					if (MatchElement(item))
 					{
-						filterData.Add(item);
+					    item.Index = index;
+                        filterData.Add(item);
+					    index++;
 					}
 				}
 			}
@@ -325,9 +334,11 @@ namespace DotNetNuke.Modules.FAQs
 			{
 				foreach (FAQsInfo item in FaqData)
 				{
-					if (item.ItemId == RequestFaqId)
+					if (item.ItemID == RequestFaqId)
 					{
-						filterData.Add(item);
+                        item.Index = index;
+                        filterData.Add(item);
+					    index++;
 						break;
 					}
 				}
@@ -355,7 +366,7 @@ namespace DotNetNuke.Modules.FAQs
 				bool noCat = false;
 				foreach (FAQsInfo faq in FaqData)
 				{
-					if (faq.CategoryId == -1)
+					if (faq.CategoryId == null)
 					{
 						noCat = true;
 						break;
@@ -376,14 +387,18 @@ namespace DotNetNuke.Modules.FAQs
 				CategoryInfo allCategories = new CategoryInfo();
 				allCategories.FaqCategoryId = -2;
 				allCategories.FaqCategoryName = Localization.GetString("AllCategory", LocalResourceFile);
-				
+
+			    IEnumerable<CategoryInfo> cats = FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories);
 
 				switch (ShowCategoryType)
 				{
 					case 0:
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
+				        foreach (CategoryInfo cat in cats)
+				        {
+				            categories.Add(cat);
+				        }
 						listCategories.DataSource = categories;
 						listCategories.DataBind();
 						mvShowCategoryType.SetActiveView(vShowCategoryTypeList);
@@ -394,7 +409,10 @@ namespace DotNetNuke.Modules.FAQs
 						categories.Add(allCategories);
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
+                        foreach (CategoryInfo cat in cats)
+                        {
+                            categories.Add(cat);
+                        }
 						List<CategoryInfo> lst = new List<CategoryInfo>();
 						foreach (CategoryInfo cat in categories)
 						{
@@ -414,7 +432,10 @@ namespace DotNetNuke.Modules.FAQs
 						categories.Add(allCategories);
 						if (noCat)
 							categories.Add(emptyCategory);
-						categories.AddRange(FAQsController.ListCategoriesHierarchical(ModuleId, !ShowEmptyCategories));
+                        foreach (CategoryInfo cat in cats)
+                        {
+                            categories.Add(cat);
+                        }
 						foreach (CategoryInfo cat in categories)
 						{
 							drpCategories.Items.Add(new ListItem(new string('.',cat.Level * 3) + cat.FaqCategoryName,cat.FaqCategoryId.ToString()));
@@ -443,6 +464,10 @@ namespace DotNetNuke.Modules.FAQs
 			bool match = false;
 			bool noneChecked = true;
 
+            FAQsController faqsController = new FAQsController();
+		    IEnumerable<CategoryInfo> cats = faqsController.ListCategories(ModuleId, true);
+		    string categoryName;
+
 			switch (ShowCategoryType)
 			{
 				case 0:
@@ -460,14 +485,18 @@ namespace DotNetNuke.Modules.FAQs
 							//Set Checked Flag
 							noneChecked = false;
 
-							//Get the filtered catagory
-							string category = chkCategory.Text;
+							//Get the filtered category
+							string checkedCategoryName = chkCategory.Text;
 
 							//Get the elements that match the catagory
-							if ((fData.FaqCategoryName == category) ||
-							    (fData.CategoryId < 0 && category == Localization.GetString("EmptyCategory", LocalResourceFile)))
+                            var matchedCat = (from c in cats where c.FaqCategoryId == fData.CategoryId select c).SingleOrDefault();
+                            categoryName = (matchedCat != null ? matchedCat.FaqCategoryName : "");
+
+							if ((categoryName == checkedCategoryName) ||
+							    (fData.CategoryId == null && checkedCategoryName == Localization.GetString("EmptyCategory", LocalResourceFile)))
 							{
 								match = true;
+							    break;
 							}
 						}
 					}
@@ -476,8 +505,10 @@ namespace DotNetNuke.Modules.FAQs
 					if (treeCategories.SelectedNode != null)
 					{
 						noneChecked = (treeCategories.SelectedNode.Text == Localization.GetString("AllCategory", LocalResourceFile));
-						if (treeCategories.SelectedNode.Text == fData.FaqCategoryName ||
-								(fData.CategoryId < 0 && treeCategories.SelectedNode.Text == Localization.GetString("EmptyCategory", LocalResourceFile)))
+                        var matchedCat = (from c in cats where c.FaqCategoryId == fData.CategoryId select c).SingleOrDefault();
+					    categoryName = (matchedCat != null ? matchedCat.FaqCategoryName : "");
+						if (treeCategories.SelectedNode.Text == categoryName ||
+								(fData.CategoryId == null && treeCategories.SelectedNode.Text == Localization.GetString("EmptyCategory", LocalResourceFile)))
 						{
 							match = true;
 							break;
@@ -495,8 +526,10 @@ namespace DotNetNuke.Modules.FAQs
 							selectedCat = selectedCat.Substring(1);
 						}
 						noneChecked = (selectedCat == Localization.GetString("AllCategory", LocalResourceFile));
-						if (selectedCat == fData.FaqCategoryName ||
-								(fData.CategoryId < 0 && selectedCat == Localization.GetString("EmptyCategory", LocalResourceFile)))
+                        var matchedCat = (from c in cats where c.FaqCategoryId == fData.CategoryId select c).SingleOrDefault();
+                        categoryName = (matchedCat != null ? matchedCat.FaqCategoryName : "");
+						if (selectedCat == categoryName ||
+								(fData.CategoryId == null && selectedCat == Localization.GetString("EmptyCategory", LocalResourceFile)))
 						{
 							match = true;
 							break;
@@ -563,7 +596,7 @@ namespace DotNetNuke.Modules.FAQs
 				
 				IncrementViewCount(FaqId);
 				
-				FAQsInfo FaqItem = objFAQs.GetFAQ(FaqId, ModuleId);
+				FAQsInfo FaqItem = objFAQs.GetFAQ(FaqId);
 				
 				return HtmlDecode(objFAQs.ProcessTokens(FaqItem, this.AnswerTemplate));
 				
@@ -657,7 +690,7 @@ namespace DotNetNuke.Modules.FAQs
 						linkQuestion.InnerHtml = question;
 
 						// Utilize the ClientAPI to create ajax request
-						string ClientCallBackRef = ClientAPI.GetCallbackEventReference(this, FaqItem.ItemId.ToString(),
+						string ClientCallBackRef = ClientAPI.GetCallbackEventReference(this, FaqItem.ItemID.ToString(),
 						                                                               "GetFaqAnswerSuccess",
 						                                                               "\'" + lblAnswer.ClientID + "\'",
 						                                                               "GetFaqAnswerError");
@@ -679,7 +712,7 @@ namespace DotNetNuke.Modules.FAQs
 					// If only one question (Requestparameter faqid) show answer immediately
 					if (RequestFaqId > -1)
 					{
-						IncrementViewCount(FaqItem.ItemId);
+						IncrementViewCount(FaqItem.ItemID);
 						lblAnswer.Text = HtmlDecode(new FAQsController().ProcessTokens(FaqItem, this.AnswerTemplate));
 					}
 				}
@@ -712,11 +745,11 @@ namespace DotNetNuke.Modules.FAQs
 						try
 						{
 							Label lblAnswer = (Label) (lstFAQs.Items[index].FindControl("A2"));
-							FAQsInfo FaqItem = controller.GetFAQ(itemId, ModuleId);
+							FAQsInfo FaqItem = controller.GetFAQ(itemId);
 
 							if (lblAnswer.Text == "")
 							{
-								IncrementViewCount(FaqItem.ItemId);
+								IncrementViewCount(FaqItem.ItemID);
 								lblAnswer.Text = HtmlDecode(controller.ProcessTokens(FaqItem, this.AnswerTemplate));
 							}
 							else
@@ -733,17 +766,17 @@ namespace DotNetNuke.Modules.FAQs
 					break;
 				case "up":
 					if (index == 0)
-						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[itemCount-1]).ItemId, ModuleId);
+						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[itemCount-1]).ItemID, ModuleId);
 					else
-						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[index - 1]).ItemId, ModuleId);
+						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[index - 1]).ItemID, ModuleId);
 					FaqData = null;
 					BindData();
 					break;
 				case "down":
 					if (index == itemCount -1)
-						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[0]).ItemId, ModuleId);
+						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[0]).ItemID, ModuleId);
 					else
-						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[index + 1]).ItemId, ModuleId);
+						controller.ReorderFAQ(itemId, ((FAQsInfo)FaqData[index + 1]).ItemID, ModuleId);
 					//Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
 					FaqData = null;
 					BindData();

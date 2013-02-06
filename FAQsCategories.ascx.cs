@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
@@ -106,7 +107,7 @@ namespace DotNetNuke.Modules.FAQs
 				if (node != null)
 				{
 					categoryItem.FaqCategoryId = Convert.ToInt32(node.Value);
-					CategoryInfo originalCategoryItem = faqsController.GetCategory(categoryItem.FaqCategoryId, ModuleId);
+					CategoryInfo originalCategoryItem = faqsController.GetCategory(categoryItem.FaqCategoryId);
 					categoryItem.ViewOrder = originalCategoryItem.ViewOrder;
 					faqsController.UpdateCategory(categoryItem);
 				}
@@ -194,10 +195,10 @@ namespace DotNetNuke.Modules.FAQs
 				return;
 			
 			int sourceFaqCategoryId = Convert.ToInt32(sourceNode.Value);
-			CategoryInfo sourceCategory = FAQsController.GetCategory(sourceFaqCategoryId, ModuleId);
+			CategoryInfo sourceCategory = FAQsController.GetCategory(sourceFaqCategoryId);
 
 			int destFaqCategoryId = Convert.ToInt32(destNode.Value);
-			CategoryInfo destCategory = FAQsController.GetCategory(destFaqCategoryId, ModuleId);
+			CategoryInfo destCategory = FAQsController.GetCategory(destFaqCategoryId);
 
 			switch (dropPosition)
 			{
@@ -240,13 +241,13 @@ namespace DotNetNuke.Modules.FAQs
 		private void BindData()
 		{
 			FAQsController FAQsController = new FAQsController();
-			ArrayList lst = FAQsController.ListCategoriesHierarchical(ModuleId, false);
+            IEnumerable<CategoryInfo> cats = FAQsController.ListCategoriesHierarchical(ModuleId, false);
 
-			treeCategories.Nodes.Clear();
+            treeCategories.Nodes.Clear();
 			treeCategories.DataTextField = "FaqCategoryName";
 			treeCategories.DataFieldID = "FaqCategoryId";
 			treeCategories.DataFieldParentID = "FaqCategoryParentId";
-			treeCategories.DataSource = lst;
+			treeCategories.DataSource = cats;
 			treeCategories.DataBind();
 			if (!IsPostBack && treeCategories.Nodes.Count > 0)
 				treeCategories.Nodes[0].Selected = true;
@@ -256,11 +257,9 @@ namespace DotNetNuke.Modules.FAQs
 			FAQsController faqsController = new FAQsController();
 			panelAddEdit.Visible = true;
 			PopulateCategoriesDropDown(faqCategoryId);
-			CategoryInfo categoryItem = faqsController.GetCategory(faqCategoryId, ModuleId);
-			int parentCategoryId = categoryItem.FaqCategoryParentId;
-			if (parentCategoryId == 0)
-				parentCategoryId = -1;
-			drpParentCategory.SelectedValue = parentCategoryId.ToString();
+			CategoryInfo categoryItem = faqsController.GetCategory(faqCategoryId);
+			int? parentCategoryId = categoryItem.FaqCategoryParentId;
+			drpParentCategory.SelectedValue = (parentCategoryId == null ? "-1" : parentCategoryId.ToString());
 			txtCategoryName.Text = categoryItem.FaqCategoryName;
 			txtCategoryDescription.Text = categoryItem.FaqCategoryDescription;
 		}

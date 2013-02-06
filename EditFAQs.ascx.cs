@@ -21,6 +21,7 @@
 using System;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.UI.UserControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
@@ -113,29 +114,23 @@ namespace DotNetNuke.Modules.FAQs
                 if (!Null.IsNull(FaqId))
                 {
 
-                    FAQsInfo FaqItem = FAQsController.GetFAQ(FaqId, ModuleId);
+                    FAQsInfo FaqItem = FAQsController.GetFAQ(FaqId);
 
                     if (FaqItem != null)
                     {
 
-                        if (!Null.IsNull(FaqItem.CategoryId))
+                        if (FaqItem.CategoryId != null)
                         {
                             drpCategory.SelectedValue = FaqItem.CategoryId.ToString();
                         }
 
                         chkFaqHide.Checked = FaqItem.FaqHide;
-                        datepickerPublishDate.SelectedDate = null;
-                        if (FaqItem.PublishDate > DateTime.MinValue)
-                            datepickerPublishDate.SelectedDate = FaqItem.PublishDate;
-
-                        datepickerExpireDate.SelectedDate = null;
-                        if (FaqItem.ExpireDate > DateTime.MinValue)
-                            datepickerExpireDate.SelectedDate = FaqItem.ExpireDate;
-
+                        datepickerPublishDate.SelectedDate = FaqItem.PublishDate;
+                        datepickerExpireDate.SelectedDate = FaqItem.ExpireDate;
                         teAnswerField.Text = FaqItem.Answer;
                         txtQuestionField.Text = FaqItem.Question;
-
-                        ctlAudit.CreatedByUser = FaqItem.CreatedByUserName;
+                        UserInfo user = UserController.GetUserById(PortalId, Convert.ToInt32(FaqItem.CreatedByUser));
+                        ctlAudit.CreatedByUser = (user != null ? user.DisplayName : "");
                         if (FaqItem.DateModified == Null.NullDate)
                         {
                             ctlAudit.CreatedDate = FaqItem.CreatedDate.ToString();
@@ -171,40 +166,51 @@ namespace DotNetNuke.Modules.FAQs
 
             try
             {
-                FAQsController FAQsController = new FAQsController();
+                   // We do not allow for script or markup in the question
                 PortalSecurity objSecurity = new PortalSecurity();
+                string question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
+                string answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting);
 
-                FAQsInfo FAQsInfo = new FAQsInfo();
+                FAQsController faqsController = new FAQsController();
+                FAQsInfo faq;
 
-                FAQsInfo.ItemId = FaqId;
-                FAQsInfo.CategoryId = int.Parse(drpCategory.SelectedValue.ToString());
+                int? newCatID = null;
+                if (drpCategory.SelectedValue != "-1")
+                    newCatID = int.Parse(drpCategory.SelectedValue);
 
-                FAQsInfo.FaqHide = chkFaqHide.Checked;
-                FAQsInfo.PublishDate = datepickerPublishDate.SelectedDate ?? DateTime.MinValue;
-                FAQsInfo.ExpireDate = datepickerExpireDate.SelectedDate ?? DateTime.MinValue;
-
-                // We do not allow for script or markup in the question
-                FAQsInfo.Question = objSecurity.InputFilter(txtQuestionField.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoMarkup);
-                FAQsInfo.Answer = objSecurity.InputFilter(teAnswerField.Text, PortalSecurity.FilterFlag.NoScripting);
-
-                FAQsInfo.CreatedByUser = UserId.ToString();
-                FAQsInfo.ViewCount = 0;
-                FAQsInfo.CreatedDate = DateTime.Now;
-                FAQsInfo.DateModified = DateTime.Now;
-                FAQsInfo.ModuleId = ModuleId;
-
-                // Do we add of update? The Id will tell us
+                 // Do we add of update? The Id will tell us
                 if (FaqId != -1)
                 {
-                    FAQsController.UpdateFAQ(FAQsInfo);
+                    faq = faqsController.GetFAQ(FaqId);
+                    faq.CategoryId = newCatID;
+                    faq.FaqHide = chkFaqHide.Checked;
+                    faq.PublishDate = datepickerPublishDate.SelectedDate;
+                    faq.ExpireDate = datepickerExpireDate.SelectedDate;
+                    faq.Question = question;
+                    faq.Answer = answer;
+                    faq.DateModified = DateTime.Now;
+                    faqsController.UpdateFAQ(faq);
                 }
                 else
                 {
-                    FAQsController.AddFAQ(FAQsInfo);
+                    faq = new FAQsInfo
+                              {
+                                  ItemID = FaqId,
+                                  CategoryId = newCatID,
+                                  FaqHide = chkFaqHide.Checked,
+                                  PublishDate = datepickerPublishDate.SelectedDate,
+                                  ExpireDate = datepickerExpireDate.SelectedDate,
+                                  Question = question,
+                                  Answer = answer,
+                                  CreatedByUser = UserId.ToString(),
+                                  ViewCount = 0,
+                                  DateModified = DateTime.Now,
+                                  ModuleID = ModuleId,
+                                  CreatedDate = DateTime.Now
+                              };
+                    faqsController.AddFAQ(faq);
                 }
-
                 Response.Redirect(Globals.NavigateURL(), true);
-
             }
             catch (Exception exc) //Module failed to load
             {
@@ -240,7 +246,7 @@ namespace DotNetNuke.Modules.FAQs
             try
             {
                 FAQsController FAQsController = new FAQsController();
-                FAQsController.DeleteFAQ(FaqId, ModuleId);
+                FAQsController.DeleteFAQ(FaqId);
                 Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
             catch (Exception exc) //Module failed to load
