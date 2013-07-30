@@ -5,16 +5,16 @@
       <description>FAQs allow you to manage a list of Frequently Asked Questions and their corresponding Answers.</description>
       <iconFile>DesktopModules\FAQs\DNN_FAQs.png</iconFile>
       <owner>
-        <name>DotNetNuke Corporation</name>
-        <organization>DotNetNuke Corporation</organization>
-        <url>http://www.dotnetnuke.com</url>
-        <email>support@dotnetnuke.com</email>
+        <name>DNN Corp</name>
+        <organization>DNN Corp</organization>
+        <url>http://www.dnnsoftware.com</url>
+        <email>support@dnnsoftware.com</email>
       </owner>
       <license src="License.txt"></license>
       <releaseNotes src="Release.05.01.00.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies>
-        <dependency type="CoreVersion">07.00.01</dependency>
+        <dependency type="CoreVersion">07.00.06</dependency>
       </dependencies>
       <components>
         <component type="Script">

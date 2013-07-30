@@ -49,15 +49,6 @@ namespace DotNetNuke.Modules.FAQs {
         protected global::DotNetNuke.Web.UI.WebControls.DnnListBox listCategories;
         
         /// <summary>
-        /// chkCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkCategory;
-        
-        /// <summary>
         /// vShowCategoryTypeTree control.
         /// </summary>
         /// <remarks>
@@ -91,7 +82,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblSort;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblSort;
         
         /// <summary>
         /// drpSort control.
@@ -118,7 +109,7 @@ namespace DotNetNuke.Modules.FAQs {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UserControl lblSelectCategory;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblSelectCategory;
         
         /// <summary>
         /// drpCategories control.

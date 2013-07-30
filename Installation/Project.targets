@@ -35,9 +35,9 @@
   <!--####################################################################### -->
   <!--Company properties-->
   <PropertyGroup>
-    <CompanyName>DotNetNuke Corporation</CompanyName>
-    <CompanyUrl>http://www.dotnetnuke.com</CompanyUrl>
-    <CompanyEmail>support@dotnetnuke.com</CompanyEmail>
+    <CompanyName>DNN Corp</CompanyName>
+    <CompanyUrl>http://www.dnnsoftware.com</CompanyUrl>
+    <CompanyEmail>support@dnnsoftware.com</CompanyEmail>
   </PropertyGroup>
   <!--You may change these properties when needed-->
   <PropertyGroup>
