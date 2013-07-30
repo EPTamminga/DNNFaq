@@ -33,7 +33,7 @@ using Telerik.Web.UI;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	[DNNtc.ModuleControlProperties("EditCategories", "Edit FAQ Categories", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", true, true)]
+	[DNNtc.ModuleControlProperties("EditCategories", "Edit FAQ Categories", DNNtc.ControlType.Edit, "https://dnnfaq.codeplex.com/", true, true)]
 	partial class FAQsCategories : PortalModuleBase
 	{
 		#region Event Handlers

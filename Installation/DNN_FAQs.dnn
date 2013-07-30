@@ -14,7 +14,7 @@
       <releaseNotes src="Release.05.01.00.txt"></releaseNotes>
       <azureCompatible>true</azureCompatible>
       <dependencies>
-        <dependency type="CoreVersion">07.00.06</dependency>
+        <dependency type="CoreVersion">07.00.01</dependency>
       </dependencies>
       <components>
         <component type="Script">
@@ -77,7 +77,7 @@
                     <supportsPopUps>true</supportsPopUps>
                     <controlTitle>Edit FAQs</controlTitle>
                     <controlType>Edit</controlType>
-                    <helpUrl>http://www.dotnetnuke.com/default.aspx?tabid=892</helpUrl>
+                    <helpUrl>https://dnnfaq.codeplex.com/</helpUrl>
                   </moduleControl>
                   <moduleControl>
                     <controlKey></controlKey>
@@ -86,7 +86,7 @@
                     <supportsPopUps>false</supportsPopUps>
                     <controlTitle>FAQ</controlTitle>
                     <controlType>View</controlType>
-                    <helpUrl>http://www.dnnsoftware.com/forums/forumid/27/scope/threads</helpUrl>
+                    <helpUrl>https://dnnfaq.codeplex.com/</helpUrl>
                   </moduleControl>
                   <moduleControl>
                     <controlKey>EditCategories</controlKey>
@@ -95,7 +95,7 @@
                     <supportsPopUps>true</supportsPopUps>
                     <controlTitle>Edit FAQ Categories</controlTitle>
                     <controlType>Edit</controlType>
-                    <helpUrl>http://www.dotnetnuke.com/default.aspx?tabid=892</helpUrl>
+                    <helpUrl>https://dnnfaq.codeplex.com/</helpUrl>
                   </moduleControl>
                   <moduleControl>
                     <controlKey>Settings</controlKey>
@@ -104,7 +104,7 @@
                     <supportsPopUps>true</supportsPopUps>
                     <controlTitle>FAQ Settings</controlTitle>
                     <controlType>Admin</controlType>
-                    <helpUrl>http://www.dotnetnuke.com/default.aspx?tabid=892</helpUrl>
+                    <helpUrl>https://dnnfaq.codeplex.com/</helpUrl>
                   </moduleControl>
                 </moduleControls>
                 <permissions></permissions>

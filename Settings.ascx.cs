@@ -29,7 +29,7 @@ using DotNetNuke.Services.Localization;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	[DNNtc.ModuleControlProperties("Settings", "FAQ Settings", DNNtc.ControlType.Admin, "http://www.dotnetnuke.com/default.aspx?tabid=892", true, true)]
+	[DNNtc.ModuleControlProperties("Settings", "FAQ Settings", DNNtc.ControlType.Admin, "https://dnnfaq.codeplex.com/", true, true)]
 	public partial class Settings : ModuleSettingsBase
 	{
 		
