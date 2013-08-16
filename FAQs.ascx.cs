@@ -632,7 +632,7 @@ namespace DotNetNuke.Modules.FAQs
 					
 					if (this.Page.ClientScript.IsClientScriptBlockRegistered("AjaxFaq.js") == false)
 					{
-						this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "AjaxFaq.js", "<script language=javascript src=\"" + this.ControlPath + "scripts\\AjaxFaq.js\"></script>");
+						this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "AjaxFaq.js", "<script language=javascript src=\"" + this.ControlPath + "scripts/AjaxFaq.js\"></script>");
 					}
 				}
 
