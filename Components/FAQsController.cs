@@ -441,8 +441,25 @@ namespace DotNetNuke.Modules.FAQs
 					faq.CreatedDate = DateTime.Parse(xFaq.Element("creationdate").Value);
 					faq.DateModified = DateTime.Now;
 					faq.FaqHide = Boolean.Parse(xFaq.Element("faqhide").Value);
-					faq.PublishDate = DateTime.Parse(xFaq.Element("publishdate").Value);
-					faq.ExpireDate = DateTime.Parse(xFaq.Element("expiredate").Value);
+
+                    // These dates might be emtpy
+                    try
+                    {
+                        faq.PublishDate = DateTime.Parse(xFaq.Element("publishdate").Value);
+                    }
+                    catch (Exception)
+                    {
+                        faq.PublishDate = null;
+                    }
+
+                    try
+                    {
+                        faq.ExpireDate = DateTime.Parse(xFaq.Element("expiredate").Value);
+                    }
+                    catch (Exception)
+                    {
+                        faq.ExpireDate = null;
+                    }
 					
 					// Add Faq to database
 					AddFAQ(faq);
