@@ -29,7 +29,9 @@ using DotNetNuke.Services.Localization;
 
 namespace DotNetNuke.Modules.FAQs
 {
-	[DNNtc.ModuleControlProperties("Settings", "FAQ Settings", DNNtc.ControlType.Admin, "https://dnnfaq.codeplex.com/", true, true)]
+    [DNNtc.PackageProperties("DNN_FAQs")]
+    [DNNtc.ModuleProperties("DNN_FAQs")]
+	[DNNtc.ModuleControlProperties("Settings", "FAQ Settings", DNNtc.ControlType.Admin, "http://dnnfaq.codeplex.com/", true, true)]
 	public partial class Settings : ModuleSettingsBase
 	{
 		

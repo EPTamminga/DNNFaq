@@ -31,7 +31,8 @@ using DotNetNuke.Security;
 
 namespace DotNetNuke.Modules.FAQs
 {
-
+    [DNNtc.PackageProperties("DNN_FAQs")]
+    [DNNtc.ModuleProperties("DNN_FAQs")]
     [DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", false, true)]
     public partial class EditFAQs : PortalModuleBase
     {
