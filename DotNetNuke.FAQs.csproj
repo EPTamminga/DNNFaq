@@ -27,8 +27,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>..\..\bin\</OutputPath>
-    <DocumentationFile>..\..\bin\DotNetNuke.Modules.FAQs.XML</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>bin\DotNetNuke.Modules.FAQs.XML</DocumentationFile>
     <WarningLevel>1</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
@@ -169,7 +169,7 @@
     <None Include="Installation\04.05.01.SqlDataProvider" />
     <None Include="Installation\05.00.00.SqlDataProvider" />
     <None Include="Installation\05.00.01.SqlDataProvider" />
-    <Content Include="Installation\DNN_FAQs.dnn" />
+    <Content Include="Installation\CleanUp\Cleanup.05.00.02.txt" />
     <None Include="Installation\Project.targets">
       <SubType>Designer</SubType>
     </None>
@@ -184,7 +184,6 @@
     <Content Include="Installation\CleanUp\Cleanup.04.05.01.txt" />
     <Content Include="Installation\CleanUp\Cleanup.05.00.00.txt" />
     <Content Include="Installation\CleanUp\Cleanup.05.00.01.txt" />
-    <Content Include="Installation\CleanUp\Cleanup.05.00.02.txt" />
     <Content Include="Installation\DNN_FAQs.png" />
     <Content Include="Installation\License.txt" />
     <Content Include="Installation\ReleaseNotes\Release.05.00.02.txt" />
