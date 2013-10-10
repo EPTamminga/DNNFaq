@@ -1,7 +1,7 @@
 //
-// DotNetNuke® - http://www.dotnetnuke.com
-// Copyright (c) 2002-2011
-// by DotNetNuke Corporation
+// DotNetNuke® - http://www.dnnsoftware.com
+// Copyright (c) 2002-2013
+// by DNN Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 // documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -33,7 +33,7 @@ namespace DotNetNuke.Modules.FAQs
 {
     [DNNtc.PackageProperties("DNN_FAQs")]
     [DNNtc.ModuleProperties("DNN_FAQs")]
-    [DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://www.dotnetnuke.com/default.aspx?tabid=892", false, true)]
+    [DNNtc.ModuleControlProperties("Edit", "Edit FAQs", DNNtc.ControlType.Edit, "http://dnnfaq.codeplex.com/", false, true)]
     public partial class EditFAQs : PortalModuleBase
     {
 

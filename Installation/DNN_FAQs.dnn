@@ -86,7 +86,7 @@
                     <supportsPopUps>true</supportsPopUps>
                     <controlTitle>Edit FAQs</controlTitle>
                     <controlType>Edit</controlType>
-                    <helpUrl>http://www.dotnetnuke.com/default.aspx?tabid=892</helpUrl>
+                    <helpUrl>http://dnnfaq.codeplex.com/</helpUrl>
                   </moduleControl>
                   <moduleControl>
                     <controlKey>EditCategories</controlKey>
