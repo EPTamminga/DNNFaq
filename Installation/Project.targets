@@ -39,6 +39,7 @@
 		<BinDir>$(MSBuildProjectDirectory)\bin</BinDir>
 		<!--Module properties.-->
 		<ZipFileNamePrefix>DNN_FAQs</ZipFileNamePrefix>
+		<DesktopFolderName>FAQs</DesktopFolderName>
 		<IconFile>DNN_FAQs.png</IconFile>
 		<AlsoBuildSourcesZip>true</AlsoBuildSourcesZip>
 	</PropertyGroup>
@@ -159,7 +160,7 @@
       <Output TaskParameter="Include" ItemName="ReleaseFiles" />
     </CreateItem>
     <!--Write the dnn file-->
-    <CreateDnnFile Target="$(dnnFile)" CodeFiles="@(CodeFiles)" ScriptFiles="@(ScriptFiles)" AssemblyFiles="@(AssemblyFiles)" CleanupFiles="@(CleanUpFiles)" ConfigFiles="@(ConfigFiles)" ReleaseFiles="@(ReleaseFiles)" ScriptPath="Installation" AssemblyPath="bin" Version="$(FileMajor).$(FileMinor).$(FileBuild)"/>
+    <CreateDnnFile Target="$(dnnFile)" CodeFiles="@(CodeFiles)" ScriptFiles="@(ScriptFiles)" AssemblyFiles="@(AssemblyFiles)" CleanupFiles="@(CleanUpFiles)" ConfigFiles="@(ConfigFiles)" ReleaseFiles="@(ReleaseFiles)" ScriptPath="Installation" AssemblyPath="bin" Version="$(FileMajor).$(FileMinor).$(FileBuild)" ModulePath="$(DesktopFolderName)"/>
   </Target>
   <!--Replace the @tab@ string with a tab-->
 	<Target Name="RePlaceTabs">
