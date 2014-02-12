@@ -58,7 +58,7 @@
                     <ItemTemplate>
                         <div>
                             <asp:HyperLink ID="Hyperlink1" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl("ItemId",DataBinder.Eval(Container.DataItem,"ItemId").ToString()) %>'>
-                                <asp:Image ID="Hyperlink1Image" runat="server" ImageUrl="~/images/eip_edit.gif" AlternateText="Edit" Visible="<%#IsEditable%>" resourcekey="Edit" />
+                                <asp:Image ID="Hyperlink1Image" runat="server" ImageUrl="~/images/eip_edit.png" AlternateText="Edit" Visible="<%#IsEditable%>" resourcekey="Edit" />
                             </asp:HyperLink>
                             <asp:ImageButton ID="lnkUp" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Up" runat="server" ImageUrl="~/images/up-icn.png" Visible="<%#IsMovable%>" />
                             <asp:ImageButton ID="lnkDn" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Down" runat="server" ImageUrl="~/images/down-icn.png" Visible="<%#IsMovable%>" />
