@@ -1,0 +1,17 @@
+﻿/****
+SqlDataProvider script DNN_FAQ 05.01.01
+
+Note: 
+To manually execute this script you must perform a 
+search and replace operation for {databaseOwner} and {objectQualifier}  
+
+***/
+
+/* ------------------------------------------------
+/   To be sure to have the search items reindexed
+/ ------------------------------------------------- */
+
+UPDATE {databaseOwner}[{objectQualifier}FAQs] 
+SET [DateModified] = GETDATE()
+
+GO
