@@ -1,21 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
-using DotNetNuke.UI.Utilities;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Modules.Actions;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Localization;
-//using DotNetNuke.Services.Exceptions.Exceptions;
-using Telerik.Web.UI;
-
 //
 // DotNetNuke® - http://www.dnnsoftware.com
-// Copyright (c) 2002-2013
+// Copyright (c) 2002-2014
 // by DNN Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -33,13 +18,26 @@ using Telerik.Web.UI;
 // DEALINGS IN THE SOFTWARE.
 //
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using DotNetNuke.UI.Utilities;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules.Actions;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Services.Localization;
+using Telerik.Web.UI;
 
 namespace DotNetNuke.Modules.FAQs
 {
     [DNNtc.PackageProperties("DNN_FAQs", 1, "FAQs", "FAQs allow you to manage a list of Frequently Asked Questions and their corresponding Answers.", "DNN_FAQs.png", "DNN Corp", "DNN Corp", "http://www.dnnsoftware.com", "support@dnnsoftware.com", true)]
     [DNNtc.ModuleProperties("DNN_FAQs", "FAQs", -1)]
 	[DNNtc.ModuleControlProperties("", "FAQ", DNNtc.ControlType.View, "http://dnnfaq.codeplex.com/", true, false)]
-	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "07.00.06")]
+	[DNNtc.ModuleDependencies(DNNtc.ModuleDependency.CoreVersion, "07.02.01")]
 	public partial class FAQs : PortalModuleBase, IActionable, IClientAPICallbackEventHandler
 	{
 		
@@ -696,11 +694,18 @@ namespace DotNetNuke.Modules.FAQs
 						                                                               "GetFaqAnswerSuccess",
 						                                                               "\'" + lblAnswer.ClientID + "\'",
 						                                                               "GetFaqAnswerError");
-						string AjaxJavaScript = "javascript: var label = document.getElementById(\'" + lblAnswer.ClientID +
-						                        "\');" + "if (label.innerHTML == \'\') { label.innerHTML = \'" +
-						                        HtmlDecode(this.LoadingTemplate) + "\'; " + ClientCallBackRef + " } " +
-						                        "else { label.innerHTML = \'\'; }";
-						linkQuestion.Attributes.Add("onClick", AjaxJavaScript);
+                        //Set CallBackRef ClientScriptBlock 
+                        string jsClientCallBackRef = string.Format("var ClientCallBackRef{0}= \"{1}\";", lblAnswer.ClientID, ClientCallBackRef);
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), string.Format("ClientCallBackRef{0}", lblAnswer.ClientID), jsClientCallBackRef, true);
+
+                        //Set LoadingTemplate ClientScriptBlock
+                        string jsLoadingTemplate = string.Format("var LoadingTemplate{0}= '{1}';", lblAnswer.ClientID, HtmlDecode(this.LoadingTemplate));
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), string.Format("LoadingTemplate{0}", lblAnswer.ClientID), jsLoadingTemplate, true);
+
+                        //Define javascript action
+                        string AjaxJavaScript = "javascript: SetAnswerLabel('" + lblAnswer.ClientID + "');";
+
+                        linkQuestion.Attributes.Add("onClick", AjaxJavaScript);
 
 					}
 					else // Postback Mode

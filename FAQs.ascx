@@ -58,10 +58,10 @@
                     <ItemTemplate>
                         <div>
                             <asp:HyperLink ID="Hyperlink1" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl("ItemId",DataBinder.Eval(Container.DataItem,"ItemId").ToString()) %>'>
-                                <asp:Image ID="Hyperlink1Image" runat="server" ImageUrl="~/images/eip_edit.png" AlternateText="Edit" Visible="<%#IsEditable%>" resourcekey="Edit" />
+                                <asp:Image ID="Hyperlink1Image" runat="server" ImageUrl="images/FAQs-edit.png" AlternateText="Edit" Visible="<%#IsEditable%>" resourcekey="Edit" />
                             </asp:HyperLink>
-                            <asp:ImageButton ID="lnkUp" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Up" runat="server" ImageUrl="~/images/up-icn.png" Visible="<%#IsMovable%>" />
-                            <asp:ImageButton ID="lnkDn" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Down" runat="server" ImageUrl="~/images/down-icn.png" Visible="<%#IsMovable%>" />
+                            <asp:ImageButton ID="lnkUp" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Up" runat="server" ImageUrl="images/FAQs-up.png" Visible="<%#IsMovable%>" />
+                            <asp:ImageButton ID="lnkDn" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Down" runat="server" ImageUrl="images/FAQs-down.png" Visible="<%#IsMovable%>" />
                             <asp:LinkButton ID="lnkQ2" CommandArgument='<%# HtmlDecode(DataBinder.Eval(Container.DataItem, "ItemId").ToString()) %>' CommandName="Select" runat="server" CssClass="SubHead"></asp:LinkButton>
                             <a href="javascript://" id="Q2" runat="server"></a>
                             <asp:Panel ID="pnl" runat="server" Width="100%">

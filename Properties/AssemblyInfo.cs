@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 //
 // DotNetNuke - http://www.dnnsoftware.com
-// Copyright (c) 2002-2013
+// Copyright (c) 2002-2014
 // by DNN Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly:AssemblyDescription("Open Source Web Application Framework")]
 [assembly:AssemblyCompany("DNN Corp")]
 [assembly:AssemblyProduct("http://www.dnnsoftware.com")]
-[assembly: AssemblyCopyright("DotNetNuke® is copyright 2002-2013 by DNN Corp. All Rights Reserved.")]
+[assembly: AssemblyCopyright("DotNetNuke® is copyright 2002-2014 by DNN Corp. All Rights Reserved.")]
 [assembly:AssemblyTrademark("DotNetNuke")]
 
 [assembly:ComVisibleAttribute(false)]
@@ -50,6 +50,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("5.1.1.0")]
-[assembly: AssemblyFileVersion("5.1.1.0")]
+[assembly: AssemblyVersion("5.2.0.0")]
+[assembly: AssemblyFileVersion("5.2.0.0")]
 

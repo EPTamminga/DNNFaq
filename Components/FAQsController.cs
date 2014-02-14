@@ -1,6 +1,6 @@
 //
 // DotNetNuke® - http://www.dnnsoftware.com
-// Copyright (c) 2002-2013
+// Copyright (c) 2002-2014
 // by DNN Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -25,7 +25,6 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 using DotNetNuke.Common;
@@ -589,4 +588,3 @@ namespace DotNetNuke.Modules.FAQs
     }
 
 }
-

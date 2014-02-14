@@ -1,13 +1,6 @@
-using System;
-using System.Web.UI.HtmlControls;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Localization;
-//using DotNetNuke.Services.Exceptions.Exceptions;
-
 //
 // DotNetNuke® - http://www.dnnsoftware.com
-// Copyright (c) 2002-2013
+// Copyright (c) 2002-2014
 // by DNN Corp
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -25,7 +18,11 @@ using DotNetNuke.Services.Localization;
 // DEALINGS IN THE SOFTWARE.
 //
 
-
+using System;
+using System.Web.UI.HtmlControls;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Services.Localization;
 
 namespace DotNetNuke.Modules.FAQs
 {
