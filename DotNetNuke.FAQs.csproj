@@ -171,6 +171,7 @@
     </None>
     <None Include="Installation\Uninstall.SqlDataProvider" />
     <None Include="Module.css" />
+    <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="EditFAQs.ascx" />
