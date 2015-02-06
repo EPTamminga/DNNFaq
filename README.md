@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿#Project Description
 DotNetNuke® FAQ is a basic module used for displaying frequently asked questions on your DNN site.
 
@@ -12,3 +13,7 @@ http://www.dnnsoftware.com/forums/forumid/27/scope/threads
 http://dnnfaq.codeplex.com/workitem/list/basic
 
 
+=======
+# DNNFaq
+DNN FAQ is a basic module used for displaying frequently asked questions on your DNN site.
+>>>>>>> 52104e527a06ec570fa59d1645af9edcdd873be6
